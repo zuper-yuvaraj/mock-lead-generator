@@ -1,0 +1,2299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zuper Grow · Mock Lead Generator</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@500;600&display=swap"
+    rel="stylesheet" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.25.6/babel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"></script>
+  <script>
+    // tailwind not v3, use minimal helper styles below
+  </script>
+
+  <style>
+    :root {
+      --ink: #0F172A;
+      --navy: #1F3A5F;
+      --navy-deep: #0E1A2B;
+      --navy-soft: #2E5B8F;
+      --orange: #F26430;
+      --orange-soft: #FFF1EA;
+      --teal: #1A6B5C;
+      --teal-soft: #E8F5F1;
+      --gray-900: #0F172A;
+      --gray-700: #334155;
+      --gray-600: #475569;
+      --gray-500: #64748B;
+      --gray-400: #94A3B8;
+      --gray-300: #CBD5E1;
+      --gray-200: #E2E8F0;
+      --gray-100: #F1F5F9;
+      --gray-50: #F8FAFC;
+      --bg: #F5F4EE;
+      --surface: #FFFFFF;
+      --border: #D9D6CC;
+      --border-soft: #E8E5DA;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .font-display {
+      font-family: 'IBM Plex Serif', Georgia, serif;
+    }
+
+    .font-mono {
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 0, 0, 0.25);
+    }
+
+    .code-scroll::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .code-scroll::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'IBM Plex Sans';
+      font-weight: 500;
+      font-size: 13px;
+      padding: 8px 14px;
+      border-radius: 6px;
+      transition: all 0.15s;
+      cursor: pointer;
+      border: 1px solid transparent;
+      line-height: 1;
+      letter-spacing: 0.01em;
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #D9551F;
+    }
+
+    .btn-primary:active {
+      background: #C24A18;
+    }
+
+    .btn-secondary {
+      background: var(--navy);
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: #18304D;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--gray-600);
+      border-color: var(--gray-300);
+    }
+
+    .btn-ghost:hover {
+      background: var(--gray-50);
+      color: var(--ink);
+      border-color: var(--gray-400);
+    }
+
+    .btn-mini {
+      font-size: 11px;
+      padding: 4px 8px;
+    }
+
+    .btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* Form controls */
+    .label {
+      display: block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      margin-bottom: 8px;
+    }
+
+    .field {
+      width: 100%;
+      font-family: 'IBM Plex Sans';
+      font-size: 13px;
+      padding: 8px 10px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--ink);
+    }
+
+    .field:focus {
+      outline: none;
+      border-color: var(--navy-soft);
+      box-shadow: 0 0 0 3px rgba(46, 91, 143, 0.1);
+    }
+
+    .field-mono {
+      font-family: 'IBM Plex Mono';
+      font-size: 12px;
+    }
+
+    select.field {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath stroke='%23475569' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m4 6 4 4 4-4'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 14px;
+      padding-right: 32px;
+    }
+
+    /* Source radio (segmented) */
+    .seg {
+      display: inline-flex;
+      background: var(--gray-100);
+      padding: 3px;
+      border-radius: 6px;
+      border: 1px solid var(--border-soft);
+    }
+
+    .seg button {
+      flex: 1;
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 4px;
+      border: none;
+      background: transparent;
+      color: var(--gray-600);
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: 'IBM Plex Sans';
+    }
+
+    .seg button.active {
+      background: white;
+      color: var(--navy);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    }
+
+    /* Checkbox */
+    .check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 4px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.1s;
+    }
+
+    .check-row:hover {
+      background: var(--gray-50);
+    }
+
+    .check-box {
+      width: 16px;
+      height: 16px;
+      border: 1.5px solid var(--gray-400);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      flex-shrink: 0;
+      margin-top: 2px;
+      transition: all 0.15s;
+    }
+
+    .check-row.checked .check-box {
+      background: var(--navy);
+      border-color: var(--navy);
+    }
+
+    .check-row .check-label {
+      font-size: 13px;
+      color: var(--gray-700);
+      line-height: 1.4;
+    }
+
+    .check-row.checked .check-label {
+      color: var(--ink);
+    }
+
+    .check-meta {
+      font-size: 11px;
+      color: var(--gray-500);
+      font-family: 'IBM Plex Mono';
+    }
+
+    /* Lead card */
+    .lead-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 12px;
+      transition: border-color 0.15s;
+      overflow: hidden;
+    }
+
+    .lead-card:hover {
+      border-color: var(--gray-400);
+    }
+
+    .lead-card.expanded {
+      border-color: var(--navy-soft);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    .lead-header {
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .lead-num {
+      font-family: 'IBM Plex Mono';
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--gray-500);
+      background: var(--gray-100);
+      padding: 3px 7px;
+      border-radius: 3px;
+      min-width: 28px;
+      text-align: center;
+    }
+
+    .lead-title {
+      flex: 1;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .lead-tag {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 999px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-family: 'IBM Plex Sans';
+    }
+
+    .tag-storm {
+      background: #FEF3C7;
+      color: #92400E;
+    }
+
+    .tag-age {
+      background: #DBEAFE;
+      color: #1E40AF;
+    }
+
+    .tag-leak {
+      background: #FEE2E2;
+      color: #991B1B;
+    }
+
+    .tag-insurance {
+      background: #E0E7FF;
+      color: #3730A3;
+    }
+
+    .tag-gutter {
+      background: #DCFCE7;
+      color: #166534;
+    }
+
+    .tag-spam {
+      background: var(--gray-200);
+      color: var(--gray-700);
+    }
+
+    /* LSA lead-type pills */
+    .lt-pill {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-family: 'IBM Plex Mono';
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .lt-message {
+      background: #EDE9FE;
+      color: #5B21B6;
+    }
+
+    .lt-phone {
+      background: #D1FAE5;
+      color: #065F46;
+    }
+
+    .lt-booking {
+      background: #FED7AA;
+      color: #9A3412;
+    }
+
+    /* Meta platform pills */
+    .lt-fb {
+      background: #E7F0FF;
+      color: #1D4ED8;
+    }
+
+    .lt-ig {
+      background: #FCE7F3;
+      color: #BE185D;
+    }
+
+    /* Edited indicator */
+    .edited-pill {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 999px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: var(--orange-soft);
+      color: var(--orange);
+      font-family: 'IBM Plex Sans';
+    }
+
+    /* Editable JSON viewer */
+    .json-viewer[contenteditable="true"] {
+      outline: none;
+      cursor: text;
+    }
+
+    .json-viewer[contenteditable="true"]:focus {
+      box-shadow: inset 0 0 0 2px rgba(46, 91, 143, 0.5);
+    }
+
+    .json-viewer.json-error {
+      box-shadow: inset 0 0 0 2px rgba(252, 165, 165, 0.7);
+    }
+
+    .json-error-msg {
+      background: #2A1518;
+      color: #FCA5A5;
+      font-family: 'IBM Plex Mono';
+      font-size: 11px;
+      padding: 6px 16px;
+      border-top: 1px solid rgba(252, 165, 165, 0.2);
+    }
+
+    /* Phase label for Meta dual viewers */
+    .phase-label {
+      background: #182438;
+      color: rgba(226, 232, 240, 0.75);
+      font-family: 'IBM Plex Mono';
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 7px 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    /* JSON viewer */
+    .json-viewer {
+      background: var(--navy-deep);
+      color: #E2E8F0;
+      font-family: 'IBM Plex Mono';
+      font-size: 12px;
+      line-height: 1.6;
+      padding: 16px;
+      overflow-x: auto;
+      white-space: pre;
+      max-height: 480px;
+      overflow-y: auto;
+    }
+
+    .json-key {
+      color: #93C5FD;
+    }
+
+    .json-string {
+      color: #FCA5A5;
+    }
+
+    .json-number {
+      color: #C4B5FD;
+    }
+
+    .json-bool {
+      color: #6EE7B7;
+    }
+
+    .json-null {
+      color: #94A3B8;
+    }
+
+    .lead-actions {
+      padding: 12px 16px;
+      border-top: 1px solid #1E293B;
+      background: var(--navy-deep);
+      display: flex;
+      gap: 8px;
+    }
+
+    /* Wrapper for entire expanded section — owns the bottom rounded corners */
+    .lead-detail {
+      border-radius: 0 0 8px 8px;
+      overflow: hidden;
+    }
+
+    /* Response panels */
+    .response-header {
+      background: #182438;
+      padding: 9px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .response-label {
+      font-family: 'IBM Plex Mono';
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      padding: 3px 8px;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
+
+    .response-label.ok {
+      background: rgba(110, 231, 183, 0.14);
+      color: #6EE7B7;
+    }
+
+    .response-label.err {
+      background: rgba(252, 165, 165, 0.14);
+      color: #FCA5A5;
+    }
+
+    .response-meta {
+      font-family: 'IBM Plex Mono';
+      font-size: 11px;
+      color: rgba(226, 232, 240, 0.55);
+      flex: 1;
+    }
+
+    .response-body {
+      background: var(--navy-deep);
+      color: #E2E8F0;
+      font-family: 'IBM Plex Mono';
+      font-size: 12px;
+      line-height: 1.6;
+      padding: 12px 16px 16px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      max-height: 320px;
+      overflow-y: auto;
+      word-break: break-word;
+    }
+
+    .response-body.is-error {
+      color: #FCA5A5;
+    }
+
+    .response-body .hint {
+      display: block;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.12);
+      color: rgba(226, 232, 240, 0.7);
+      font-style: italic;
+      font-size: 11px;
+      white-space: normal;
+    }
+
+    .response-empty {
+      color: rgba(226, 232, 240, 0.4);
+      font-style: italic;
+    }
+
+    /* Status pills */
+    .status-pill {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: 'IBM Plex Mono';
+      font-weight: 500;
+    }
+
+    .status-success {
+      background: #DCFCE7;
+      color: #166534;
+    }
+
+    .status-error {
+      background: #FEE2E2;
+      color: #991B1B;
+    }
+
+    .status-pending {
+      background: #FEF3C7;
+      color: #92400E;
+    }
+
+    /* Sticky panels */
+    .left-panel {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    /* Brand mark */
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      background: var(--navy);
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: 'IBM Plex Serif';
+      font-weight: 600;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .brand-mark::before {
+      content: "Z";
+      transform: translateY(-1px);
+    }
+
+    /* Toast */
+    @keyframes slide-up {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--ink);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      animation: slide-up 0.2s ease-out;
+      z-index: 50;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Loading */
+    @keyframes pulse-dot {
+
+      0%,
+      100% {
+        opacity: 0.3;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    .loading-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: currentColor;
+      border-radius: 50%;
+      margin: 0 2px;
+      animation: pulse-dot 1.4s infinite;
+    }
+
+    .loading-dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .loading-dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    /* Empty state */
+    .empty-state {
+      padding: 64px 24px;
+      text-align: center;
+      color: var(--gray-500);
+    }
+
+    /* Grain texture overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.025;
+      z-index: 1;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: var(--border-soft);
+      margin: 20px 0;
+    }
+
+    /* Number input */
+    input[type="number"].field {
+      font-family: 'IBM Plex Mono';
+    }
+
+    /* Animations */
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fade-in 0.25s ease-out backwards;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel" data-type="module">
+    const { useState, useMemo, useCallback, useEffect, useRef } = React;
+
+    // ============================================================
+    // DATA POOLS
+    // ============================================================
+    const FIRST_NAMES = ["James", "Mary", "John", "Patricia", "Robert", "Jennifer", "Michael", "Linda", "David", "Barbara", "William", "Susan", "Richard", "Jessica", "Joseph", "Sarah", "Thomas", "Karen", "Charles", "Nancy", "Christopher", "Lisa", "Daniel", "Margaret", "Matthew", "Betty", "Anthony", "Sandra", "Mark", "Ashley", "Donald", "Kimberly", "Steven", "Emily", "Paul", "Donna", "Andrew", "Michelle", "Joshua", "Carol", "Kenneth", "Amanda", "Kevin", "Melissa", "Brian", "Deborah", "George", "Stephanie", "Edward", "Rebecca", "Ronald", "Sharon", "Timothy", "Laura", "Jason", "Cynthia", "Jeffrey", "Amy", "Ryan", "Kathleen", "Jacob", "Angela", "Gary", "Shirley", "Nicholas", "Brenda", "Eric", "Anna", "Jonathan", "Pamela", "Stephen", "Nicole", "Larry", "Samantha", "Justin", "Katherine", "Scott", "Christine", "Brandon", "Helen", "Benjamin", "Debra", "Samuel", "Rachel", "Gregory", "Carolyn", "Frank", "Janet", "Alexander", "Maria", "Raymond", "Catherine", "Patrick", "Heather", "Jack", "Diane", "Dennis", "Olivia", "Jerry", "Julie"];
+    const LAST_NAMES = ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez", "Hernandez", "Lopez", "Gonzalez", "Wilson", "Anderson", "Thomas", "Taylor", "Moore", "Jackson", "Martin", "Lee", "Perez", "Thompson", "White", "Harris", "Sanchez", "Clark", "Ramirez", "Lewis", "Robinson", "Walker", "Young", "Allen", "King", "Wright", "Scott", "Torres", "Nguyen", "Hill", "Flores", "Green", "Adams", "Nelson", "Baker", "Hall", "Rivera", "Campbell", "Mitchell", "Carter", "Roberts", "Gomez", "Phillips", "Evans", "Turner", "Diaz", "Parker", "Cruz", "Edwards", "Collins", "Reyes", "Stewart", "Morris", "Morales", "Murphy", "Cook", "Rogers", "Gutierrez", "Ortiz", "Morgan", "Cooper", "Peterson", "Bailey", "Reed", "Kelly", "Howard", "Ramos", "Kim", "Cox", "Ward", "Richardson", "Watson", "Brooks", "Chavez", "Wood", "James", "Bennett", "Gray", "Mendoza", "Ruiz", "Hughes", "Price", "Alvarez", "Castillo", "Sanders", "Patel", "Myers", "Long", "Ross", "Foster", "Jimenez"];
+
+    const STREETS = ["Main", "Oak", "Pine", "Maple", "Cedar", "Elm", "Washington", "Lake", "Hill", "Park", "Spring", "North", "South", "East", "West", "River", "Forest", "Meadow", "Birch", "Willow", "Highland", "Sunset", "Ridge", "Valley", "Garden", "Linden", "Walnut", "Chestnut", "Cherry", "Magnolia", "Dogwood", "Holly", "Juniper", "Sycamore", "Aspen", "Poplar", "Hickory", "Beech", "Spruce"];
+    const STREET_TYPES = ["St", "Ave", "Rd", "Dr", "Ln", "Way", "Ct", "Pl", "Blvd", "Pkwy", "Cir", "Ter"];
+
+    const METROS = {
+      seattle: { city: "Seattle", state: "WA", areaCode: ["206", "425", "253"], zips: ["98101", "98102", "98103", "98105", "98115", "98116", "98117", "98118", "98199"] },
+      portland: { city: "Portland", state: "OR", areaCode: ["503", "971"], zips: ["97201", "97202", "97205", "97209", "97214", "97215", "97217", "97220", "97232"] },
+      denver: { city: "Denver", state: "CO", areaCode: ["303", "720"], zips: ["80202", "80203", "80206", "80209", "80210", "80211", "80212", "80218", "80220"] },
+      dallas: { city: "Dallas", state: "TX", areaCode: ["214", "469", "972"], zips: ["75201", "75204", "75206", "75214", "75218", "75219", "75225", "75230", "75248"] },
+      houston: { city: "Houston", state: "TX", areaCode: ["713", "281", "832"], zips: ["77002", "77005", "77006", "77007", "77019", "77024", "77027", "77056", "77098"] },
+      austin: { city: "Austin", state: "TX", areaCode: ["512", "737"], zips: ["78701", "78702", "78703", "78704", "78705", "78731", "78745", "78751", "78759"] },
+      atlanta: { city: "Atlanta", state: "GA", areaCode: ["404", "678", "770"], zips: ["30301", "30303", "30305", "30306", "30307", "30308", "30309", "30312", "30318"] },
+      tampa: { city: "Tampa", state: "FL", areaCode: ["813", "727"], zips: ["33602", "33603", "33604", "33605", "33606", "33609", "33611", "33612", "33629"] },
+      miami: { city: "Miami", state: "FL", areaCode: ["305", "786"], zips: ["33101", "33125", "33126", "33127", "33130", "33131", "33132", "33136", "33145"] },
+      orlando: { city: "Orlando", state: "FL", areaCode: ["407", "321"], zips: ["32801", "32803", "32804", "32805", "32806", "32807", "32808", "32810", "32814"] },
+      charlotte: { city: "Charlotte", state: "NC", areaCode: ["704", "980"], zips: ["28202", "28203", "28204", "28205", "28207", "28209", "28211", "28215", "28226"] },
+      nashville: { city: "Nashville", state: "TN", areaCode: ["615", "629"], zips: ["37201", "37203", "37204", "37205", "37206", "37207", "37208", "37209", "37215"] },
+      kansas_city: { city: "Kansas City", state: "MO", areaCode: ["816", "913"], zips: ["64101", "64108", "64109", "64110", "64111", "64112", "64114", "64116", "64124"] },
+      minneapolis: { city: "Minneapolis", state: "MN", areaCode: ["612", "763", "952"], zips: ["55401", "55403", "55404", "55405", "55408", "55409", "55410", "55411", "55416"] },
+      indianapolis: { city: "Indianapolis", state: "IN", areaCode: ["317", "463"], zips: ["46202", "46203", "46204", "46205", "46208", "46220", "46222", "46225", "46240"] },
+      phoenix: { city: "Phoenix", state: "AZ", areaCode: ["602", "480", "623"], zips: ["85003", "85004", "85006", "85008", "85013", "85014", "85016", "85020", "85032"] },
+    };
+
+    const METRO_OPTIONS = Object.entries(METROS).map(([k, v]) => ({ value: k, label: `${v.city}, ${v.state}` }));
+
+    // ============================================================
+    // SCENARIO TEMPLATES
+    // ============================================================
+    const SCENARIOS = {
+      storm: {
+        label: "Storm damage",
+        tagClass: "tag-storm",
+        descriptions: [
+          "Recent hailstorm came through last weekend and left visible damage to multiple shingles. Insurance adjuster is scheduled but I want estimates ready.",
+          "Wind event last Thursday tore off shingles on the north slope and exposed underlayment. Need this addressed quickly before the next storm.",
+          "Hail damage from the storm two weeks ago. State Farm has approved the claim and I need a contractor to do the work.",
+          "Tree branch came down during the windstorm and damaged about a 6x4 section of roof. Tarped temporarily but need permanent repair.",
+          "Got hit hard by the hailstorm. Roof is 8 years old and now has heavy granule loss. Need a full assessment and estimate.",
+        ],
+        titles: { angi: "Storm Damage Roof Repair", thumbtack: "Roof Repair or Maintenance" },
+        categories: { angi: "Roofing - Repair", thumbtack: "Roof Repair or Maintenance" },
+        thumbtackCategoryId: "122681972262289742",
+        details: () => ([
+          { question: "What type of property is this?", answer: "Home" },
+          { question: "What kind of roofing material is on the home?", answer: pickFrom(["Asphalt shingle", "Architectural shingle", "Metal", "Tile"]) },
+          { question: "What's the reason for this project?", answer: "Storm or weather damage" },
+          { question: "Have you filed an insurance claim?", answer: pickFrom(["Yes, approved", "Yes, pending", "Plan to", "No"]) },
+          { question: "How soon do you need this?", answer: pickFrom(["As soon as possible", "Within 1 week", "Within 2 weeks"]) },
+        ]),
+        timeframe: "ASAP",
+        leadType: "REQUEST_A_QUOTE",
+        leadPriceRange: [38, 65],
+        flaggable: false,
+      },
+      age: {
+        label: "Age replacement",
+        tagClass: "tag-age",
+        descriptions: [
+          "Roof is 22 years old, original to the home. No active leaks but it's clearly at end of life. Looking for full replacement estimates.",
+          "Our roof is approximately 25 years old and starting to show its age. Getting quotes from 3-4 contractors for a full tear-off and replacement.",
+          "House is 18 years old with original roof. Want to be proactive and replace before issues. Architectural shingles preferred.",
+          "Buying a home with a 20-year-old roof. Inspection flagged it as nearing end of life. Need replacement quote for the contract.",
+          "30-year shingles installed in 2003. Time to replace. Considering upgrading to impact-resistant shingles for insurance discount.",
+        ],
+        titles: { angi: "Roof Replacement", thumbtack: "Roof Installation or Replacement" },
+        categories: { angi: "Roofing - Install or Replace", thumbtack: "Roof Installation or Replacement" },
+        thumbtackCategoryId: "122681972262289742",
+        details: () => ([
+          { question: "What type of property is this?", answer: "Home" },
+          { question: "What kind of roofing material is on the home?", answer: pickFrom(["Asphalt shingle", "Architectural shingle"]) },
+          { question: "What's the reason for this project?", answer: "Age or wear" },
+          { question: "How many stories does the building have?", answer: pickFrom(["1 story", "2 stories", "3 stories"]) },
+          { question: "When do you need this completed?", answer: pickFrom(["Within 1 month", "Within 2-3 months", "Flexible"]) },
+        ]),
+        timeframe: "Within 1 month",
+        leadType: "REQUEST_A_QUOTE",
+        leadPriceRange: [52, 95],
+        flaggable: false,
+      },
+      leak: {
+        label: "Active leak",
+        tagClass: "tag-leak",
+        descriptions: [
+          "Active leak in the master bedroom ceiling. Water came through during last night's rain. Need someone out today or tomorrow.",
+          "Ceiling stain just appeared in the kitchen and is growing. Pretty sure it's from the roof. Urgent.",
+          "Water dripping into the attic during heavy rain. Caught it in a bucket but need a professional to find and fix the source.",
+          "Brown water stain spreading on the dining room ceiling. Started small last week, much bigger now. Roof is about 12 years old.",
+          "Found water damage in the upstairs closet. Suspect a leak around the chimney flashing. Need urgent inspection and repair.",
+        ],
+        titles: { angi: "Roof Leak Repair", thumbtack: "Roof Repair or Maintenance" },
+        categories: { angi: "Roofing - Repair", thumbtack: "Roof Repair or Maintenance" },
+        thumbtackCategoryId: "122681972262289742",
+        details: () => ([
+          { question: "What type of property is this?", answer: "Home" },
+          { question: "What kind of roofing material is on the home?", answer: pickFrom(["Asphalt shingle", "Architectural shingle", "Metal", "Tile", "Flat / membrane"]) },
+          { question: "What's the reason for this project?", answer: "Active leak or water damage" },
+          { question: "When did the leak start?", answer: pickFrom(["Today", "Yesterday", "This week", "Last week"]) },
+          { question: "How soon do you need this?", answer: "As soon as possible" },
+        ]),
+        timeframe: "ASAP",
+        leadType: "INSTANT_BOOK",
+        leadPriceRange: [42, 78],
+        flaggable: false,
+      },
+      insurance: {
+        label: "Insurance claim",
+        tagClass: "tag-insurance",
+        descriptions: [
+          "Insurance claim approved by Allstate for full roof replacement after hail damage. Need licensed contractor for the work. Have claim paperwork ready.",
+          "State Farm approved my hail claim. Looking for a roofing contractor familiar with insurance work and Xactimate. Replacement value approximately $14k.",
+          "USAA claim approved last week for roof replacement. Need a contractor who handles insurance projects start to finish, including supplements if needed.",
+          "Adjuster came out and approved the claim for $11,200. Insurance is Liberty Mutual. Need contractor to schedule work and handle paperwork.",
+          "Travelers Insurance approved my roof claim from the spring storms. Contractor needs to coordinate with my adjuster. Replacement, not repair.",
+        ],
+        titles: { angi: "Insurance Roof Replacement", thumbtack: "Roof Installation or Replacement" },
+        categories: { angi: "Roofing - Install or Replace", thumbtack: "Roof Installation or Replacement" },
+        thumbtackCategoryId: "122681972262289742",
+        details: () => ([
+          { question: "What type of property is this?", answer: "Home" },
+          { question: "What kind of roofing material is on the home?", answer: pickFrom(["Asphalt shingle", "Architectural shingle"]) },
+          { question: "What's the reason for this project?", answer: "Insurance claim work" },
+          { question: "Has the insurance company approved the claim?", answer: "Yes" },
+          { question: "Insurance carrier", answer: pickFrom(["State Farm", "Allstate", "USAA", "Liberty Mutual", "Travelers", "Farmers", "Nationwide", "American Family"]) },
+          { question: "When do you need this completed?", answer: pickFrom(["Within 1 month", "Within 2-3 months"]) },
+        ]),
+        timeframe: "Within 1 month",
+        leadType: "REQUEST_A_QUOTE",
+        leadPriceRange: [58, 110],
+        flaggable: false,
+      },
+      gutter: {
+        label: "Gutter / siding",
+        tagClass: "tag-gutter",
+        descriptions: [
+          "Need new gutters installed around the entire house. Old aluminum gutters are sagging and disconnecting. Looking for 6-inch seamless.",
+          "Vinyl siding repair on the south wall. Wind blew off about 8 panels last week. Need someone to source matching panels and reinstall.",
+          "Full gutter replacement plus gutter guards. House is 2 stories, approximately 180 linear feet of gutters needed.",
+          "Soffit and fascia replacement. Squirrel damage to the existing soffit on one corner. Wood rot in fascia visible in two spots.",
+          "Need to replace failing wood siding with fiber cement (Hardie). 1,400 sq ft, front and side elevations.",
+        ],
+        titles: { angi: "Gutter Installation", thumbtack: "Gutter Installation or Replacement" },
+        categories: { angi: "Gutters - Install or Replace", thumbtack: "Gutter Installation or Replacement" },
+        thumbtackCategoryId: "122681972283199244",
+        details: () => ([
+          { question: "What type of property is this?", answer: "Home" },
+          { question: "What service is needed?", answer: pickFrom(["Gutter installation", "Gutter replacement", "Siding repair", "Siding replacement"]) },
+          { question: "How many stories does the building have?", answer: pickFrom(["1 story", "2 stories"]) },
+          { question: "When do you need this?", answer: pickFrom(["Within 1 month", "Within 2-3 months", "Flexible"]) },
+        ]),
+        timeframe: "Within 2 months",
+        leadType: "REQUEST_A_QUOTE",
+        leadPriceRange: [22, 48],
+        flaggable: false,
+      },
+      spam: {
+        label: "Spam / out-of-scope",
+        tagClass: "tag-spam",
+        descriptions: [
+          "need quote",
+          "Looking for commercial flat-roof replacement on a 200-unit apartment complex. 80,000 sq ft. TPO membrane.",
+          "Hi do you do solar panel removal and reinstall I have 32 panels need to come off for new roof",
+          "test",
+          "I need someone to fix a leak in my mobile home, the roof is metal, single wide. Asking for friend.",
+          "want to know how much for new roof maybe later this year not sure when",
+        ],
+        titles: { angi: "Roofing Inquiry", thumbtack: "Roof Repair or Maintenance" },
+        categories: { angi: "Roofing - Other", thumbtack: "Roof Repair or Maintenance" },
+        thumbtackCategoryId: "122681972262289742",
+        details: () => ([
+          { question: "What type of property is this?", answer: pickFrom(["Home", "Commercial", "Mobile home", "Other"]) },
+          { question: "What's the reason for this project?", answer: pickFrom(["Just exploring", "Not sure", "Other"]) },
+        ]),
+        timeframe: "Flexible",
+        leadType: "CONTACT",
+        leadPriceRange: [15, 30],
+        flaggable: true,
+      },
+    };
+
+    const SCENARIO_KEYS = Object.keys(SCENARIOS);
+
+    // ============================================================
+    // HELPERS
+    // ============================================================
+    const pickFrom = (arr) => arr[Math.floor(Math.random() * arr.length)];
+    const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+    const randId = (digits = 18) => {
+      let s = String(randInt(1, 9));
+      for (let i = 0; i < digits - 1; i++) s += randInt(0, 9);
+      return s;
+    };
+    const nowUnix = () => Math.floor(Date.now() / 1000);
+    // ISO-8601 with no millis and a Z suffix. Thumbtack uses this for
+    // createdAt / triggeredAt / proposedTimes.
+    const isoZ = (d) => d.toISOString().replace(/\.\d{3}Z$/, "Z");
+    const nowISO = () => isoZ(new Date());
+
+    // Meta uses long numeric string IDs. base = shared prefix for ad/adset/campaign realism.
+    const metaId = (digits = 15) => {
+      let s = String(randInt(1, 9));
+      for (let i = 0; i < digits - 1; i++) s += randInt(0, 9);
+      return s;
+    };
+    // Meta Graph API time format: "2026-05-29T23:02:00+0000" (no millis, +0000 not Z).
+    const formatMetaTime = (date) => date.toISOString().replace(/\.\d{3}Z$/, "+0000");
+
+    const randomPhone = (areaCodes) => {
+      const ac = pickFrom(areaCodes);
+      const mid = String(randInt(200, 999));
+      const end = String(randInt(0, 9999)).padStart(4, "0");
+      return `${ac}${mid}${end}`;
+    };
+    const formatPhone10 = (p) => `${p.slice(0, 3)}-${p.slice(3, 6)}-${p.slice(6)}`;
+
+    const randomEmail = (first, last) => {
+      const domains = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com", "icloud.com", "comcast.net", "aol.com"];
+      const variants = [
+        `${first.toLowerCase()}.${last.toLowerCase()}`,
+        `${first.toLowerCase()}${last.toLowerCase()}`,
+        `${first[0].toLowerCase()}${last.toLowerCase()}`,
+        `${first.toLowerCase()}${randInt(1, 99)}`,
+        `${first.toLowerCase()}.${last.toLowerCase()}${randInt(50, 99)}`,
+      ];
+      return `${pickFrom(variants)}@${pickFrom(domains)}`;
+    };
+
+    const randomAddress = (metro) => ({
+      street: `${randInt(100, 9899)} ${pickFrom(STREETS)} ${pickFrom(STREET_TYPES)}`,
+      city: metro.city,
+      state: metro.state,
+      zip: pickFrom(metro.zips),
+    });
+
+    // ============================================================
+    // GENERATORS — ANGI (matches Mary's BHC workflow payload shape)
+    // ============================================================
+    const ANGI_TASK_NAMES = {
+      storm: "Asphalt Shingle Roofing - Repair",
+      age: "Asphalt Shingle Roofing - Install or Replace",
+      leak: "Asphalt Shingle Roofing - Repair",
+      insurance: "Asphalt Shingle Roofing - Install or Replace",
+      gutter: "Gutters - Install or Replace",
+      spam: "Roofing - General",
+    };
+
+    const ANGI_SP_COMPANIES = ["Maven Roofing", "BHC Roofing & Exteriors", "Apex Roofing Co", "Summit Roofing Partners"];
+
+    function generateAngiLead(scenarioKey, metroKey) {
+      const scenario = SCENARIOS[scenarioKey];
+      const metro = METROS[metroKey];
+      const first = pickFrom(FIRST_NAMES);
+      const last = pickFrom(LAST_NAMES);
+      const addr = randomAddress(metro);
+      const phone = randomPhone(metro.areaCode);
+      const desc = pickFrom(scenario.descriptions);
+      const fee = parseFloat((Math.random() * (scenario.leadPriceRange[1] - scenario.leadPriceRange[0]) + scenario.leadPriceRange[0]).toFixed(2));
+      // TrustedForm cert URL — 40-char hex token, mirrors Angi's format
+      const trustedFormToken = Array(40).fill(0).map(() => randInt(0, 15).toString(16)).join("");
+
+      return {
+        name: `${first} ${last}`,
+        firstName: first,
+        lastName: last,
+        address: addr.street,
+        city: addr.city.toUpperCase(),
+        stateProvince: addr.state,
+        postalCode: addr.zip,
+        primaryPhone: phone,
+        secondaryPhone: null,
+        email: randomEmail(first, last),
+        srOid: parseInt(randId(9)),
+        leadOid: parseInt(randId(9)),
+        fee: fee,
+        taskName: ANGI_TASK_NAMES[scenarioKey] || "Roofing - General",
+        comments: scenarioKey === "spam" ? null : pickFrom([null, "", "Please call after 5pm", "Best to reach via text"]),
+        leadDescription: scenarioKey === "spam" ? null : desc,
+        spEntityId: parseInt(randId(9)),
+        spCompanyName: pickFrom(ANGI_SP_COMPANIES),
+        leadSource: "AngiesList",
+        trustedFormUrl: `https://cert.trustedform.com/${trustedFormToken}`,
+        primaryPhoneDetails: {
+          maskedNumber: false,
+        },
+        matchType: scenarioKey === "insurance" || scenarioKey === "age" ? pickFrom(["Lead", "Quote"]) : "Lead",
+        __meta: { scenario: scenarioKey, source: "angi" },
+      };
+    }
+
+    // ============================================================
+    // GENERATORS — THUMBTACK (matches real partner-forwarded payload shape)
+    // ============================================================
+    // Homeowner-facing job value per scenario, in dollars. Drives data.estimate.
+    // Distinct from scenario.leadPriceRange, which is the fee the pro pays Thumbtack.
+    const TT_ESTIMATE_RANGES = {
+      storm: [3000, 15000],
+      age: [8000, 30000],
+      leak: [500, 5000],
+      insurance: [10000, 28000],
+      gutter: [1500, 8000],
+      spam: [500, 5000],
+    };
+
+    // A freshly created negotiation is almost always still Open. Weighted by repetition.
+    const TT_STATUSES = ["Open", "Open", "Open", "Open", "Booked"];
+
+    // request.travelPreferences is an enum array; the matching "Travel Preferences"
+    // detail answer is the homeowner-facing wording of the same choice.
+    const TT_TRAVEL_PREFS = [
+      { values: ["ProviderTravelToCustomer"], answer: "The pro travels to me" },
+      { values: ["CustomerTravelToProvider"], answer: "I travel to the pro" },
+      { values: ["RemoteService"], answer: "Remote (phone or internet)" },
+      { values: ["ProviderTravelToCustomer", "RemoteService"], answer: "The pro travels to me, or remote" },
+    ];
+
+    // Thumbtack's standard property questions, asked ahead of the category-specific ones.
+    const TT_PROPERTY_DETAILS = [
+      { question: "Project location", answers: ["Home", "Business"] },
+      { question: "Building height", answers: ["Single-level building", "Two-level building", "Three-level building"] },
+      { question: "Total square footage of property", answers: ["Less than 1,000 sq ft", "1,000 - 2,000 sq ft", "2,000 - 3,000 sq ft", "3,000 - 4,000 sq ft", "More than 4,000 sq ft"] },
+    ];
+
+    // Asked after the category-specific questions, per the wire order.
+    const TT_ROOF_DETAILS = [
+      { question: "Roof steepness", answers: ["Not steep", "Somewhat steep", "Very steep", "Other (please describe), It's not steep", "I'm not sure"] },
+    ];
+
+    const TT_OWNERSHIP = ["Owner", "Renter", "Property manager"];
+
+    const TT_BUSINESS_NAMES = ["Apex Roof & Exterior", "Summit Roofing Partners", "BHC Roofing & Exteriors", "Maven Roofing Co", "AC INC. Roofing"];
+
+    // data.estimate - Fixed quotes a lump sum, Hourly quotes a rate x hours.
+    function makeThumbtackEstimate(scenarioKey) {
+      const range = TT_ESTIMATE_RANGES[scenarioKey] || TT_ESTIMATE_RANGES.storm;
+      if (Math.random() < 0.75) {
+        const amount = randInt(range[0], range[1]);
+        return {
+          type: "Fixed",
+          total: `$${amount.toLocaleString("en-US")}`,
+          unitName: "",
+          pricePerUnit: amount.toFixed(2),
+          unitQuantity: 0,
+        };
+      }
+      const rate = randInt(65, 185);
+      const qty = randInt(2, 12);
+      return {
+        type: "Hourly",
+        total: `$${(rate * qty).toLocaleString("en-US")}`,
+        unitName: "hour",
+        pricePerUnit: rate.toFixed(2),
+        unitQuantity: qty,
+      };
+    }
+
+    const ttQa = (question, answers) => ({ answer: pickFrom(answers), question });
+
+    // request.details is a flat Q&A list that mixes Thumbtack's standard property
+    // questions with the category-specific ones, and repeats several values that also
+    // appear as first-class fields (description, category, zip, scheduling, travel).
+    // The duplication is intentional - it is how the real payload arrives.
+    function buildThumbtackDetails(scenario, ctx) {
+      return [
+        ...TT_PROPERTY_DETAILS.map(d => ttQa(d.question, d.answers)),
+        { answer: ctx.description, question: "Anything else" },
+        { answer: ctx.categoryName, question: "Category" },
+        // Scenario Q&A, re-keyed answer-first to match the wire key order.
+        ...scenario.details().map(d => ({ answer: d.answer, question: d.question })),
+        ...TT_ROOF_DETAILS.map(d => ttQa(d.question, d.answers)),
+        { answer: ctx.schedulingAnswer, question: "Scheduling" },
+        ttQa("Property Ownership", TT_OWNERSHIP),
+        { answer: ctx.travelAnswer, question: "Travel Preferences" },
+        { answer: ctx.zipCode, question: "Zip code" },
+      ];
+    }
+
+    // Emits the real Thumbtack partner envelope: { data: <negotiation>, event: <webhook> }.
+    // Key structure is fixed; every value is redrawn per call, and the values the real
+    // payload repeats across fields are drawn once and shared.
+    function generateThumbtackLead(scenarioKey, metroKey, opts = {}) {
+      const scenario = SCENARIOS[scenarioKey];
+      const metro = METROS[metroKey];
+      const first = pickFrom(FIRST_NAMES);
+      const last = pickFrom(LAST_NAMES);
+      const address = randomAddress(metro);
+      const phone = randomPhone(metro.areaCode);
+      const desc = pickFrom(scenario.descriptions);
+      const categoryName = scenario.categories.thumbtack;
+      const sched = makeThumbtackProposedTimes();
+      const travel = pickFrom(TT_TRAVEL_PREFS);
+      // request.customerID and customer.customerID are the same person.
+      const customerID = randId(18);
+      const negotiationID = randId(18);
+      const leadPriceVal = (Math.random() * (scenario.leadPriceRange[1] - scenario.leadPriceRange[0]) + scenario.leadPriceRange[0]).toFixed(2);
+      const initialPriceSet = opts.priceSetOnLead === true;
+      // The webhook fires seconds to minutes after the negotiation is created.
+      const createdMs = Date.now() - randInt(0, 600) * 1000;
+
+      return {
+        data: {
+          status: pickFrom(TT_STATUSES),
+          request: {
+            details: buildThumbtackDetails(scenario, {
+              description: desc,
+              categoryName: categoryName,
+              schedulingAnswer: sched.schedulingAnswer,
+              travelAnswer: travel.answer,
+              zipCode: address.zip,
+            }),
+            category: {
+              name: categoryName,
+              categoryID: scenario.thumbtackCategoryId,
+            },
+            location: {
+              city: address.city,
+              state: address.state,
+              zipCode: address.zip,
+              // Thumbtack withholds the street address until the job is booked.
+              address1: "",
+              address2: "",
+            },
+            requestID: randId(18),
+            customerID: customerID,
+            attachments: [],
+            description: desc,
+            proposedTimes: sched.proposedTimes,
+            travelPreferences: travel.values,
+            contactedBusinesses: [],
+          },
+          business: {
+            name: opts.businessName || pickFrom(TT_BUSINESS_NAMES),
+            imageURL: `https://production-next-images-cdn.thumbtack.com/i/${randId(18)}/desktop/standard/fullscreen`,
+            accessCode: String(randInt(1000000, 9999999)),
+            businessID: opts.businessID || randId(18),
+          },
+          customer: {
+            phone: phone,
+            lastName: last,
+            firstName: first,
+            customerID: customerID,
+          },
+          estimate: makeThumbtackEstimate(scenarioKey),
+          createdAt: isoZ(new Date(createdMs)),
+          // leadPrice is the fee the pro pays; it lands empty until the charge settles.
+          leadPrice: initialPriceSet ? `$${leadPriceVal}` : "",
+          chargeState: initialPriceSet ? "Charged" : "Pending",
+          negotiationID: negotiationID,
+          refundRequestLink: `https://www.thumbtack.com/generic-survey/REQUEST_A_REFUND?negotiation-pk=${negotiationID}`,
+        },
+        event: {
+          eventType: "NegotiationCreatedV4",
+          webhookID: randId(18),
+          description: "",
+          triggeredAt: isoZ(new Date(createdMs + randInt(5, 180) * 1000)),
+        },
+        __meta: { scenario: scenarioKey, source: "thumbtack" },
+      };
+    }
+
+    // Once the charge settles Thumbtack re-sends the whole negotiation with the price
+    // filled in - not a delta. Same negotiationID and webhookID as the create event.
+    function generateThumbtackPriceUpdate(lead) {
+      const scenario = SCENARIOS[lead.__meta.scenario];
+      const price = (Math.random() * (scenario.leadPriceRange[1] - scenario.leadPriceRange[0]) + scenario.leadPriceRange[0]).toFixed(2);
+      return {
+        data: {
+          ...JSON.parse(JSON.stringify(lead.data)),
+          leadPrice: `$${price}`,
+          chargeState: "Charged",
+        },
+        event: {
+          eventType: "NegotiationUpdatedV4",
+          webhookID: lead.event?.webhookID || randId(18),
+          description: "",
+          triggeredAt: nowISO(),
+        },
+        __meta: { ...lead.__meta, eventType: "price_update" },
+      };
+    }
+
+    // ============================================================
+    // GENERATORS — GOOGLE LSA (Local Services Ads)
+    // Matches the google_ads_local_services_lead resource shape.
+    // LSA delivers MESSAGE, PHONE_CALL, and BOOKING lead types.
+    // ============================================================
+
+    // LSA service types per scenario. categoryId stays roofing_contractor for all.
+    const LSA_SERVICE_TYPE_MAP = {
+      storm: "roof_repair",
+      age: "roof_installation_replacement",
+      leak: "roof_repair",
+      insurance: "roof_installation_replacement",
+      gutter: "gutter_installation_replacement",
+      spam: "roof_repair",
+    };
+
+    // Lead-type probability distribution per scenario.
+    // Leak skews to PHONE_CALL (urgency). Others mostly MESSAGE with some PHONE_CALL.
+    const LSA_TYPE_WEIGHTS = {
+      storm: { MESSAGE: 0.65, PHONE_CALL: 0.25, BOOKING: 0.10 },
+      age: { MESSAGE: 0.70, PHONE_CALL: 0.20, BOOKING: 0.10 },
+      leak: { MESSAGE: 0.25, PHONE_CALL: 0.65, BOOKING: 0.10 },
+      insurance: { MESSAGE: 0.75, PHONE_CALL: 0.20, BOOKING: 0.05 },
+      gutter: { MESSAGE: 0.75, PHONE_CALL: 0.20, BOOKING: 0.05 },
+      spam: { MESSAGE: 0.85, PHONE_CALL: 0.15, BOOKING: 0.00 },
+    };
+
+    // Per-type LSA price multipliers (BOOKING > PHONE_CALL > MESSAGE).
+    const LSA_PRICE_MULT = { MESSAGE: 1.0, PHONE_CALL: 1.45, BOOKING: 1.85 };
+
+    // LSA message text per scenario. Homeowner's initial chat to the pro.
+    const LSA_MESSAGES = {
+      storm: [
+        "Hail damage from last week's storm, looking for replacement estimates. About 2,200 sq ft roof.",
+        "Multiple shingles missing after the wind storm. Insurance adjuster scheduled for next Tuesday.",
+        "Storm damage on the north side of the roof. Need a contractor familiar with insurance work.",
+        "Recent hailstorm, visible granule loss everywhere. Can you come out to inspect?",
+      ],
+      age: [
+        "Hello, my roof is about 22 years old and showing its age. I am looking for a full asphalt shingle replacement estimate. Can you come out next week?",
+        "Original 25-year roof on a 2-story home. Want to get a few estimates for full replacement before fall.",
+        "Roof is end of life. Looking for quote on full tear-off and replacement, architectural shingles preferred.",
+        "Need full roof replacement. Buying a home and inspection flagged the roof. Need quote for the contract.",
+      ],
+      leak: [
+        "Have a leak in my upstairs ceiling, looks like it's coming from around the chimney. Need someone to look ASAP.",
+        "Active leak in master bedroom after last night's rain. Caught water in a bucket. Need urgent help.",
+        "Water stain spreading on dining room ceiling. Pretty sure it's the roof. Can someone come this week?",
+      ],
+      insurance: [
+        "Allstate approved my roof replacement claim from hail damage. Need a contractor familiar with insurance claims.",
+        "State Farm approved my hail claim for full roof replacement. Looking for a contractor who handles supplements if needed.",
+        "Insurance has approved the work for $14,200. Need licensed contractor to coordinate with my adjuster.",
+      ],
+      gutter: [
+        "Need new gutters installed around the entire house. Existing aluminum is sagging.",
+        "Looking for 6-inch seamless gutters plus leaf guards. 2-story home, around 180 linear feet.",
+        "Want to replace old gutters and add gutter guards. Can you provide an estimate?",
+      ],
+      spam: [
+        "need quote",
+        "how much",
+        "looking for prices",
+        "test message",
+      ],
+    };
+
+    function generateLsaLead(scenarioKey, metroKey, opts = {}) {
+      const metro = METROS[metroKey];
+      const first = pickFrom(FIRST_NAMES);
+      const last = pickFrom(LAST_NAMES);
+      const phone = randomPhone(metro.areaCode);
+      const zip = pickFrom(metro.zips);
+      const scenario = SCENARIOS[scenarioKey];
+
+      // Pick leadType from weighted distribution
+      const weights = LSA_TYPE_WEIGHTS[scenarioKey];
+      const roll = Math.random();
+      let cumulative = 0;
+      let leadType = "MESSAGE";
+      for (const [type, weight] of Object.entries(weights)) {
+        cumulative += weight;
+        if (roll < cumulative) { leadType = type; break; }
+      }
+
+      // Price: base scenario range, scaled by type multiplier, converted to micros
+      const baseDollars = Math.random() * (scenario.leadPriceRange[1] - scenario.leadPriceRange[0]) + scenario.leadPriceRange[0];
+      const priceDollars = baseDollars * LSA_PRICE_MULT[leadType];
+      const priceMicros = String(Math.round(priceDollars * 1_000_000));
+
+      // Customer (advertiser account) ID and lead ID
+      const customerId = randId(10);
+      const leadId = randId(12);
+      const nowIso = new Date().toISOString();
+
+      // Build conversation block based on lead type
+      let conversation;
+      if (leadType === "MESSAGE") {
+        conversation = {
+          conversationChannel: "MESSAGE",
+          conversationType: "INITIAL_COMMUNICATION",
+          conversationDateTime: nowIso,
+          messageDetails: {
+            text: pickFrom(LSA_MESSAGES[scenarioKey] || LSA_MESSAGES.storm),
+          },
+        };
+      } else if (leadType === "PHONE_CALL") {
+        // Calls are 30s to 5min, with call recording URL
+        const callDurationSec = randInt(30, 300);
+        conversation = {
+          conversationChannel: "PHONE_CALL",
+          conversationType: "INITIAL_COMMUNICATION",
+          conversationDateTime: nowIso,
+          phoneCallDetails: {
+            callDurationMillis: String(callDurationSec * 1000),
+            callRecordingUrl: `https://contactcenter.googleapis.com/v1/recordings/${randId(16)}.mp3`,
+          },
+        };
+      } else { // BOOKING
+        const apptDate = new Date(Date.now() + 1000 * 60 * 60 * 24 * randInt(2, 10));
+        conversation = {
+          conversationChannel: "BOOKING",
+          conversationType: "INITIAL_COMMUNICATION",
+          conversationDateTime: nowIso,
+          bookingDetails: {
+            serviceTypeDisplayName: scenarioKey === "gutter" ? "Gutter installation" : "Roof inspection",
+            bookingDateTime: apptDate.toISOString(),
+          },
+        };
+      }
+
+      return {
+        resourceName: `customers/${customerId}/localServicesLeads/${leadId}`,
+        id: leadId,
+        categoryId: scenarioKey === "gutter" ? "gutter_contractor" : "roofing_contractor",
+        serviceType: LSA_SERVICE_TYPE_MAP[scenarioKey] || "roof_repair",
+        leadType: leadType,
+        leadStatus: "NEW",
+        creationDateTime: nowIso,
+        locale: "en-US",
+        contactDetails: {
+          phoneNumber: `+1${phone}`,
+          consumerName: `${first} ${last}`,
+          zipCode: zip,
+          city: metro.city,
+          state: metro.state,
+        },
+        chargeStatus: "CHARGED",
+        leadPriceMicros: priceMicros,
+        conversations: [conversation],
+        creditDetails: {
+          creditState: "NOT_CREDITED",
+          creditStateLastUpdateDateTime: null,
+        },
+        __meta: { scenario: scenarioKey, source: "lsa", leadType: leadType },
+      };
+    }
+
+    // ============================================================
+    // GENERATORS — META ADS (Lead Forms)
+    // Two-phase: webhookEvent (Phase 1, PII-free notification) +
+    // graphResponse (Phase 2, the Graph API GET result with field_data).
+    // ============================================================
+
+    // Project-type word used in campaign/ad names per scenario.
+    const META_PROJECT_WORD = {
+      storm: "Repair",
+      age: "Replacement",
+      leak: "Repair",
+      insurance: "Replacement",
+      gutter: "Gutters",
+      spam: "Repair",
+    };
+
+    const META_CAMPAIGN_TYPE = {
+      storm: "Repair",
+      age: "Installation",
+      leak: "Repair",
+      insurance: "Installation",
+      gutter: "Gutters",
+      spam: "Repair",
+    };
+
+    // Scenario-specific qualifying fields (identity fields added in the generator).
+    // Returns array of { name, values:[...] } in Meta's field_data shape.
+    function metaScenarioFields(scenarioKey) {
+      switch (scenarioKey) {
+        case "storm":
+          return [
+            { name: "what_kind_of_roofing_material_is_on_the_home?", values: [pickFrom(["Asphalt Shingle", "Architectural Shingle", "Metal", "Tile / Slate"])] },
+            { name: "project_urgency", values: [pickFrom(["Storm / Hail Damage", "Immediate / Active Leak", "Within 1 Month"])] },
+            { name: "have_you_filed_an_insurance_claim?", values: [pickFrom(["Yes, approved", "Yes, pending", "Plan to", "No"])] },
+          ];
+        case "age":
+          return [
+            { name: "what_kind_of_roofing_material_is_on_the_home?", values: [pickFrom(["Asphalt Shingle", "Architectural Shingle"])] },
+            { name: "how_many_stories_does_the_property_have?", values: [pickFrom(["1 story", "2 stories", "3 stories"])] },
+            { name: "project_urgency", values: [pickFrom(["Planning / Aging Roof", "Within 1-3 Months", "Just Researching"])] },
+          ];
+        case "leak":
+          return [
+            { name: "what_kind_of_roofing_material_is_on_the_home?", values: [pickFrom(["Asphalt Shingle", "Architectural Shingle", "Metal", "Tile / Slate", "Flat / Membrane"])] },
+            { name: "project_urgency", values: ["Immediate / Active Leak"] },
+            { name: "when_did_the_leak_start?", values: [pickFrom(["Today", "Yesterday", "This week", "Last week"])] },
+          ];
+        case "insurance":
+          return [
+            { name: "what_kind_of_roofing_material_is_on_the_home?", values: [pickFrom(["Asphalt Shingle", "Architectural Shingle"])] },
+            { name: "has_your_insurance_claim_been_approved?", values: ["Yes"] },
+            { name: "insurance_carrier", values: [pickFrom(["State Farm", "Allstate", "USAA", "Liberty Mutual", "Travelers", "Farmers", "Nationwide", "American Family"])] },
+          ];
+        case "gutter":
+          return [
+            { name: "what_service_do_you_need?", values: [pickFrom(["Gutter installation", "Gutter replacement", "Siding repair", "Siding replacement"])] },
+            { name: "how_many_stories_does_the_property_have?", values: [pickFrom(["1 story", "2 stories"])] },
+          ];
+        case "spam":
+        default:
+          return [
+            { name: "project_urgency", values: [pickFrom(["Just Researching", "Not Sure", "Other"])] },
+          ];
+      }
+    }
+
+    const META_FORM_QUESTION = "Get a Free Roofing Estimate";
+
+    function generateMetaLead(scenarioKey, metroKey) {
+      const metro = METROS[metroKey];
+      const first = pickFrom(FIRST_NAMES);
+      const last = pickFrom(LAST_NAMES);
+      const phone = randomPhone(metro.areaCode);
+      const zip = pickFrom(metro.zips);
+      const email = randomEmail(first, last);
+
+      // Shared IDs across both phases.
+      const pageId = metaId(15);
+      const formId = metaId(15);
+      const leadgenId = metaId(16);
+      const campaignBase = metaId(15);
+      const campaignId = campaignBase;
+      const adsetId = String(Number(campaignBase) + randInt(1, 6));    // adgroup_id in Phase 1
+      const adId = String(Number(campaignBase) + randInt(7, 20));
+
+      const platform = pickFrom(["fb", "ig"]);
+      const isOrganic = false;
+
+      const createdDate = new Date();
+      const createdUnix = Math.floor(createdDate.getTime() / 1000);
+
+      // Names
+      const cityToken = metro.city.replace(/\s+/g, "");
+      const campaignName = `Q2_Roofing_${META_CAMPAIGN_TYPE[scenarioKey]}_Conversions`;
+      const adsetName = `${cityToken}_Homeowners_35-65`;
+      const adName = `${metro.state}_Roofing_${META_PROJECT_WORD[scenarioKey]}_Lookalike_2026`;
+
+      // Phase 1 — webhook notification (no PII)
+      const webhookEvent = {
+        object: "page",
+        entry: [
+          {
+            id: pageId,
+            time: createdUnix + randInt(1, 4),
+            changes: [
+              {
+                field: "leadgen",
+                value: {
+                  page_id: pageId,
+                  form_id: formId,
+                  leadgen_id: leadgenId,
+                  created_time: createdUnix,
+                  ad_id: adId,
+                  adgroup_id: adsetId,
+                },
+              },
+            ],
+          },
+        ],
+      };
+
+      // Phase 2 — Graph API GET result (PII)
+      const fieldData = [
+        { name: "full_name", values: [`${first} ${last}`] },
+        { name: "phone_number", values: [`+1${phone}`] },
+        { name: "email", values: [email] },
+        { name: "zip_code", values: [zip] },
+        ...metaScenarioFields(scenarioKey),
+      ];
+
+      const graphResponse = {
+        created_time: formatMetaTime(createdDate),
+        id: leadgenId,
+        ad_id: adId,
+        ad_name: adName,
+        adset_id: adsetId,
+        adset_name: adsetName,
+        campaign_id: campaignId,
+        campaign_name: campaignName,
+        form_id: formId,
+        is_organic: isOrganic,
+        platform: platform,
+        field_data: fieldData,
+      };
+
+      return {
+        webhookEvent,
+        graphResponse,
+        __meta: { scenario: scenarioKey, source: "meta", platform, city: metro.city, state: metro.state },
+      };
+    }
+
+    // Thumbtack slots, expressed in UTC hours because the wire format is ISO-Z.
+    // Date.UTC rolls hour 24 into the next day, which is what the late slot wants.
+    const TT_TIME_SLOTS = [
+      { label: "Morning (9am - 12pm)", startUTC: 15, endUTC: 18 },
+      { label: "Afternoon (12pm - 3pm)", startUTC: 18, endUTC: 21 },
+      { label: "Late Afternoon (3pm - 6pm)", startUTC: 21, endUTC: 24 },
+    ];
+
+    // Returns request.proposedTimes plus the human "Scheduling" detail answer built
+    // from the same draw, so the two always agree. One slot is offered across every
+    // proposed day, matching the real payload.
+    function makeThumbtackProposedTimes() {
+      const slot = pickFrom(TT_TIME_SLOTS);
+      const firstOffset = randInt(1, 21);
+      const dayCount = randInt(1, 3);
+      const proposedTimes = [];
+      const dateLabels = [];
+
+      for (let i = 0; i < dayCount; i++) {
+        const d = new Date(Date.now() + (firstOffset + i) * 86400000);
+        const y = d.getUTCFullYear(), m = d.getUTCMonth(), day = d.getUTCDate();
+        proposedTimes.push({
+          end: isoZ(new Date(Date.UTC(y, m, day, slot.endUTC))),
+          start: isoZ(new Date(Date.UTC(y, m, day, slot.startUTC))),
+        });
+        dateLabels.push(new Date(Date.UTC(y, m, day)).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" }));
+      }
+
+      let schedulingAnswer = `Dates: ${dateLabels.join(", ")}\nTime: ${slot.label}`;
+      if (Math.random() < 0.5) schedulingAnswer += "\nAllow pro to suggest other dates";
+
+      return { proposedTimes, schedulingAnswer };
+    }
+
+    function maybeAttachment(scenarioKey) {
+      if (Math.random() > 0.55) return [];
+      const filenames = {
+        storm: ["roof_damage.jpg", "hail_damage_north.jpg", "missing_shingles.jpg"],
+        leak: ["ceiling_stain.jpg", "water_damage.jpg", "bucket_under_leak.jpg"],
+        age: ["roof_overview.jpg", "shingle_wear.jpg"],
+        insurance: ["adjuster_photos.pdf", "claim_summary.pdf"],
+        gutter: ["gutter_damage.jpg", "siding_panel.jpg"],
+        spam: ["photo.jpg"],
+      };
+      const name = pickFrom(filenames[scenarioKey] || ["photo.jpg"]);
+      return [{
+        fileName: name,
+        fileSize: randInt(500, 4000),
+        mimeType: name.endsWith(".pdf") ? "application/pdf" : "image/jpeg",
+        url: `https://www.thumbtack.com/attachment/${Array(40).fill(0).map(() => randInt(0, 15).toString(16)).join("")}/${name}`,
+        description: ""
+      }];
+    }
+
+    // ============================================================
+    // JSON SYNTAX HIGHLIGHTER
+    // ============================================================
+    function highlightJson(obj) {
+      // Strip __meta before display
+      const clean = JSON.parse(JSON.stringify(obj, (k, v) => (k === "__meta" ? undefined : v)));
+      return highlightJsonString(JSON.stringify(clean, null, 2));
+    }
+
+    function highlightJsonString(str) {
+      const escaped = str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      return escaped
+        .replace(/("(?:\\.|[^"\\])*")(\s*:)/g, '<span class="json-key">$1</span>$2')
+        .replace(/:\s*("(?:\\.|[^"\\])*")/g, ': <span class="json-string">$1</span>')
+        .replace(/:\s*(-?\d+\.?\d*)/g, ': <span class="json-number">$1</span>')
+        .replace(/:\s*(true|false)/g, ': <span class="json-bool">$1</span>')
+        .replace(/:\s*null/g, ': <span class="json-null">null</span>');
+    }
+
+    // Object with __meta stripped, for display/edit/send.
+    function cleanPayload(obj) {
+      return JSON.parse(JSON.stringify(obj, (k, v) => (k === "__meta" ? undefined : v)));
+    }
+
+    // Try to parse a body string as JSON. Returns { isJson, display }.
+    function formatBody(bodyText, contentType) {
+      if (!bodyText) return { isJson: false, display: "" };
+      const looksJson = (contentType || "").includes("application/json") ||
+        /^\s*[{[]/.test(bodyText);
+      if (looksJson) {
+        try {
+          const parsed = JSON.parse(bodyText);
+          return { isJson: true, display: JSON.stringify(parsed, null, 2) };
+        } catch { }
+      }
+      return { isJson: false, display: bodyText };
+    }
+
+    // ============================================================
+    // COMPONENTS
+    // ============================================================
+    function Segmented({ value, onChange, options }) {
+      return (
+        <div className="seg">
+          {options.map(opt => (
+            <button key={opt.value} onClick={() => onChange(opt.value)} className={value === opt.value ? "active" : ""}>
+              {opt.label}
+            </button>
+          ))}
+        </div>
+      );
+    }
+
+    function CheckRow({ checked, onChange, label, meta }) {
+      return (
+        <div className={`check-row ${checked ? "checked" : ""}`} onClick={() => onChange(!checked)}>
+          <div className="check-box">
+            {checked && (
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+                <path d="M2.5 6L5 8.5L9.5 3.5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            )}
+          </div>
+          <div style={{ flex: 1 }}>
+            <div className="check-label">{label}</div>
+            {meta && <div className="check-meta" style={{ marginTop: 2 }}>{meta}</div>}
+          </div>
+        </div>
+      );
+    }
+
+    function IconCopy() {
+      return <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="4" y="4" width="9" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.4" /><path d="M11.5 4V3a1 1 0 0 0-1-1H3.5a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h1" stroke="currentColor" strokeWidth="1.4" /></svg>;
+    }
+    function IconDownload() {
+      return <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M8 2v8m0 0L5 7m3 3 3-3M2.5 13h11" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg>;
+    }
+    function IconSend() {
+      return <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M14 2 8 14l-1.5-5L2 7.5 14 2Z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" /></svg>;
+    }
+    function IconBolt() {
+      return <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M8.5 1.5 3 9h4.5L7 14.5 13 7H8.5l0-5.5Z" fill="currentColor" /></svg>;
+    }
+    function IconChevron({ open }) {
+      return <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ transform: open ? "rotate(90deg)" : "rotate(0deg)", transition: "transform 0.15s" }}><path d="M4.5 3 7.5 6 4.5 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>;
+    }
+
+    // Caret-stable inline JSON editor.
+    // Blurred: shows syntax-highlighted JSON. Focused: plain text (no live re-highlight).
+    // On blur: parses; valid -> onCommit({ok:true, value, changed}); invalid -> onCommit({ok:false}).
+    function EditableJson({ value, onCommit }) {
+      const ref = useRef(null);
+      const editingRef = useRef(false);
+      const preEditRef = useRef("");
+      const [errMsg, setErrMsg] = useState(null);
+
+      // Refresh highlighted HTML whenever value changes and we're not mid-edit.
+      useEffect(() => {
+        if (!editingRef.current && ref.current && !errMsg) {
+          ref.current.innerHTML = highlightJson(value);
+        }
+      }, [value, errMsg]);
+
+      const onFocus = () => {
+        editingRef.current = true;
+        // If there's an unresolved parse error, keep the user's in-progress text to fix.
+        if (errMsg) {
+          preEditRef.current = ref.current ? ref.current.textContent : "";
+          return;
+        }
+        const plain = JSON.stringify(cleanPayload(value), null, 2);
+        preEditRef.current = plain;
+        if (ref.current) ref.current.textContent = plain;
+      };
+
+      const onBlur = () => {
+        editingRef.current = false;
+        const text = ref.current ? ref.current.textContent : "";
+        try {
+          const parsed = JSON.parse(text);
+          setErrMsg(null);
+          const changed = text.trim() !== preEditRef.current.trim();
+          onCommit({ ok: true, value: parsed, changed });
+          // re-render highlighted from the parsed value
+          if (ref.current) ref.current.innerHTML = highlightJsonString(JSON.stringify(parsed, null, 2));
+        } catch (e) {
+          setErrMsg(e.message || "Invalid JSON");
+          onCommit({ ok: false });
+          // leave raw text visible so the user can fix it
+        }
+      };
+
+      return (
+        <div>
+          <div
+            ref={ref}
+            className={`json-viewer code-scroll ${errMsg ? "json-error" : ""}`}
+            contentEditable
+            suppressContentEditableWarning
+            spellCheck={false}
+            onFocus={onFocus}
+            onBlur={onBlur}
+          />
+          {errMsg && <div className="json-error-msg">Invalid JSON — not saved: {errMsg}</div>}
+        </div>
+      );
+    }
+
+    function LeadCard({ lead, index, onSend, expanded, onToggle, sendStatus, includePriceUpdate, includeMetaPhase2, onEditCommit, onEditError, edited, hasError }) {
+      const meta = lead.__meta;
+      const scenario = SCENARIOS[meta.scenario];
+      const sourceLabel = meta.source === "angi" ? "Angi"
+        : meta.source === "lsa" ? "Google LSA"
+          : meta.source === "meta" ? "Meta Ads"
+            : "Thumbtack";
+      const responses = sendStatus?.responses || [];
+      const pending = sendStatus?.pending;
+
+      const metaField = (name) => {
+        if (meta.source !== "meta") return "";
+        const f = lead.graphResponse.field_data.find(x => x.name === name);
+        return f ? f.values[0] : "";
+      };
+
+      // Display name + location vary by source shape
+      const displayName = meta.source === "angi" ? lead.name
+        : meta.source === "lsa" ? lead.contactDetails.consumerName
+          : meta.source === "meta" ? metaField("full_name")
+            : `${lead.data.customer.firstName} ${lead.data.customer.lastName}`;
+      const displayLoc = meta.source === "angi" ? `${lead.city}, ${lead.stateProvince}`
+        : meta.source === "lsa" ? `${lead.contactDetails.city}, ${lead.contactDetails.state}`
+          : meta.source === "meta" ? `${meta.city}, ${meta.state}`
+            : `${lead.data.request.location.city}, ${lead.data.request.location.state}`;
+
+      // LSA lead-type pill mapping
+      const ltClass = meta.source === "lsa"
+        ? (meta.leadType === "PHONE_CALL" ? "lt-phone" : meta.leadType === "BOOKING" ? "lt-booking" : "lt-message")
+        : meta.source === "meta"
+          ? (meta.platform === "ig" ? "lt-ig" : "lt-fb")
+          : null;
+      const ltLabel = meta.source === "lsa"
+        ? (meta.leadType === "PHONE_CALL" ? "CALL" : meta.leadType === "BOOKING" ? "BOOKING" : "MESSAGE")
+        : meta.source === "meta"
+          ? (meta.platform === "ig" ? "IG" : "FB")
+          : null;
+
+      const copyJson = () => {
+        const clean = JSON.parse(JSON.stringify(lead, (k, v) => (k === "__meta" ? undefined : v)));
+        navigator.clipboard.writeText(JSON.stringify(clean, null, 2));
+        window.dispatchEvent(new CustomEvent("toast", { detail: "JSON copied to clipboard" }));
+      };
+
+      return (
+        <div className={`lead-card fade-in ${expanded ? "expanded" : ""}`} style={{ animationDelay: `${index * 30}ms` }}>
+          <div className="lead-header" onClick={onToggle}>
+            <IconChevron open={expanded} />
+            <span className="lead-num">#{String(index + 1).padStart(2, "0")}</span>
+            <span className="lead-title">
+              <span style={{ color: "var(--gray-500)", fontWeight: 400 }}>{sourceLabel}</span>
+              <span style={{ margin: "0 8px", color: "var(--gray-300)" }}>·</span>
+              {displayName}
+              <span style={{ margin: "0 8px", color: "var(--gray-300)" }}>·</span>
+              <span style={{ color: "var(--gray-500)", fontFamily: "IBM Plex Mono", fontSize: 12 }}>{displayLoc}</span>
+            </span>
+            {ltLabel && <span className={`lt-pill ${ltClass}`}>{ltLabel}</span>}
+            <span className={`lead-tag ${scenario.tagClass}`}>{scenario.label}</span>
+            {edited && <span className="edited-pill">edited</span>}
+            {pending && <span className="status-pill status-pending">sending…</span>}
+            {responses.map((r, i) => (
+              <span key={i} className={`status-pill ${r.ok ? "status-success" : "status-error"}`} title={r.label === "price_update" ? "Price update response" : "Lead response"}>
+                {r.label === "price_update" ? "+" : ""}{r.status > 0 ? r.status : "err"}
+              </span>
+            ))}
+          </div>
+          {expanded && (
+            <div className="lead-detail">
+              {meta.source === "meta" ? (
+                <>
+                  <div className="phase-label">Webhook event (Phase 1) — sent to your endpoint</div>
+                  <EditableJson
+                    value={lead.webhookEvent}
+                    onCommit={(r) => r.ok ? onEditCommit(index, "webhookEvent", r.value, r.changed) : onEditError(index, "webhookEvent")}
+                  />
+                  <div className="phase-label">Graph API response (Phase 2) — your workflow fetches this</div>
+                  <EditableJson
+                    value={lead.graphResponse}
+                    onCommit={(r) => r.ok ? onEditCommit(index, "graphResponse", r.value, r.changed) : onEditError(index, "graphResponse")}
+                  />
+                </>
+              ) : (
+                <EditableJson
+                  value={lead}
+                  onCommit={(r) => r.ok ? onEditCommit(index, undefined, r.value, r.changed) : onEditError(index, undefined)}
+                />
+              )}
+              <div className="lead-actions">
+                <button className="btn btn-mini" style={{ background: "rgba(255,255,255,0.08)", color: "#E2E8F0", borderColor: "rgba(255,255,255,0.12)" }} onClick={copyJson}>
+                  <IconCopy /> Copy JSON
+                </button>
+                <button className="btn btn-mini" style={{ background: hasError ? "rgba(148,163,184,0.4)" : "rgba(242,100,48,0.95)", color: "white" }} disabled={hasError} onClick={() => onSend(lead, index)}>
+                  <IconSend /> Send to webhook
+                </button>
+                {meta.source === "thumbtack" && includePriceUpdate && (
+                  <span style={{ fontSize: 11, color: "var(--gray-400)", fontFamily: "IBM Plex Mono", marginLeft: 8, alignSelf: "center" }}>
+                    + price update will fire 5s after
+                  </span>
+                )}
+                {meta.source === "meta" && includeMetaPhase2 && (
+                  <span style={{ fontSize: 11, color: "var(--gray-400)", fontFamily: "IBM Plex Mono", marginLeft: 8, alignSelf: "center" }}>
+                    + Phase 2 rides along as lead_data
+                  </span>
+                )}
+              </div>
+              {responses.map((r, i) => (
+                <React.Fragment key={i}>
+                  <div className="response-header">
+                    <span className={`response-label ${r.ok ? "ok" : "err"}`}>
+                      {r.label === "price_update" ? "Price update response" : "Lead response"}
+                    </span>
+                    <span className="response-meta">
+                      {r.status > 0 ? `${r.status} ${r.statusText || ""}`.trim() : "Network error"}
+                      {" · "}{r.latencyMs}ms
+                      {" · "}{new Date(r.timestamp).toLocaleTimeString()}
+                      {r.contentType && <span style={{ opacity: 0.7 }}>{" · "}{r.contentType.split(";")[0]}</span>}
+                    </span>
+                  </div>
+                  <div className={`response-body code-scroll ${r.networkError ? "is-error" : ""}`}>
+                    {r.body
+                      ? (r.isJson
+                        ? <span dangerouslySetInnerHTML={{ __html: highlightJsonString(r.body) }} />
+                        : r.body)
+                      : <span className="response-empty">(empty response body)</span>
+                    }
+                    {r.networkError && (
+                      <span className="hint">
+                        Network or CORS error. The browser blocked the request before reading the response. To verify: try the same payload from curl. If curl works but the browser fails, the endpoint needs to return <code>Access-Control-Allow-Origin</code> headers for the origin this tool is served from.
+                      </span>
+                    )}
+                  </div>
+                </React.Fragment>
+              ))}
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    // ============================================================
+    // APP
+    // ============================================================
+    function App() {
+      const [source, setSource] = useState("thumbtack");
+      const [scenarios, setScenarios] = useState({ storm: true, age: true, leak: true, insurance: true, gutter: false, spam: false });
+      const [metro, setMetro] = useState("dallas");
+      const [count, setCount] = useState(5);
+      const [includePriceUpdate, setIncludePriceUpdate] = useState(false);
+      const [includeMetaPhase2, setIncludeMetaPhase2] = useState(true);
+      const [webhookUrl, setWebhookUrl] = useState("");
+      const [leads, setLeads] = useState([]);
+      const [expanded, setExpanded] = useState({});
+      const [sendStatuses, setSendStatuses] = useState({});
+      const [toast, setToast] = useState(null);
+      const [generating, setGenerating] = useState(false);
+      const [batchSending, setBatchSending] = useState(false);
+      const [editErrors, setEditErrors] = useState({});   // key: index or `${index}:phase1`/`${index}:phase2`
+      const [editedCards, setEditedCards] = useState({});  // key: index -> true
+
+      useEffect(() => {
+        const onToast = (e) => {
+          setToast(e.detail);
+          setTimeout(() => setToast(null), 1800);
+        };
+        window.addEventListener("toast", onToast);
+        return () => window.removeEventListener("toast", onToast);
+      }, []);
+
+      const enabledScenarios = useMemo(() =>
+        SCENARIO_KEYS.filter(k => scenarios[k]),
+        [scenarios]
+      );
+
+      const handleGenerate = () => {
+        if (enabledScenarios.length === 0) {
+          setToast("Pick at least one scenario");
+          setTimeout(() => setToast(null), 1800);
+          return;
+        }
+        setGenerating(true);
+        setTimeout(() => {
+          const newLeads = [];
+          for (let i = 0; i < count; i++) {
+            const scn = pickFrom(enabledScenarios);
+            let lead;
+            if (source === "angi") lead = generateAngiLead(scn, metro);
+            else if (source === "lsa") lead = generateLsaLead(scn, metro);
+            else if (source === "meta") lead = generateMetaLead(scn, metro);
+            else lead = generateThumbtackLead(scn, metro);
+            newLeads.push(lead);
+          }
+          setLeads(newLeads);
+          setSendStatuses({});
+          // auto-expand first card
+          setExpanded({ 0: true });
+          setGenerating(false);
+        }, 180);
+      };
+
+      const toggleExpand = (i) => setExpanded(p => ({ ...p, [i]: !p[i] }));
+
+      // Commit an edited payload back into leads state.
+      // phase: undefined for single-payload sources; "webhookEvent"/"graphResponse" for Meta.
+      const handleEditCommit = useCallback((index, phase, parsed, changed) => {
+        setLeads(prev => prev.map((lead, i) => {
+          if (i !== index) return lead;
+          if (phase) return { ...lead, [phase]: parsed };
+          return { ...parsed, __meta: lead.__meta };
+        }));
+        setEditErrors(prev => {
+          const next = { ...prev };
+          delete next[phase ? `${index}:${phase}` : index];
+          return next;
+        });
+        if (changed) setEditedCards(prev => ({ ...prev, [index]: true }));
+      }, []);
+
+      const handleEditError = useCallback((index, phase) => {
+        setEditErrors(prev => ({ ...prev, [phase ? `${index}:${phase}` : index]: true }));
+      }, []);
+
+      const cardHasError = useCallback((index) =>
+        editErrors[index] || editErrors[`${index}:webhookEvent`] || editErrors[`${index}:graphResponse`],
+        [editErrors]
+      );
+
+      // Append ?source=<source> to the base webhook URL (Zuper gatekeeper expects this).
+      // If the user already pasted ?source=… we replace it so the tool's source dropdown wins.
+      const buildUrl = (baseUrl, sourceName, extraParams = {}) => {
+        try {
+          const u = new URL(baseUrl);
+          u.searchParams.set("source", sourceName);
+          Object.entries(extraParams).forEach(([k, v]) => u.searchParams.set(k, v));
+          return u.toString();
+        } catch {
+          // fallback if the URL is malformed
+          const sep = baseUrl.includes("?") ? "&" : "?";
+          return `${baseUrl}${sep}source=${encodeURIComponent(sourceName)}`;
+        }
+      };
+
+      const postOne = useCallback(async (lead, index) => {
+        if (!webhookUrl) {
+          setToast("Enter a webhook URL first");
+          setTimeout(() => setToast(null), 1800);
+          return null;
+        }
+        setSendStatuses(s => ({ ...s, [index]: { pending: true, responses: [] } }));
+        let clean;
+        if (lead.__meta.source === "meta") {
+          // Phase 1 webhook event native at top level; attach resolved Phase 2 as `lead_data` when enabled.
+          clean = cleanPayload(lead.webhookEvent);
+          if (includeMetaPhase2) clean = { ...clean, lead_data: cleanPayload(lead.graphResponse) };
+        } else {
+          clean = cleanPayload(lead);
+        }
+        const targetUrl = buildUrl(webhookUrl, lead.__meta.source);
+        const start = performance.now();
+
+        try {
+          const res = await fetch(targetUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(clean),
+          });
+          const latencyMs = Math.round(performance.now() - start);
+          const contentType = res.headers.get("content-type") || "";
+          const bodyText = await res.text();
+          const { isJson, display } = formatBody(bodyText, contentType);
+
+          const response = {
+            label: "lead",
+            ok: res.ok,
+            status: res.status,
+            statusText: res.statusText,
+            contentType,
+            isJson,
+            body: display,
+            latencyMs,
+            timestamp: Date.now(),
+          };
+
+          setSendStatuses(s => ({ ...s, [index]: { pending: false, responses: [response] } }));
+
+          // Fire price update for Thumbtack
+          if (lead.__meta.source === "thumbtack" && includePriceUpdate) {
+            setTimeout(async () => {
+              const upd = generateThumbtackPriceUpdate(lead);
+              const cleanUpd = JSON.parse(JSON.stringify(upd, (k, v) => (k === "__meta" ? undefined : v)));
+              const updUrl = buildUrl(webhookUrl, "thumbtack", { event: "lead.priced" });
+              const updStart = performance.now();
+              try {
+                const updRes = await fetch(updUrl, {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(cleanUpd),
+                });
+                const updLatency = Math.round(performance.now() - updStart);
+                const updCT = updRes.headers.get("content-type") || "";
+                const updBody = await updRes.text();
+                const updFmt = formatBody(updBody, updCT);
+                const updResponse = {
+                  label: "price_update",
+                  ok: updRes.ok,
+                  status: updRes.status,
+                  statusText: updRes.statusText,
+                  contentType: updCT,
+                  isJson: updFmt.isJson,
+                  body: updFmt.display,
+                  latencyMs: updLatency,
+                  timestamp: Date.now(),
+                };
+                setSendStatuses(s => ({
+                  ...s,
+                  [index]: { pending: false, responses: [...(s[index]?.responses || []), updResponse] }
+                }));
+              } catch (err) {
+                const errResponse = {
+                  label: "price_update",
+                  ok: false,
+                  status: 0,
+                  statusText: "Network error",
+                  body: (err && err.message) || "Failed to fetch",
+                  isJson: false,
+                  latencyMs: Math.round(performance.now() - updStart),
+                  timestamp: Date.now(),
+                  networkError: true,
+                };
+                setSendStatuses(s => ({
+                  ...s,
+                  [index]: { pending: false, responses: [...(s[index]?.responses || []), errResponse] }
+                }));
+              }
+            }, 5000);
+          }
+
+          return res.ok;
+        } catch (err) {
+          const latencyMs = Math.round(performance.now() - start);
+          const errResponse = {
+            label: "lead",
+            ok: false,
+            status: 0,
+            statusText: "Network error",
+            body: (err && err.message) || "Failed to fetch",
+            isJson: false,
+            latencyMs,
+            timestamp: Date.now(),
+            networkError: true,
+          };
+          setSendStatuses(s => ({ ...s, [index]: { pending: false, responses: [errResponse] } }));
+          return false;
+        }
+      }, [webhookUrl, includePriceUpdate, includeMetaPhase2]);
+
+      const postAll = async () => {
+        if (!webhookUrl) {
+          setToast("Enter a webhook URL first");
+          setTimeout(() => setToast(null), 1800);
+          return;
+        }
+        setBatchSending(true);
+        let skipped = 0;
+        for (let i = 0; i < leads.length; i++) {
+          if (cardHasError(i)) { skipped++; continue; }
+          await postOne(leads[i], i);
+          await new Promise(r => setTimeout(r, 200));
+        }
+        setBatchSending(false);
+        if (skipped > 0) {
+          setToast(`Sent. Skipped ${skipped} card${skipped > 1 ? "s" : ""} with invalid JSON.`);
+          setTimeout(() => setToast(null), 2400);
+        }
+      };
+
+      const downloadAll = () => {
+        const clean = leads.map(l => JSON.parse(JSON.stringify(l, (k, v) => (k === "__meta" ? undefined : v))));
+        const blob = new Blob([JSON.stringify(clean, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `zuper-grow-mock-${source}-${Date.now()}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+      };
+
+      const copyAll = () => {
+        const clean = leads.map(l => JSON.parse(JSON.stringify(l, (k, v) => (k === "__meta" ? undefined : v))));
+        navigator.clipboard.writeText(JSON.stringify(clean, null, 2));
+        setToast("All payloads copied to clipboard");
+        setTimeout(() => setToast(null), 1800);
+      };
+
+      return (
+        <div style={{ display: "flex", minHeight: "100vh", position: "relative", zIndex: 2 }}>
+          {/* LEFT PANEL */}
+          <aside className="left-panel" style={{ width: 340, background: "var(--surface)", borderRight: "1px solid var(--border)", padding: "24px 24px 32px" }}>
+            {/* Brand */}
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+              <span className="brand-mark"></span>
+              <span style={{ fontFamily: "IBM Plex Serif", fontSize: 16, fontWeight: 600, color: "var(--navy)" }}>Zuper Grow</span>
+            </div>
+            <div style={{ fontSize: 12, color: "var(--gray-500)", marginBottom: 28, fontFamily: "IBM Plex Mono", marginLeft: 38 }}>mock_lead_generator.v1</div>
+
+            {/* Source */}
+            <div style={{ marginBottom: 24 }}>
+              <div className="label">Source</div>
+              <Segmented value={source} onChange={setSource} options={[
+                { value: "angi", label: "Angi" },
+                { value: "thumbtack", label: "Thumbtack" },
+                { value: "lsa", label: "Google LSA" },
+                { value: "meta", label: "Meta Ads" },
+              ]} />
+            </div>
+
+            {/* Scenarios */}
+            <div style={{ marginBottom: 24 }}>
+              <div className="label">Scenarios <span style={{ textTransform: "none", letterSpacing: 0, color: "var(--gray-400)", fontWeight: 400 }}>({enabledScenarios.length} on)</span></div>
+              <div>
+                {SCENARIO_KEYS.map(k => (
+                  <CheckRow
+                    key={k}
+                    checked={scenarios[k]}
+                    onChange={v => setScenarios(s => ({ ...s, [k]: v }))}
+                    label={SCENARIOS[k].label}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div className="divider"></div>
+
+            {/* Metro */}
+            <div style={{ marginBottom: 20 }}>
+              <div className="label">Metro</div>
+              <select className="field" value={metro} onChange={e => setMetro(e.target.value)}>
+                {METRO_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+              </select>
+            </div>
+
+            {/* Count */}
+            <div style={{ marginBottom: 20 }}>
+              <div className="label">Count <span style={{ textTransform: "none", letterSpacing: 0, color: "var(--gray-400)", fontWeight: 400 }}>1–50</span></div>
+              <input type="number" className="field" min="1" max="50" value={count} onChange={e => setCount(Math.max(1, Math.min(50, parseInt(e.target.value) || 1)))} />
+            </div>
+
+            {/* Thumbtack price update toggle */}
+            {source === "thumbtack" && (
+              <div style={{ marginBottom: 20 }}>
+                <CheckRow
+                  checked={includePriceUpdate}
+                  onChange={setIncludePriceUpdate}
+                  label="Simulate price update"
+                  meta="Fires 5s after lead as NegotiationUpdatedV4 with chargeState Charged"
+                />
+              </div>
+            )}
+
+            {source === "meta" && (
+              <div style={{ marginBottom: 20 }}>
+                <CheckRow
+                  checked={includeMetaPhase2}
+                  onChange={setIncludeMetaPhase2}
+                  label="Include Phase 2 lead data"
+                  meta="Attaches resolved field_data as lead_data in the same call. Off = Phase 1 notification only."
+                />
+              </div>
+            )}
+
+            <div className="divider"></div>
+
+            {/* Webhook */}
+            <div style={{ marginBottom: 20 }}>
+              <div className="label">Webhook URL <span style={{ textTransform: "none", letterSpacing: 0, color: "var(--gray-400)", fontWeight: 400 }}>(optional)</span></div>
+              <input type="text" className="field field-mono" placeholder="https://us-east-1-workflow.zuperpro.com/api/gatekeeper/workflow/webhook/<id>" value={webhookUrl} onChange={e => setWebhookUrl(e.target.value)} />
+              <div style={{ fontSize: 11, color: "var(--gray-500)", marginTop: 6, lineHeight: 1.5 }}>Tool appends <code style={{ fontFamily: "IBM Plex Mono", background: "var(--gray-100)", padding: "1px 4px", borderRadius: 2 }}>?source=angi</code> or <code style={{ fontFamily: "IBM Plex Mono", background: "var(--gray-100)", padding: "1px 4px", borderRadius: 2 }}>?source=thumbtack</code> automatically.</div>
+            </div>
+
+            {/* Generate */}
+            <button className="btn btn-primary" style={{ width: "100%", justifyContent: "center", padding: "11px 16px", fontSize: 14, marginTop: 8 }} onClick={handleGenerate} disabled={generating}>
+              <IconBolt />
+              {generating ? "Generating…" : `Generate ${count} lead${count > 1 ? "s" : ""}`}
+            </button>
+          </aside>
+
+          {/* RIGHT PANEL */}
+          <main style={{ flex: 1, padding: "24px 32px 40px", maxWidth: 920 }}>
+            {/* Top bar */}
+            <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 20, gap: 16, flexWrap: "wrap" }}>
+              <div>
+                <h1 style={{ fontFamily: "IBM Plex Serif", fontSize: 26, fontWeight: 600, margin: 0, letterSpacing: "-0.01em", color: "var(--ink)" }}>
+                  Mock Lead Generator
+                </h1>
+                <div style={{ fontSize: 13, color: "var(--gray-600)", marginTop: 4 }}>
+                  Realistic Angi and Thumbtack payloads for testing the Grow ingestion pipeline before real credentials land.
+                </div>
+              </div>
+              {leads.length > 0 && (
+                <div style={{ display: "flex", gap: 8 }}>
+                  <button className="btn btn-ghost" onClick={copyAll}><IconCopy /> Copy all</button>
+                  <button className="btn btn-ghost" onClick={downloadAll}><IconDownload /> Download</button>
+                  <button className="btn btn-secondary" onClick={postAll} disabled={batchSending || !webhookUrl}>
+                    <IconSend /> {batchSending ? "Sending…" : `Send all (${leads.length})`}
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Content */}
+            {leads.length === 0 ? (
+              <div className="empty-state" style={{ background: "var(--surface)", border: "1px dashed var(--border)", borderRadius: 10 }}>
+                <div style={{ fontFamily: "IBM Plex Serif", fontSize: 18, color: "var(--gray-700)", marginBottom: 8 }}>No leads generated yet.</div>
+                <div style={{ fontSize: 13, color: "var(--gray-500)" }}>Pick scenarios, set a count, and hit <strong style={{ color: "var(--orange)" }}>Generate</strong> on the left.</div>
+                <div style={{ marginTop: 28, display: "flex", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
+                  {SCENARIO_KEYS.map(k => (
+                    <span key={k} className={`lead-tag ${SCENARIOS[k].tagClass}`} style={{ fontSize: 10 }}>{SCENARIOS[k].label}</span>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div>
+                {leads.map((lead, i) => (
+                  <LeadCard
+                    key={i}
+                    lead={lead}
+                    index={i}
+                    expanded={!!expanded[i]}
+                    onToggle={() => toggleExpand(i)}
+                    onSend={postOne}
+                    sendStatus={sendStatuses[i]}
+                    includePriceUpdate={includePriceUpdate}
+                    includeMetaPhase2={includeMetaPhase2}
+                    onEditCommit={handleEditCommit}
+                    onEditError={handleEditError}
+                    edited={!!editedCards[i]}
+                    hasError={!!cardHasError(i)}
+                  />
+                ))}
+              </div>
+            )}
+
+            {/* Footer */}
+            <div style={{ marginTop: 40, paddingTop: 20, borderTop: "1px solid var(--border-soft)", fontSize: 11, color: "var(--gray-500)", fontFamily: "IBM Plex Mono", lineHeight: 1.6 }}>
+              <div>schema_note: angi shape matches a real BHC payload from Maven's workflow.</div>
+              <div>schema_note: thumbtack shape matches the real NegotiationCreatedV4 envelope. attachments and contactedBusinesses always empty.</div>
+              <div>schema_note: lsa shape matches google ads local_services_lead resource. MESSAGE / PHONE_CALL / BOOKING types supported.</div>
+              <div>schema_note: meta shape is two-phase — webhook leadgen notification (no PII) + Graph API field_data. Single call: native event at top level, resolved field_data attached as lead_data (toggle off = notification only).</div>
+            </div>
+          </main>
+
+          {/* Toast */}
+          {toast && <div className="toast">{toast}</div>}
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+
+</html>
