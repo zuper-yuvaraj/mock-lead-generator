@@ -731,6 +731,1007 @@
     .fade-in {
       animation: fade-in 0.25s ease-out backwards;
     }
+
+    /* Version switch (v1 generator / v2 ingestion console) */
+    .version-switch {
+      margin-bottom: 24px;
+    }
+
+    .version-switch .seg,
+    .seg-block .seg {
+      display: flex;
+      width: 100%;
+    }
+
+    /* ============================================================
+       V2 — Lead ingestion console
+       ============================================================ */
+    .v2-main {
+      flex: 1;
+      min-width: 0;
+      padding: 24px 32px 40px;
+    }
+
+    .v2-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 20px;
+      align-items: start;
+      max-width: 1320px;
+    }
+
+    @media (max-width: 1240px) {
+      .v2-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .v2-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+
+    .v2-card-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-soft);
+      flex-wrap: wrap;
+    }
+
+    .v2-card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .v2-card-sub {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+
+    .v2-card-body {
+      padding: 12px 16px;
+    }
+
+    .v2-form-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 5px 0;
+    }
+
+    .v2-form-label {
+      width: 72px;
+      flex-shrink: 0;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+    }
+
+    .v2-form-ctrl {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .v2-endpoint-url {
+      font-family: 'IBM Plex Mono';
+      font-size: 12px;
+      background: var(--gray-100);
+      border: 1px solid var(--border-soft);
+      padding: 4px 8px;
+      border-radius: 4px;
+      color: var(--gray-700);
+      word-break: break-all;
+    }
+
+    .v2-origin {
+      font-family: 'IBM Plex Mono';
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 2px 6px;
+      border-radius: 3px;
+      background: var(--teal-soft);
+      color: var(--teal);
+      white-space: nowrap;
+    }
+
+    .v2-warn-text {
+      font-size: 12px;
+      color: #92400E;
+    }
+
+    .v2-editor-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px 8px 16px;
+      background: #182438;
+      flex-wrap: wrap;
+    }
+
+    .v2-json-state {
+      font-family: 'IBM Plex Mono';
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+
+    .v2-json-state.ok {
+      background: rgba(110, 231, 183, 0.14);
+      color: #6EE7B7;
+    }
+
+    .v2-json-state.err {
+      background: rgba(252, 165, 165, 0.14);
+      color: #FCA5A5;
+    }
+
+    .v2-dark-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'IBM Plex Sans';
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 9px;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #E2E8F0;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      cursor: pointer;
+    }
+
+    .v2-dark-btn:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    .v2-dark-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .v2-editor {
+      display: block;
+      width: 100%;
+      min-height: 340px;
+      height: 400px;
+      resize: vertical;
+      margin: 0;
+      border: 0;
+      border-radius: 0;
+      background: var(--navy-deep);
+      color: #E2E8F0;
+      font-family: 'IBM Plex Mono';
+      font-size: 12px;
+      line-height: 1.6;
+      padding: 14px 16px;
+      white-space: pre;
+      overflow: auto;
+      tab-size: 2;
+      outline: none;
+    }
+
+    .v2-editor:focus {
+      box-shadow: inset 0 0 0 2px rgba(46, 91, 143, 0.5);
+    }
+
+    .v2-editor.json-error {
+      box-shadow: inset 0 0 0 2px rgba(252, 165, 165, 0.7);
+    }
+
+    .v2-send-bar {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 16px;
+      border-top: 1px solid var(--border-soft);
+      flex-wrap: wrap;
+    }
+
+    .v2-send {
+      padding: 10px 18px;
+      font-size: 14px;
+    }
+
+    .v2-send-hint {
+      font-size: 11px;
+      color: var(--gray-500);
+      font-family: 'IBM Plex Mono';
+    }
+
+    /* Flow strip */
+    .v2-flow {
+      display: flex;
+      align-items: stretch;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 16px;
+      overflow-x: auto;
+      max-width: 1320px;
+    }
+
+    .v2-flow-step {
+      flex: 1 1 0;
+      min-width: 132px;
+      padding: 9px 11px;
+      border-radius: 6px;
+      border: 1px solid var(--border-soft);
+      background: var(--gray-50);
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .v2-flow-name {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'IBM Plex Mono';
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+    }
+
+    .v2-flow-cap {
+      font-size: 12px;
+      color: var(--gray-700);
+      margin-top: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .v2-flow-arrow {
+      align-self: center;
+      color: var(--gray-400);
+      padding: 0 6px;
+      flex-shrink: 0;
+    }
+
+    .v2-flow-step.ready {
+      border-color: #BFDBFE;
+      background: #EFF6FF;
+    }
+
+    .v2-flow-step.active {
+      border-color: var(--navy-soft);
+      background: #EFF6FF;
+      animation: v2-pulse 1.2s infinite;
+    }
+
+    .v2-flow-step.done {
+      border-color: #86EFAC;
+      background: #F0FDF4;
+    }
+
+    .v2-flow-step.done .v2-flow-name {
+      color: #166534;
+    }
+
+    .v2-flow-step.warn {
+      border-color: #FCD34D;
+      background: #FFFBEB;
+    }
+
+    .v2-flow-step.warn .v2-flow-name {
+      color: #92400E;
+    }
+
+    .v2-flow-step.failed {
+      border-color: #FCA5A5;
+      background: #FEF2F2;
+    }
+
+    .v2-flow-step.failed .v2-flow-name {
+      color: #991B1B;
+    }
+
+    @keyframes v2-pulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(46, 91, 143, 0.25);
+      }
+
+      50% {
+        box-shadow: 0 0 0 4px rgba(46, 91, 143, 0.12);
+      }
+    }
+
+    /* Response */
+    .v2-banner {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      border-left: 4px solid;
+    }
+
+    .v2-banner.ok {
+      background: #F0FDF4;
+      border-color: #16A34A;
+    }
+
+    .v2-banner.dup {
+      background: #FFFBEB;
+      border-color: #D97706;
+    }
+
+    .v2-banner.fail {
+      background: #FEF2F2;
+      border-color: #DC2626;
+    }
+
+    .v2-banner-label {
+      font-family: 'IBM Plex Mono';
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      padding: 6px 11px;
+      border-radius: 4px;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .v2-banner.ok .v2-banner-label {
+      background: #16A34A;
+    }
+
+    .v2-banner.dup .v2-banner-label {
+      background: #D97706;
+    }
+
+    .v2-banner.fail .v2-banner-label {
+      background: #DC2626;
+    }
+
+    .v2-banner-headline {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .v2-banner-detail {
+      font-size: 12px;
+      color: var(--gray-600);
+      margin-top: 3px;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
+    .v2-statusline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 16px;
+      padding: 10px 16px;
+      font-size: 12px;
+      color: var(--gray-600);
+      border-bottom: 1px solid var(--border-soft);
+      font-family: 'IBM Plex Mono';
+    }
+
+    .v2-statusline b {
+      color: var(--ink);
+    }
+
+    .v2-statusline-url {
+      color: var(--gray-500);
+      word-break: break-all;
+    }
+
+    .v2-inspecting {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--navy-soft);
+      background: #EFF6FF;
+      padding: 3px 9px;
+      border-radius: 999px;
+    }
+
+    .v2-placeholder,
+    .v2-waiting {
+      padding: 28px 16px;
+      text-align: center;
+      color: var(--gray-500);
+      font-size: 13px;
+    }
+
+    .v2-waiting {
+      color: var(--navy-soft);
+    }
+
+    .v2-lead {
+      margin: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .v2-lead-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: var(--gray-50);
+      border-bottom: 1px solid var(--border-soft);
+      flex-wrap: wrap;
+    }
+
+    .v2-lead-title {
+      font-family: 'IBM Plex Serif';
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .v2-lead-from {
+      font-size: 11px;
+      color: var(--gray-500);
+      font-family: 'IBM Plex Mono';
+    }
+
+    .v2-kv {
+      display: grid;
+      grid-template-columns: 100px minmax(0, 1fr);
+    }
+
+    .v2-kv>div {
+      padding: 7px 14px;
+      border-top: 1px solid var(--border-soft);
+      font-size: 13px;
+    }
+
+    .v2-kv>div:nth-child(-n+2) {
+      border-top: none;
+    }
+
+    .v2-k {
+      color: var(--gray-500);
+      font-size: 12px;
+    }
+
+    .v2-v {
+      color: var(--ink);
+      word-break: break-word;
+      display: flex;
+      gap: 8px;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+
+    .v2-src {
+      font-family: 'IBM Plex Mono';
+      font-size: 10px;
+      color: var(--gray-400);
+    }
+
+    .v2-leadid {
+      font-family: 'IBM Plex Mono';
+      font-weight: 600;
+      font-size: 13px;
+      background: var(--orange-soft);
+      color: #C2410C;
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid #FED7AA;
+      word-break: break-all;
+    }
+
+    .v2-missing {
+      color: var(--gray-400);
+      font-style: italic;
+      font-size: 12px;
+    }
+
+    .v2-leadapi {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 10px 14px;
+      border-top: 1px solid var(--border-soft);
+      background: var(--gray-50);
+      font-size: 12px;
+      color: var(--gray-600);
+    }
+
+    .v2-leadapi .field {
+      width: 240px;
+      padding: 5px 8px;
+    }
+
+    .v2-ok-text {
+      color: #166534;
+    }
+
+    .v2-err-text {
+      color: #991B1B;
+    }
+
+    .json-hl {
+      background: rgba(242, 100, 48, 0.35);
+      outline: 1px solid rgba(242, 100, 48, 0.8);
+      border-radius: 2px;
+    }
+
+    .v2-details {
+      border-top: 1px solid var(--border-soft);
+    }
+
+    .v2-details>summary {
+      cursor: pointer;
+      padding: 10px 16px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--gray-600);
+      user-select: none;
+    }
+
+    .v2-details>summary:hover {
+      color: var(--ink);
+      background: var(--gray-50);
+    }
+
+    .v2-headers {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'IBM Plex Mono';
+      font-size: 11px;
+    }
+
+    .v2-headers td {
+      padding: 4px 16px;
+      border-top: 1px solid var(--border-soft);
+      vertical-align: top;
+      word-break: break-all;
+    }
+
+    .v2-headers td:first-child {
+      color: var(--gray-500);
+      white-space: nowrap;
+      width: 1%;
+    }
+
+    /* Mapping */
+    .v2-map-note {
+      padding: 10px 16px 0;
+      font-size: 12px;
+      color: var(--gray-600);
+      line-height: 1.5;
+    }
+
+    .v2-table-wrap {
+      overflow-x: auto;
+      padding: 6px 16px 4px;
+    }
+
+    .v2-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .v2-table th {
+      text-align: left;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      padding: 8px;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    .v2-table td {
+      padding: 7px 8px;
+      border-bottom: 1px solid var(--border-soft);
+      vertical-align: top;
+    }
+
+    .v2-path {
+      font-family: 'IBM Plex Mono';
+      font-size: 11px;
+      color: var(--navy-soft);
+      word-break: break-all;
+    }
+
+    .v2-lead-key {
+      font-family: 'IBM Plex Mono';
+      font-size: 11px;
+      color: var(--teal);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .v2-note {
+      font-size: 10px;
+      color: var(--gray-500);
+      margin-top: 2px;
+      font-family: 'IBM Plex Mono';
+      word-break: break-all;
+    }
+
+    .v2-cell-val {
+      color: var(--ink);
+      word-break: break-word;
+      max-width: 260px;
+    }
+
+    .v2-arrow-cell {
+      color: var(--gray-400);
+      text-align: center;
+      width: 18px;
+    }
+
+    .v2-dim {
+      color: var(--gray-400);
+      font-style: italic;
+    }
+
+    .v2-mstate {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 999px;
+      white-space: nowrap;
+      letter-spacing: 0.02em;
+    }
+
+    .v2-mstate.match {
+      background: #DCFCE7;
+      color: #166534;
+    }
+
+    .v2-mstate.differs {
+      background: #FEF3C7;
+      color: #92400E;
+    }
+
+    .v2-mstate.not_returned {
+      background: var(--gray-100);
+      color: var(--gray-600);
+    }
+
+    .v2-mstate.expected {
+      background: #E0E7FF;
+      color: #3730A3;
+    }
+
+    .v2-mstate.absent {
+      background: transparent;
+      color: var(--gray-500);
+      border: 1px dashed var(--gray-300);
+    }
+
+    .v2-mstate.lead_only {
+      background: #E0F2FE;
+      color: #075985;
+    }
+
+    .v2-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+      padding: 8px 16px 12px;
+      font-size: 11px;
+      color: var(--gray-500);
+      align-items: center;
+    }
+
+    .v2-subhead {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      padding: 14px 16px 0;
+      font-family: 'IBM Plex Serif';
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--navy);
+      border-top: 1px solid var(--border-soft);
+      margin-top: 6px;
+    }
+
+    .v2-derived {
+      margin: 8px 16px 0;
+      font-size: 12px;
+    }
+
+    .v2-derived-row {
+      display: flex;
+      gap: 8px;
+      align-items: baseline;
+      padding: 3px 0;
+      flex-wrap: wrap;
+    }
+
+    .v2-extras {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+      padding: 12px 16px 16px;
+    }
+
+    .v2-extra {
+      border: 1px solid var(--border-soft);
+      border-radius: 6px;
+      background: var(--gray-50);
+      overflow: hidden;
+    }
+
+    .v2-extra-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray-600);
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border-soft);
+      background: white;
+    }
+
+    .v2-extra-row {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 3fr) 14px;
+      gap: 8px;
+      padding: 6px 12px;
+      border-top: 1px solid var(--border-soft);
+      font-size: 12px;
+    }
+
+    .v2-extra-row:first-of-type {
+      border-top: none;
+    }
+
+    .v2-extra-k {
+      color: var(--gray-600);
+      word-break: break-word;
+    }
+
+    .v2-extra-v {
+      color: var(--ink);
+      word-break: break-word;
+      white-space: pre-wrap;
+    }
+
+    .v2-kept {
+      color: #16A34A;
+      font-weight: 700;
+    }
+
+    /* Recent tests */
+    .v2-rail {
+      position: sticky;
+      top: 16px;
+      max-height: calc(100vh - 32px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .v2-rail-list {
+      overflow-y: auto;
+    }
+
+    .v2-hist {
+      padding: 10px 14px;
+      border-top: 1px solid var(--border-soft);
+      cursor: pointer;
+      border-left: 3px solid transparent;
+    }
+
+    .v2-hist:first-child {
+      border-top: none;
+    }
+
+    .v2-hist:hover {
+      background: var(--gray-50);
+    }
+
+    .v2-hist.active {
+      background: #EFF6FF;
+      border-left-color: var(--navy-soft);
+    }
+
+    .v2-hist-top,
+    .v2-hist-bottom {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .v2-hist-bottom {
+      margin-top: 5px;
+      font-size: 12px;
+      color: var(--gray-600);
+      min-width: 0;
+    }
+
+    .v2-result-pill {
+      font-family: 'IBM Plex Mono';
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      padding: 2px 7px;
+      border-radius: 3px;
+    }
+
+    .v2-result-pill.ok {
+      background: #DCFCE7;
+      color: #166534;
+    }
+
+    .v2-result-pill.fail {
+      background: #FEE2E2;
+      color: #991B1B;
+    }
+
+    .v2-result-pill.dup {
+      background: #FEF3C7;
+      color: #92400E;
+    }
+
+    .v2-result-pill.queued {
+      background: #E0E7FF;
+      color: #3730A3;
+    }
+
+    /* "What happened" — plain-language account of the round trip */
+    .v2-explain {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .v2-explain-row {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--gray-700);
+      padding: 3px 0;
+    }
+
+    .v2-explain-icon {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      margin-top: 1px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: 'IBM Plex Mono';
+    }
+
+    .v2-explain-row.done .v2-explain-icon {
+      background: #DCFCE7;
+      color: #166534;
+    }
+
+    .v2-explain-row.active .v2-explain-icon {
+      background: #DBEAFE;
+      color: #1E40AF;
+      animation: pulse-dot 1.4s infinite;
+    }
+
+    .v2-explain-row.warn .v2-explain-icon {
+      background: #FEF3C7;
+      color: #92400E;
+    }
+
+    .v2-explain-row.failed .v2-explain-icon {
+      background: #FEE2E2;
+      color: #991B1B;
+    }
+
+    .v2-mono {
+      font-family: 'IBM Plex Mono';
+      font-size: 11px;
+    }
+
+    .v2-muted {
+      color: var(--gray-500);
+    }
+
+    .v2-ellipsis {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      min-width: 0;
+    }
+
+    /* Endpoints (left panel) */
+    .v2-ep {
+      padding: 8px 10px;
+      border: 1px solid var(--border-soft);
+      border-radius: 6px;
+      margin-bottom: 8px;
+      background: white;
+    }
+
+    .v2-ep.current {
+      border-color: var(--navy-soft);
+      box-shadow: 0 0 0 3px rgba(46, 91, 143, 0.08);
+    }
+
+    .v2-ep-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .v2-ep-name {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .v2-ep-url {
+      font-family: 'IBM Plex Mono';
+      font-size: 11px;
+      color: var(--gray-600);
+      margin-top: 4px;
+      word-break: break-all;
+      display: flex;
+      gap: 6px;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+
+    .v2-ep form {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .v2-ep-actions {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .v2-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gray-300);
+      flex-shrink: 0;
+    }
+
+    .v2-dot.on {
+      background: #16A34A;
+      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15);
+    }
+
+    .v2-hint {
+      font-size: 11px;
+      color: var(--gray-500);
+      line-height: 1.5;
+      margin-top: 6px;
+    }
   </style>
 </head>
 
@@ -1878,7 +2879,7 @@
     // ============================================================
     // APP
     // ============================================================
-    function App() {
+    function App({ versionSwitch }) {
       const [source, setSource] = useState("thumbtack");
       const [scenarios, setScenarios] = useState({ storm: true, age: true, leak: true, insurance: true, gutter: false, spam: false });
       const [metro, setMetro] = useState("dallas");
@@ -2140,6 +3141,8 @@
             </div>
             <div style={{ fontSize: 12, color: "var(--gray-500)", marginBottom: 28, fontFamily: "IBM Plex Mono", marginLeft: 38 }}>mock_lead_generator.v1</div>
 
+            {versionSwitch}
+
             {/* Source */}
             <div style={{ marginBottom: 24 }}>
               <div className="label">Source</div>
@@ -2292,7 +3295,1879 @@
       );
     }
 
-    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    // ============================================================
+    // V2 — LEAD INGESTION CONSOLE
+    // Demo / test console for the Lead Source Ingestion service:
+    //   source payload → Zuper webhook → source adapter → Lead object → default pipeline / New.
+    // v1 (App above) is unchanged apart from rendering the version switch.
+    // Webhooks are called through the /api/v2/* proxy (Vercel functions, or scripts/dev-server.js
+    // locally) so secret URLs can stay server-side and CORS isn't a factor.
+    // ============================================================
+    const V2_SOURCES = {
+      angi: { label: "Angi" },
+      thumbtack: { label: "Thumbtack" },
+      lsa: { label: "Google LSA" },
+      meta: { label: "Meta" },
+    };
+    const V2_SOURCE_KEYS = Object.keys(V2_SOURCES);
+    const V2_META_FORMATS = [
+      { value: "zapier", label: "Zapier" },
+      { value: "graph", label: "Graph webhook" },
+    ];
+    // "Any scenario" leaves out spam, matching v1's defaults.
+    const V2_ANY_SCENARIOS = SCENARIO_KEYS.filter(k => k !== "spam");
+    const V2_STORAGE = { prefs: "zgv2.prefs", endpoints: "zgv2.endpoints", tests: "zgv2.tests", version: "zg.version" };
+    const V2_TEST_LIMIT = 20;
+    const V2_BODY_LIMIT = 200000;
+    const V2_LEAD_API_DEFAULT_PATH = "/api/v1/leads/{id}";
+    const V2_LEAD_API_DEFAULT_HEADER = "x-api-key";
+    // The ingestion service creates the Lead within a few seconds, so a 404 from the Lead API is retried.
+    const V2_LEAD_FETCH_DELAYS = [0, 1500, 3000, 4500];
+    // The dev webhook only answers "Enqueued", so the newest leads are polled for ~20 s to find it.
+    const V2_LEAD_FIND_DELAYS = [1500, 2000, 2500, 3000, 3000, 4000, 4000];
+
+    // Per-viewer conveniences only (prefs, browser-entered endpoints, recent tests).
+    // Storage can throw in private windows, so every access is guarded.
+    const v2Store = {
+      get(key, fallback) {
+        try {
+          const raw = window.localStorage.getItem(key);
+          return raw == null ? fallback : JSON.parse(raw);
+        } catch {
+          return fallback;
+        }
+      },
+      set(key, value) {
+        try { window.localStorage.setItem(key, JSON.stringify(value)); } catch { }
+      },
+    };
+
+    // ------------------------------------------------------------
+    // Payloads — reuse the v1 generators; Meta also gets the Zapier shape
+    // ------------------------------------------------------------
+
+    // "Facebook Lead Ads → New Lead" trigger output as POSTed by "Webhooks by Zapier"
+    // with all trigger fields: lead metadata plus one flat key per form question.
+    // Approximated from Zapier's trigger fields — verify against a real Zap run.
+    function generateMetaZapierLead(scenarioKey, metroKey) {
+      const lead = generateMetaLead(scenarioKey, metroKey);
+      const g = lead.graphResponse;
+      const metro = METROS[metroKey];
+      const answers = {};
+      g.field_data.forEach(f => { answers[f.name] = f.values.join(", "); });
+      const { full_name, email, phone_number, zip_code, ...questions } = answers;
+      return {
+        id: g.id,
+        created_time: g.created_time,
+        page_id: lead.webhookEvent.entry[0].id,
+        form_id: g.form_id,
+        form_name: META_FORM_QUESTION,
+        campaign_id: g.campaign_id,
+        campaign_name: g.campaign_name,
+        adset_id: g.adset_id,
+        adset_name: g.adset_name,
+        ad_id: g.ad_id,
+        ad_name: g.ad_name,
+        platform: g.platform,
+        is_organic: g.is_organic,
+        full_name,
+        email,
+        phone_number,
+        street_address: randomAddress(metro).street,
+        city: metro.city,
+        state: metro.state,
+        zip_code,
+        ...questions,
+      };
+    }
+
+    function v2GeneratePayload(source, scenarioKey, metroKey, metaFormat) {
+      if (source === "angi") return cleanPayload(generateAngiLead(scenarioKey, metroKey));
+      if (source === "thumbtack") return cleanPayload(generateThumbtackLead(scenarioKey, metroKey));
+      if (source === "lsa") return cleanPayload(generateLsaLead(scenarioKey, metroKey));
+      if (metaFormat === "graph") {
+        // Same single-call shape v1 sends with "Include Phase 2" on.
+        const l = generateMetaLead(scenarioKey, metroKey);
+        return { ...cleanPayload(l.webhookEvent), lead_data: cleanPayload(l.graphResponse) };
+      }
+      return generateMetaZapierLead(scenarioKey, metroKey);
+    }
+
+    // ------------------------------------------------------------
+    // Lead fields — names we accept when reading a response.
+    // The backend schema is not assumed: whichever alias is present wins,
+    // and the UI always shows the path a value was read from.
+    // ------------------------------------------------------------
+    // The lead_* names come from the Lead API Postman collection (API-5688); the rest are common variants.
+    const V2_LEAD_FIELDS = {
+      first_name: ["lead_first_name", "first_name", "firstName", "given_name", "givenName"],
+      last_name: ["lead_last_name", "last_name", "lastName", "family_name", "familyName", "surname"],
+      name: ["lead_full_name", "full_name", "fullName", "name", "lead_name", "contact_name", "customer_name", "display_name"],
+      email: ["lead_email", "email", "email_address", "emailAddress", "primary_email", "emails"],
+      phone: ["lead_contact_no", "phone", "phone_number", "phoneNumber", "mobile", "mobile_number", "mobilePhone", "primary_phone", "phones", "contact_number"],
+      "address.street": ["street", "street_address", "streetAddress", "address_line_1", "address_line1", "addressLine1", "line1", "address1", "lead_address", "address"],
+      "address.city": ["city"],
+      "address.state": ["state", "state_code", "stateCode", "province", "region"],
+      "address.zip": ["zip", "zip_code", "zipCode", "zipcode", "postal_code", "postalCode"],
+      service: ["service", "lead_service", "service_type", "serviceType", "service_name", "category", "job_category", "project_type"],
+      description: ["lead_summary", "lead_description", "description", "notes", "summary"],
+      source: ["source", "lead_source", "leadSource", "source_name", "sourceName", "medium", "channel"],
+      external_id: ["external_id", "externalId", "source_lead_id", "sourceLeadId", "external_reference", "source_reference", "reference", "vendor_lead_id"],
+      status: ["lead_status", "status", "leadStatus", "status_type", "stage", "status_name", "pipeline_stage", "stage_name"],
+      pipeline: ["lead_pipeline", "pipeline", "pipeline_name", "pipelineName"],
+    };
+    const V2_LEAD_ID_KEYS = ["lead_uid", "leadUid", "lead_id", "leadId"];
+    // Keys that identify an object as a Lead (generic ones like "id"/"status" don't count).
+    const V2_LEAD_SIGNAL_KEYS = new Set([
+      ...V2_LEAD_FIELDS.first_name, ...V2_LEAD_FIELDS.last_name, ...V2_LEAD_FIELDS.email, ...V2_LEAD_FIELDS.phone,
+      ...V2_LEAD_FIELDS.pipeline, ...V2_LEAD_ID_KEYS, "lead_status", "leadStatus", "lead_source", "leadSource", "external_id", "source_lead_id",
+    ]);
+    // Containers that echo the raw source payload or extra data: not where standard Lead fields live.
+    const V2_ECHO_KEYS = /^(source_data|sourceData|source_payload|raw|raw_payload|raw_body|payload|original_payload|request|request_body|additional_data|additionalData|extras?|metadata|custom_fields|customFields|source_fields)$/i;
+    // Nested objects that belong to someone else (owner, creator…) and never hold the Lead's contact fields.
+    const V2_FOREIGN_KEYS = /^(owner|assignee|assigned_to|assigned_user|created_by|updated_by|modified_by|user|team|company|organization|account|tenant|_links)$/i;
+    const V2_RESERVED_KEYS = /^(lead_)?(pipeline|status|stage|source)$/i;
+    const V2_OWN_CONTAINERS = {
+      pipeline: /^(lead_)?pipeline$/i,
+      status: /^(lead_)?(status|stage|pipeline)$/i,
+      source: /^(lead_)?source$/i,
+      external_id: /^(lead_)?source$/i,
+    };
+
+    // Expected adapter mapping per source (tool-side config): Lead field ← source path.
+    // It labels the comparison; the Lead values column only ever shows what the backend returned.
+    // Paths: dot segments, numeric indexes, and [key=value] filters for arrays of objects.
+    const V2_MAPPINGS = {
+      angi: {
+        fields: [
+          { lead: "first_name", from: "firstName" },
+          { lead: "last_name", from: "lastName" },
+          { lead: "email", from: "email" },
+          { lead: "phone", from: "primaryPhone" },
+          { lead: "address.street", from: "address" },
+          { lead: "address.city", from: "city" },
+          { lead: "address.state", from: "stateProvince" },
+          { lead: "address.zip", from: "postalCode" },
+          { lead: "service", from: "taskName", loose: true },
+          { lead: "description", from: "leadDescription" },
+          { lead: "external_id", from: "leadOid" },
+          { lead: "source", from: "leadSource", loose: true, note: "AngiesList → Angi" },
+        ],
+        extras: [
+          { title: "Lead fee & TrustedForm", paths: ["fee", "trustedFormUrl"] },
+          { title: "Angi references", paths: ["srOid", "spEntityId", "spCompanyName", "matchType"] },
+          { title: "Contact extras", paths: ["name", "secondaryPhone", "primaryPhoneDetails", "comments"] },
+          { title: "Other source fields", rest: true },
+        ],
+      },
+      thumbtack: {
+        fields: [
+          { lead: "first_name", from: "data.customer.firstName" },
+          { lead: "last_name", from: "data.customer.lastName" },
+          { lead: "email", none: "Thumbtack doesn't share the customer email" },
+          { lead: "phone", from: "data.customer.phone" },
+          { lead: "address.street", from: "data.request.location.address1", note: "withheld until booked" },
+          { lead: "address.city", from: "data.request.location.city" },
+          { lead: "address.state", from: "data.request.location.state" },
+          { lead: "address.zip", from: "data.request.location.zipCode" },
+          { lead: "service", from: "data.request.category.name", loose: true },
+          { lead: "description", from: "data.request.description" },
+          { lead: "external_id", from: "data.negotiationID" },
+          { lead: "source", value: "Thumbtack", loose: true, note: "set by the source endpoint" },
+        ],
+        extras: [
+          { title: "Request Q&A", qa: "data.request.details" },
+          { title: "Estimate", paths: ["data.estimate"] },
+          { title: "Lead price & charge", paths: ["data.leadPrice", "data.chargeState", "data.refundRequestLink"] },
+          { title: "Scheduling & travel", paths: ["data.request.proposedTimes", "data.request.travelPreferences"] },
+          { title: "Business", paths: ["data.business"] },
+          { title: "Webhook event", paths: ["event"] },
+          { title: "Other source fields", rest: true },
+        ],
+      },
+      lsa: {
+        fields: [
+          { lead: "first_name", from: "contactDetails.consumerName", transform: "first", note: "first word of consumerName" },
+          { lead: "last_name", from: "contactDetails.consumerName", transform: "rest", note: "rest of consumerName" },
+          { lead: "email", from: "contactDetails.email" },
+          { lead: "phone", from: "contactDetails.phoneNumber" },
+          { lead: "address.city", from: "contactDetails.city" },
+          { lead: "address.state", from: "contactDetails.state" },
+          { lead: "address.zip", from: "contactDetails.zipCode" },
+          { lead: "service", from: "serviceType", loose: true },
+          { lead: "description", from: "conversations.0.messageDetails.text", note: "MESSAGE leads only" },
+          { lead: "external_id", from: "id" },
+          { lead: "source", value: "Google LSA", loose: true, note: "set by the source endpoint" },
+        ],
+        extras: [
+          { title: "Lead type & conversation", paths: ["leadType", "conversations"] },
+          { title: "Lead cost", paths: ["leadPriceMicros", "chargeStatus"] },
+          { title: "Credit", paths: ["creditDetails"] },
+          { title: "Google Ads references", paths: ["resourceName", "categoryId", "leadStatus", "creationDateTime", "locale"] },
+          { title: "Other source fields", rest: true },
+        ],
+      },
+      meta_zapier: {
+        fields: [
+          { lead: "first_name", from: "full_name", transform: "first", note: "first word of full_name" },
+          { lead: "last_name", from: "full_name", transform: "rest", note: "rest of full_name" },
+          { lead: "email", from: "email" },
+          { lead: "phone", from: "phone_number" },
+          { lead: "address.street", from: "street_address" },
+          { lead: "address.city", from: "city" },
+          { lead: "address.state", from: "state" },
+          { lead: "address.zip", from: "zip_code" },
+          { lead: "external_id", from: "id" },
+          { lead: "source", value: "Meta", loose: true, note: "set by the source endpoint" },
+        ],
+        extras: [
+          { title: "Campaign", paths: ["campaign_id", "campaign_name", "adset_id", "adset_name", "ad_id", "ad_name", "platform", "is_organic"] },
+          { title: "Form", paths: ["form_id", "form_name", "page_id", "created_time"] },
+          { title: "Form answers (every question)", rest: true },
+        ],
+      },
+      meta_graph: {
+        fields: [
+          { lead: "first_name", from: "lead_data.field_data[name=full_name].values.0", transform: "first", note: "first word of full_name" },
+          { lead: "last_name", from: "lead_data.field_data[name=full_name].values.0", transform: "rest", note: "rest of full_name" },
+          { lead: "email", from: "lead_data.field_data[name=email].values.0" },
+          { lead: "phone", from: "lead_data.field_data[name=phone_number].values.0" },
+          { lead: "address.zip", from: "lead_data.field_data[name=zip_code].values.0" },
+          { lead: "external_id", from: "entry.0.changes.0.value.leadgen_id" },
+          { lead: "source", value: "Meta", loose: true, note: "set by the source endpoint" },
+        ],
+        extras: [
+          { title: "Campaign", paths: ["lead_data.campaign_id", "lead_data.campaign_name", "lead_data.adset_id", "lead_data.adset_name", "lead_data.ad_id", "lead_data.ad_name", "lead_data.platform", "lead_data.is_organic"] },
+          { title: "Form answers", fieldData: "lead_data.field_data", exclude: ["full_name", "email", "phone_number", "zip_code"] },
+          { title: "Webhook notification (Phase 1)", paths: ["object", "entry"] },
+          { title: "Other source fields", rest: true },
+        ],
+      },
+    };
+    // Every ingested lead lands on the company's default pipeline in New (ingestion service, dev v1).
+    const V2_PIPELINE_ROWS = [
+      { lead: "status", value: "New", loose: true, note: "ingestion default" },
+      { lead: "pipeline", value: "Default Pipeline", loose: true, note: "company default pipeline" },
+    ];
+    const V2_STATE_LABEL = {
+      match: "✓ mapped",
+      differs: "transformed",
+      not_returned: "not in response",
+      expected: "expected",
+      absent: "not in source",
+      lead_only: "set by Zuper",
+    };
+
+    // ------------------------------------------------------------
+    // Helpers
+    // ------------------------------------------------------------
+    const v2Join = (a, b) => (a && b ? `${a}.${b}` : a || b);
+    const v2Empty = (v) => v === undefined || v === null || v === "";
+    const v2Sleep = (ms) => new Promise(r => setTimeout(r, ms));
+    const v2Time = (ts) => new Date(ts).toLocaleTimeString();
+    const v2Short = (id) => (!id ? "" : id.length > 14 ? `${id.slice(0, 8)}…` : id);
+    const v2Bytes = (n) => (n < 1024 ? `${n} B` : `${(n / 1024).toFixed(1)} KB`);
+
+    function v2ParseJson(text) {
+      if (typeof text !== "string" || !text.trim()) return null;
+      try { return JSON.parse(text); } catch { return null; }
+    }
+
+    function v2Display(v) {
+      if (v === undefined) return "";
+      if (v === null) return "null";
+      if (typeof v === "string") return v === "" ? '""' : v;
+      if (typeof v === "object") return JSON.stringify(v);
+      return String(v);
+    }
+
+    // Comparison key: case/punctuation-insensitive; phone numbers compare on their last 10 digits.
+    function v2Norm(v) {
+      if (v === null || v === undefined || typeof v === "boolean" || typeof v === "object") return "";
+      const s = String(v).trim();
+      const digits = s.replace(/\D/g, "");
+      if (/^[+\d\s().-]+$/.test(s) && digits.length >= 10 && digits.length <= 15) return `tel:${digits.slice(-10)}`;
+      return s.toLowerCase().replace(/[^a-z0-9@.]/g, "");
+    }
+
+    function v2Same(a, b, loose) {
+      const x = v2Norm(a), y = v2Norm(b);
+      if (!x || !y) return false;
+      return x === y || (loose && (x.includes(y) || y.includes(x)));
+    }
+
+    function v2ParsePath(path) {
+      const segs = [];
+      String(path).replace(/\[([^=\]]+)=([^\]]*)\]|([^.[\]]+)/g, (m, fk, fv, key) => {
+        segs.push(key !== undefined ? { key } : { fk, fv });
+        return m;
+      });
+      return segs;
+    }
+
+    function v2Get(obj, path) {
+      let cur = obj;
+      for (const s of v2ParsePath(path)) {
+        if (cur == null) return undefined;
+        cur = s.fk !== undefined ? (Array.isArray(cur) ? cur.find(x => x && String(x[s.fk]) === s.fv) : undefined) : cur[s.key];
+      }
+      return cur;
+    }
+
+    // Concrete dotted path (filters resolved to indexes), or null when the path doesn't exist.
+    function v2ResolvePath(obj, path) {
+      let cur = obj;
+      const out = [];
+      for (const s of v2ParsePath(path)) {
+        if (cur == null) return null;
+        if (s.fk !== undefined) {
+          if (!Array.isArray(cur)) return null;
+          const i = cur.findIndex(x => x && String(x[s.fk]) === s.fv);
+          if (i < 0) return null;
+          out.push(String(i));
+          cur = cur[i];
+        } else {
+          out.push(s.key);
+          cur = cur[s.key];
+        }
+      }
+      return cur === undefined ? null : out.join(".");
+    }
+
+    function v2Flatten(value, prefix = "", out = [], skip = null, depth = 0) {
+      if (value !== null && typeof value === "object" && depth < 8) {
+        const entries = Array.isArray(value) ? value.map((v, i) => [String(i), v]) : Object.entries(value);
+        if (!entries.length) out.push({ path: prefix, value });
+        entries.forEach(([k, v]) => {
+          if (skip && skip.test(k)) return;
+          v2Flatten(v, v2Join(prefix, k), out, skip, depth + 1);
+        });
+        return out;
+      }
+      out.push({ path: prefix, value });
+      return out;
+    }
+
+    function v2Transform(kind, v) {
+      if (typeof v !== "string") return v;
+      const parts = v.trim().split(/\s+/);
+      if (kind === "first") return parts[0] || "";
+      if (kind === "rest") return parts.slice(1).join(" ");
+      return v;
+    }
+
+    // A display value from a field that may be a scalar, an {name/value} object or a list.
+    function v2Scalar(v) {
+      if (v === null || v === undefined) return null;
+      if (Array.isArray(v)) return v.length ? v2Scalar(v[0]) : null;
+      if (typeof v === "object") {
+        for (const k of ["name", "title", "label", "display_name", "status_name", "pipeline_name", "value", "email", "mobile", "phone", "number", "work", "home"]) {
+          if (v[k] !== undefined && v[k] !== null && typeof v[k] !== "object") return v[k];
+        }
+        return null;
+      }
+      return v;
+    }
+
+    // Find a standard Lead field inside the Lead object: shallowest match wins, alias order breaks ties.
+    function v2FindLeadField(obj, field) {
+      const aliases = V2_LEAD_FIELDS[field];
+      if (!aliases || !obj || typeof obj !== "object") return null;
+      const own = V2_OWN_CONTAINERS[field];
+      let level = [{ node: obj, path: "" }];
+      for (let depth = 0; depth < 3 && level.length; depth++) {
+        for (const alias of aliases) {
+          for (const { node, path } of level) {
+            if (!Object.prototype.hasOwnProperty.call(node, alias)) continue;
+            const v = v2Scalar(node[alias]);
+            if (!v2Empty(v)) return { value: v, path: v2Join(path, alias) };
+          }
+        }
+        const next = [];
+        level.forEach(({ node, path }) => Object.entries(node).forEach(([k, v]) => {
+          if (!v || typeof v !== "object" || Array.isArray(v)) return;
+          if (V2_ECHO_KEYS.test(k) || V2_FOREIGN_KEYS.test(k)) return;
+          if (V2_RESERVED_KEYS.test(k) && !(own && own.test(k))) return;
+          next.push({ node: v, path: v2Join(path, k) });
+        }));
+        level = next;
+      }
+      return null;
+    }
+
+    function v2Children(level) {
+      const next = [];
+      level.forEach(({ node, path }) => {
+        if (!node || typeof node !== "object") return;
+        const entries = Array.isArray(node) ? node.slice(0, 5).map((v, i) => [String(i), v]) : Object.entries(node);
+        entries.forEach(([k, v]) => {
+          if (v && typeof v === "object" && !V2_ECHO_KEYS.test(k)) next.push({ node: v, path: v2Join(path, k) });
+        });
+      });
+      return next;
+    }
+
+    // The object in a response that looks most like a Lead (or null).
+    function v2FindLeadObject(json) {
+      let best = null;
+      let level = [{ node: json, path: "" }];
+      for (let depth = 0; depth < 6 && level.length; depth++) {
+        level.forEach(({ node, path }) => {
+          if (!node || typeof node !== "object" || Array.isArray(node)) return;
+          const last = path.split(".").pop() || "";
+          let score = Object.keys(node).filter(k => V2_LEAD_SIGNAL_KEYS.has(k)).length;
+          if (/^lead$/i.test(last)) score += 3;
+          else if (/lead/i.test(last)) score += 1;
+          if (score >= 2 && (!best || score > best.score)) best = { obj: node, path, score };
+        });
+        level = v2Children(level);
+      }
+      return best;
+    }
+
+    // A Lead ID: an explicit lead id key anywhere (shallowest first), else the Lead object's own id.
+    function v2FindLeadId(json, leadHit) {
+      let level = [{ node: json, path: "" }];
+      for (let depth = 0; depth < 6 && level.length; depth++) {
+        for (const { node, path } of level) {
+          if (!node || typeof node !== "object" || Array.isArray(node)) continue;
+          for (const k of V2_LEAD_ID_KEYS) {
+            const v = node[k];
+            if ((typeof v === "string" && v) || typeof v === "number") return { value: String(v), path: v2Join(path, k) };
+          }
+        }
+        level = v2Children(level);
+      }
+      if (leadHit) {
+        for (const k of ["uid", "id", "_id"]) {
+          const v = leadHit.obj[k];
+          if ((typeof v === "string" && v) || typeof v === "number") return { value: String(v), path: v2Join(leadHit.path, k) };
+        }
+      }
+      return null;
+    }
+
+    function v2DetectDuplicate(json) {
+      let dup = false;
+      const visit = (node, depth) => {
+        if (dup || !node || typeof node !== "object" || depth > 5) return;
+        for (const [k, v] of Object.entries(node)) {
+          if (/dup|dedup/i.test(k) && (v === true || v === "true")) { dup = true; return; }
+          if (/^(status|result|action|outcome|message|code|event|reason)$/i.test(k) && typeof v === "string" &&
+            /duplicate|dedup|already (exists|ingested|received|processed)/i.test(v)) { dup = true; return; }
+          if (v && typeof v === "object" && !V2_ECHO_KEYS.test(k)) visit(v, depth + 1);
+        }
+      };
+      visit(json, 0);
+      return dup;
+    }
+
+    // The dev v1 webhook answers 200 {"type":"success","message":"Enqueued for processing"}:
+    // the payload is queued and the source adapter creates the Lead in the background.
+    function v2DetectQueued(json) {
+      let found = null;
+      const visit = (node, depth) => {
+        if (found || !node || typeof node !== "object" || depth > 2) return;
+        for (const [k, v] of Object.entries(node)) {
+          if (/^(message|status|state|result|detail|type)$/i.test(k) && typeof v === "string" && /enqueue|queued|accepted for|processing/i.test(v)) { found = v; return; }
+          if (v && typeof v === "object" && !V2_ECHO_KEYS.test(k)) visit(v, depth + 1);
+        }
+      };
+      visit(json, 0);
+      return found;
+    }
+
+    // First array of objects in a list response (e.g. { data: [ …leads ] }).
+    function v2FindObjectArray(json) {
+      let level = [json];
+      for (let depth = 0; depth < 4 && level.length; depth++) {
+        for (const node of level) {
+          if (Array.isArray(node) && node.some(x => x && typeof x === "object")) return node.filter(x => x && typeof x === "object" && !Array.isArray(x));
+        }
+        const next = [];
+        level.forEach(node => { if (node && typeof node === "object") Object.values(node).forEach(v => { if (v && typeof v === "object") next.push(v); }); });
+        level = next;
+      }
+      return [];
+    }
+
+    // Which of the most recent Leads came from this payload? Matched on identifying values
+    // (source lead id, email, phone, name) wherever they sit in the Lead, so no schema is assumed.
+    const V2_MATCH_WEIGHTS = [["external_id", 3], ["email", 2], ["phone", 2], ["first_name", 1], ["last_name", 1]];
+    function v2MatchLead(listJson, mappingKey, payload) {
+      const items = v2FindObjectArray(listJson);
+      const rows = v2BuildMappingRows(mappingKey, payload, null);
+      const wanted = V2_MATCH_WEIGHTS.map(([lead, weight]) => {
+        const row = rows.find(r => r.lead === lead);
+        const n = row && !row.none ? v2Norm(row.srcVal) : "";
+        return n.length >= 2 ? { lead, weight, n } : null;
+      }).filter(Boolean);
+      let best = null;
+      items.forEach((item, index) => {
+        const values = v2Flatten(item).map(l => v2Norm(l.value)).filter(Boolean);
+        const set = new Set(values);
+        const matched = wanted.filter(w => set.has(w.n) || (w.lead === "external_id" && w.n.length >= 6 && values.some(v => v.includes(w.n))));
+        const score = matched.reduce((s, m) => s + m.weight, 0);
+        if (score >= 3 && (!best || score > best.score)) best = { item, index, score, matchedOn: matched.map(m => m.lead) };
+      });
+      return best ? { ...best, scanned: items.length } : { item: null, scanned: items.length };
+    }
+
+    // If the backend ever returns its own field mapping, show it as-is instead of the tool's config.
+    function v2FindBackendMapping(json) {
+      let level = [{ node: json, path: "" }];
+      for (let depth = 0; depth < 5 && level.length; depth++) {
+        for (const { node, path } of level) {
+          if (!node || typeof node !== "object" || Array.isArray(node)) continue;
+          for (const [k, v] of Object.entries(node)) {
+            if (/^(mapping|mappings|field_mapping|field_mappings|fieldMapping|fieldMappings|mapped_fields|mappedFields)$/.test(k) && v && typeof v === "object") {
+              return { path: v2Join(path, k), value: v };
+            }
+          }
+        }
+        level = v2Children(level);
+      }
+      return null;
+    }
+
+    function v2ValueIndex(json) {
+      const index = new Map();
+      v2Flatten(json).forEach(l => {
+        const n = v2Norm(l.value);
+        if (n.length >= 3 && !index.has(n)) index.set(n, l.path);
+      });
+      return index;
+    }
+
+    function v2HighlightJson(text, leadId) {
+      let html = highlightJsonString(text);
+      if (leadId) {
+        const quoted = JSON.stringify(String(leadId)).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        html = html.split(`<span class="json-string">${quoted}</span>`).join(`<span class="json-string json-hl">${quoted}</span>`);
+        if (/^\d+$/.test(leadId)) html = html.split(`<span class="json-number">${leadId}</span>`).join(`<span class="json-number json-hl">${leadId}</span>`);
+      }
+      return html;
+    }
+
+    function v2BodyView(body) {
+      const parsed = v2ParseJson(body);
+      return parsed !== null ? { isJson: true, text: JSON.stringify(parsed, null, 2) } : { isJson: false, text: body || "" };
+    }
+
+    // Mirrors maskUrl in api/_lib/zuper.js: keeps scheme, host and plain path words;
+    // masks token-like path segments, query values and credentials.
+    function v2IsSecretSegment(seg) {
+      let s = seg || "";
+      try { s = decodeURIComponent(s); } catch { }
+      if (s.length < 8) return false;
+      if (/^[a-z]+([-_.][a-z]+)*$/.test(s) || /^[A-Z]+([-_.][A-Z]+)*$/.test(s)) return false;
+      return /\d/.test(s) || s.length >= 16;
+    }
+    function v2MaskSecret(s) {
+      const str = String(s);
+      return str.length <= 8 ? "••••••" : `${str.slice(0, 3)}••••••${str.slice(-3)}`;
+    }
+    function v2MaskUrl(raw) {
+      let u;
+      try { u = new URL(raw); } catch { return v2MaskSecret(raw); }
+      const path = u.pathname.split("/").map(seg => (v2IsSecretSegment(seg) ? v2MaskSecret(seg) : seg)).join("/");
+      const query = [];
+      u.searchParams.forEach((v, k) => query.push(`${k}=${v.length >= 6 ? v2MaskSecret(v) : v}`));
+      const auth = u.username || u.password ? "••••@" : "";
+      return `${u.protocol}//${auth}${u.host}${path}${query.length ? `?${query.join("&")}` : ""}`;
+    }
+
+    // ------------------------------------------------------------
+    // Endpoint configuration — server env (preferred) or a URL entered in this browser
+    // ------------------------------------------------------------
+    function v2EndpointInfo(source, serverConfig, browserEndpoints, transport) {
+      const browserUrl = (browserEndpoints[source] || "").trim();
+      const server = serverConfig.status === "ok" ? (serverConfig.sources || {})[source] : null;
+      const serverSet = !!(server && server.configured);
+      if (browserUrl) return { configured: true, origin: "browser", masked: v2MaskUrl(browserUrl), url: browserUrl, browserSet: true, serverSet };
+      if (serverSet && transport === "proxy") return { configured: true, origin: "server", masked: server.masked, signed: !!server.signed, serverSet };
+      return { configured: false, serverOnly: serverSet, serverSet };
+    }
+
+    function v2LeadApiInfo(serverConfig, browserEndpoints, transport) {
+      const b = browserEndpoints.leadApi || {};
+      const server = serverConfig.status === "ok" ? serverConfig.leadApi : null;
+      const browserSet = !!(b.baseUrl && b.apiKey);
+      const serverSet = !!(server && server.configured);
+      if (transport !== "proxy") return { ready: false, browserSet, serverSet, reason: "The Lead API lookup runs through the server proxy." };
+      if (browserSet) {
+        const path = b.path || V2_LEAD_API_DEFAULT_PATH;
+        return { ready: true, origin: "browser", browserSet, serverSet, masked: v2MaskUrl(b.baseUrl).replace(/\/+$/, "") + path, request: { baseUrl: b.baseUrl, apiKey: b.apiKey, path, keyHeader: b.keyHeader || V2_LEAD_API_DEFAULT_HEADER } };
+      }
+      if (serverSet) return { ready: true, origin: "server", browserSet, serverSet, masked: server.masked, request: {} };
+      return { ready: false, browserSet, serverSet };
+    }
+
+    // ------------------------------------------------------------
+    // Transport
+    // ------------------------------------------------------------
+    function v2ElapsedSince(start) {
+      return Math.round(performance.now() - start);
+    }
+
+    async function v2PostProxy(path, payload) {
+      const start = performance.now();
+      let res;
+      try {
+        res = await fetch(path, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+      } catch (err) {
+        return { kind: "proxy_unreachable", errorMessage: (err && err.message) || "Failed to fetch", latencyMs: v2ElapsedSince(start) };
+      }
+      let data;
+      try {
+        data = await res.json();
+      } catch {
+        return { kind: "proxy_unreachable", errorMessage: `${path} answered HTTP ${res.status} without JSON — the proxy isn't deployed here.`, latencyMs: v2ElapsedSince(start) };
+      }
+      if (data && data.ok && data.upstream) return { kind: "http", ...data.upstream, target: data.target };
+      const e = (data && data.error) || {};
+      return { kind: e.kind || "proxy_error", errorMessage: e.message || `Proxy error (HTTP ${res.status})`, errorCode: e.code || null, target: data && data.target, latencyMs: (data && data.latencyMs) != null ? data.latencyMs : v2ElapsedSince(start) };
+    }
+
+    async function v2PostDirect(url, body) {
+      const start = performance.now();
+      try {
+        const res = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body });
+        const text = await res.text();
+        const headers = {};
+        res.headers.forEach((v, k) => { headers[k] = v; });
+        return { kind: "http", status: res.status, statusText: res.statusText, headers, body: text, latencyMs: v2ElapsedSince(start) };
+      } catch (err) {
+        return { kind: "network", errorMessage: (err && err.message) || "Failed to fetch", latencyMs: v2ElapsedSince(start) };
+      }
+    }
+
+    function v2TrimBody(result) {
+      if (typeof result.body === "string" && result.body.length > V2_BODY_LIMIT) {
+        return { ...result, body: result.body.slice(0, V2_BODY_LIMIT), truncated: true };
+      }
+      return result;
+    }
+
+    // ------------------------------------------------------------
+    // Result analysis
+    // ------------------------------------------------------------
+    const V2_PROXY_HEADLINES = {
+      not_configured: "No webhook URL is configured for this source.",
+      host_not_allowed: "The proxy refused to forward to this host.",
+      invalid_url: "The configured webhook URL is not valid.",
+      insecure_url: "The configured webhook URL must use https.",
+      invalid_payload: "Payload is not valid JSON.",
+    };
+
+    function v2Classify(r, { leadId, duplicate, transport, queued, found, existing }) {
+      const fail = (headline, detail, kind) => ({ ok: false, tone: "fail", label: "FAILED", headline, detail: detail || null, kind });
+      if (r.kind === "proxy_unreachable") {
+        return fail("Could not reach the tool's server proxy.", `${r.errorMessage} Run the tool with \`npm run dev\` or deploy it to Vercel — or switch Transport to Direct.`, "proxy");
+      }
+      if (r.kind === "network") {
+        return fail("Could not reach the webhook endpoint.", transport === "direct"
+          ? "The browser could not complete the request. If the same payload works from curl, the endpoint isn't sending CORS headers — switch Transport to Server proxy."
+          : r.errorMessage, "network");
+      }
+      if (r.kind === "timeout") return fail("The webhook endpoint did not respond in time.", r.errorMessage, "timeout");
+      if (r.kind !== "http") return fail(V2_PROXY_HEADLINES[r.kind] || "The request failed before reaching the webhook.", r.errorMessage, r.kind);
+
+      const s = r.status;
+      if (s >= 200 && s < 300) {
+        if (duplicate || existing) {
+          return { ok: true, tone: "dup", label: "SUCCESS", kind: "duplicate", headline: "Duplicate — the ingestion service deduplicated this lead.", detail: "The same source lead was already ingested, so no new Lead was created and the existing Lead is shown. Generate a new payload to create a new Lead." };
+        }
+        if (queued && found) return { ok: true, tone: "ok", label: "SUCCESS", kind: "created", headline: "Lead created — found through the Lead API.", detail: "The webhook queued the payload and the source adapter created the Lead in the background." };
+        if (queued) {
+          return { ok: true, tone: "ok", label: "SUCCESS", kind: "queued", headline: "Accepted and queued — Zuper creates the Lead in the background.", detail: `The webhook replied “${queued}” and doesn't send the Lead back. See “What happened” below.` };
+        }
+        if (leadId) return { ok: true, tone: "ok", label: "SUCCESS", kind: "created", headline: "Lead created.", detail: null };
+        if (s === 202) return { ok: true, tone: "ok", label: "SUCCESS", kind: "accepted", headline: "Accepted — the Lead is created asynchronously.", detail: "The webhook accepted the payload but did not return the Lead. It should appear on the default pipeline within a few seconds." };
+        return { ok: true, tone: "ok", label: "SUCCESS", kind: "accepted", headline: "Webhook accepted the payload.", detail: "The response did not include a Lead ID." };
+      }
+      if (s === 401 || s === 403) return fail("Webhook authentication failed. Check the configured endpoint/token.", null, "auth");
+      if (s === 400 || s === 422) return fail("Payload rejected by the ingestion endpoint.", null, "rejected");
+      if (s === 404) return fail("Webhook endpoint not found. Check the URL — the source connection may be disconnected or its secret rotated.", null, "not_found");
+      if (s === 409) return fail(duplicate ? "Conflict — the endpoint reports this lead already exists." : "The ingestion endpoint reported a conflict.", null, "conflict");
+      if (s === 413) return fail("Payload too large for the ingestion endpoint.", null, "too_large");
+      if (s === 429) return fail("Rate limited by the ingestion endpoint. Wait a moment and retry.", null, "rate_limited");
+      if (s >= 500) return fail("Zuper ingestion service returned an internal error.", null, "server");
+      if (s >= 300 && s < 400) return fail("The endpoint answered with a redirect. Check the configured URL.", r.headers && r.headers.location ? `Location: ${r.headers.location}` : null, "redirect");
+      return fail(`Unexpected HTTP ${s} from the ingestion endpoint.`, null, "other");
+    }
+
+    function v2Analyze(test) {
+      const r = test.result;
+      const json = r.kind === "http" ? v2ParseJson(r.body) : null;
+      const leadHit = json ? v2FindLeadObject(json) : null;
+      const webhookLeadId = json ? v2FindLeadId(json, leadHit) : null;
+      const duplicate = json ? v2DetectDuplicate(json) : false;
+      const queued = leadHit ? null : (json && v2DetectQueued(json)) || (r.status === 202 ? "Accepted" : null);
+
+      // A Lead read back from the Lead API is the better source of truth than the webhook echo.
+      const d = test.leadDetails;
+      const detailsJson = d && d.ok ? v2ParseJson(d.body) : null;
+      const detailsHit = detailsJson ? v2FindLeadObject(detailsJson) || (typeof detailsJson === "object" ? { obj: detailsJson, path: "" } : null) : null;
+      const leadCtx = detailsHit
+        ? { obj: detailsHit.obj, path: detailsHit.path, origin: "details" }
+        : leadHit ? { obj: leadHit.obj, path: leadHit.path, origin: "webhook" } : null;
+      const leadId = webhookLeadId || (detailsHit ? v2FindLeadId(detailsJson, detailsHit) : null) || (d && d.ok && d.leadId ? { value: d.leadId, path: "lead_uid" } : null);
+      const existing = !!(d && d.ok && d.existing);
+      const verdict = v2Classify(r, { leadId, duplicate, transport: test.transport, queued, found: !!detailsHit, existing });
+
+      return {
+        json,
+        leadId,
+        leadIdFromWebhook: !!webhookLeadId,
+        duplicate: duplicate || existing,
+        queued,
+        verdict,
+        leadCtx,
+        detailsJson,
+        evidence: detailsJson || json,
+        backendMapping: json ? v2FindBackendMapping(json) : null,
+      };
+    }
+
+    // Plain-language account of the round trip, one line per stage.
+    function v2Explain(test, analysis, leadApi) {
+      const r = test.result;
+      const src = V2_SOURCES[test.source].label;
+      const d = test.leadDetails;
+      const steps = [];
+      const add = (state, text) => steps.push({ state, text });
+      add("done", `Sent the ${src} payload (${v2Bytes(test.requestBody.length)}) ${test.transport === "proxy" ? "through the tool's server proxy" : "straight from the browser"} to the ${src} ingestion webhook.`);
+      if (r.kind !== "http") {
+        add("failed", `${analysis.verdict.headline} ${r.errorMessage || ""}`.trim());
+        return steps;
+      }
+      if (r.status === 401 || r.status === 403) { add("failed", `Zuper refused it (HTTP ${r.status}): the token in the URL is wrong or was rotated, or the source connection is disabled.`); return steps; }
+      if (r.status === 404) { add("failed", "Zuper found no webhook at that URL (HTTP 404): check the company id / source in the URL."); return steps; }
+      if (r.status >= 400 && r.status < 500) { add("failed", `Zuper received it but rejected the payload (HTTP ${r.status}). The response body below says why.`); return steps; }
+      if (r.status >= 500) { add("failed", `Zuper's ingestion service failed while handling it (HTTP ${r.status}). Nothing was created; the response body below may say why.`); return steps; }
+      if (r.status >= 300) { add("failed", `The URL answered with a redirect (HTTP ${r.status}) instead of accepting the payload.`); return steps; }
+      add("done", `Zuper accepted it (HTTP ${r.status} in ${r.latencyMs} ms), so the webhook URL and token are valid.`);
+      if (analysis.queued) add("done", `The webhook replied “${analysis.queued}”: the payload went onto a queue, and the ${src} source adapter maps it into a Lead in the background, usually within a few seconds. The webhook itself never returns the Lead.`);
+      else if (analysis.leadIdFromWebhook) add("done", "The webhook response includes the created Lead.");
+
+      if (d && d.state === "loading") {
+        add("active", d.mode === "find"
+          ? `Looking for that Lead among the newest leads in the Lead API (check ${d.attempt} of ${d.max})…`
+          : `Loading Lead ${v2Short(d.leadId)} from the Lead API (attempt ${d.attempt} of ${d.max})…`);
+      } else if (d && d.state === "done" && d.ok) {
+        const ctx = analysis.leadCtx;
+        const st = ctx ? v2FindLeadField(ctx.obj, "status") : null;
+        const pl = ctx ? v2FindLeadField(ctx.obj, "pipeline") : null;
+        const where = [pl && `pipeline “${pl.value}”`, st && `status “${st.value}”`].filter(Boolean).join(", ");
+        add("done", `${d.existing ? "Found the existing Lead" : "Found the new Lead"} ${v2Short(d.leadId)} through the Lead API${d.matchedOn ? ` (matched on ${d.matchedOn.join(", ")})` : ""}${where ? ` — ${where}` : ""}.`);
+        if (d.existing) add("warn", "That Lead was already there before this send, so the ingestion service deduplicated it instead of creating a new one.");
+        add("done", "The Lead Mapping below now compares your payload with the real Lead's fields.");
+      } else if (d && d.state === "done" && d.notFound) {
+        add("warn", `No Lead matching this payload appeared among the ${d.scanned || "newest"} newest leads within ~20 s. It may still be processing, or the adapter skipped it. Click “Find Lead” to check again, or look in Zuper Dev → Leads.`);
+      } else if (d && d.state === "done") {
+        add("warn", `The Lead API lookup failed (${d.status ? `HTTP ${d.status}` : d.errorMessage}). Check that the API key belongs to the same company as the webhook.`);
+      } else if (!analysis.leadIdFromWebhook && !analysis.duplicate) {
+        add("warn", leadApi.ready
+          ? "Not looked up yet: click “Find Lead” to search the newest leads for it."
+          : "Not verified yet: the tool can't see the Lead without the Lead API. Add it under Endpoints → Lead API (base URL https://development.zuperpro.com + an API key for the same company) and the tool looks the Lead up after each send. Or check Zuper Dev → Leads → New.");
+      }
+      return steps;
+    }
+
+    function v2BuildMappingRows(mappingKey, payload, leadCtx) {
+      const def = V2_MAPPINGS[mappingKey];
+      if (!def || !payload) return [];
+      return [...def.fields, ...V2_PIPELINE_ROWS].map(f => {
+        const raw = f.from ? v2Get(payload, f.from) : f.value;
+        const srcVal = f.transform ? v2Transform(f.transform, raw) : raw;
+        let hit = leadCtx ? v2FindLeadField(leadCtx.obj, f.lead) : null;
+        let viaName = false;
+        if (!hit && leadCtx && (f.lead === "first_name" || f.lead === "last_name")) {
+          hit = v2FindLeadField(leadCtx.obj, "name");
+          viaName = !!hit;
+        }
+        const absent = !!f.none || (!!f.from && v2Empty(srcVal));
+        let state;
+        if (!leadCtx) state = absent ? "absent" : "expected";
+        else if (!hit) state = absent ? "absent" : "not_returned";
+        else if (absent) state = "lead_only";
+        else state = v2Same(srcVal, hit.value, f.loose || viaName) ? "match" : "differs";
+        return { ...f, srcVal, hit, state };
+      });
+    }
+
+    // Source fields with no standard Lead column, grouped per source. `evidence` (the response)
+    // is searched for each value so the demo can show the data was kept on the Lead.
+    function v2BuildExtras(mappingKey, payload, evidence) {
+      const def = V2_MAPPINGS[mappingKey];
+      if (!def || !payload || typeof payload !== "object") return [];
+      const covered = [];
+      def.fields.forEach(f => {
+        const p = f.from ? v2ResolvePath(payload, f.from) : null;
+        if (p) covered.push(p);
+      });
+      const groups = def.extras.map(g => ({ ...g, items: [] }));
+      groups.forEach(g => {
+        (g.paths || []).forEach(p => {
+          const v = v2Get(payload, p);
+          if (v === undefined) return;
+          covered.push(p);
+          const tail = p.split(".").pop();
+          if (v && typeof v === "object") v2Flatten(v).forEach(l => g.items.push({ label: v2Join(tail, l.path), path: v2Join(p, l.path), value: l.value }));
+          else g.items.push({ label: tail, path: p, value: v });
+        });
+        if (g.qa) {
+          const list = v2Get(payload, g.qa);
+          if (Array.isArray(list)) {
+            covered.push(g.qa);
+            list.forEach((q, i) => { if (q) g.items.push({ label: q.question || `#${i + 1}`, path: `${g.qa}.${i}.answer`, value: q.answer }); });
+          }
+        }
+        if (g.fieldData) {
+          const list = v2Get(payload, g.fieldData);
+          if (Array.isArray(list)) {
+            covered.push(g.fieldData);
+            list.forEach((f, i) => {
+              if (f && !(g.exclude || []).includes(f.name)) g.items.push({ label: f.name, path: `${g.fieldData}.${i}.values`, value: Array.isArray(f.values) ? f.values.join(", ") : f.values });
+            });
+          }
+        }
+      });
+      const restGroup = groups.find(g => g.rest);
+      if (restGroup) {
+        v2Flatten(payload).forEach(l => {
+          if (!covered.some(c => l.path === c || l.path.startsWith(`${c}.`))) restGroup.items.push({ label: l.path, path: l.path, value: l.value });
+        });
+      }
+      const index = evidence ? v2ValueIndex(evidence) : null;
+      groups.forEach(g => g.items.forEach(it => { it.foundAt = index ? index.get(v2Norm(it.value)) || null : null; }));
+      return groups.filter(g => g.items.length);
+    }
+
+    // Lead fields whose value traces back to a source field the config doesn't map — derived from the response.
+    function v2DerivedMatches(payload, leadCtx, rows) {
+      if (!payload || !leadCtx) return [];
+      const used = new Set(rows.filter(r => r.hit).map(r => r.hit.path));
+      const sourceIndex = new Map();
+      v2Flatten(payload).forEach(l => {
+        const n = v2Norm(l.value);
+        if (n.length >= 3 && !sourceIndex.has(n)) sourceIndex.set(n, l.path);
+      });
+      const out = [];
+      v2Flatten(leadCtx.obj, "", [], V2_ECHO_KEYS).forEach(l => {
+        if (used.has(l.path)) return;
+        const n = v2Norm(l.value);
+        const src = n.length >= 3 ? sourceIndex.get(n) : null;
+        if (src) out.push({ leadPath: l.path, srcPath: src, value: l.value });
+      });
+      return out.slice(0, 15);
+    }
+
+    function v2LeadSummaryRows(analysis) {
+      const ctx = analysis.leadCtx;
+      const f = (key) => (ctx ? v2FindLeadField(ctx.obj, key) : null);
+      const first = f("first_name"), last = f("last_name");
+      const name = first || last
+        ? { value: [first && first.value, last && last.value].filter(Boolean).join(" "), path: [first && first.path, last && last.path].filter(Boolean).join(" + ") }
+        : f("name");
+      const parts = ["address.street", "address.city", "address.state", "address.zip"].map(f).filter(Boolean);
+      const address = parts.length ? { value: parts.map(p => p.value).join(", "), path: parts.map(p => p.path).join(", ") } : null;
+      return [
+        { label: "Name", hit: name },
+        { label: "Email", hit: f("email") },
+        { label: "Phone", hit: f("phone") },
+        { label: "Address", hit: address },
+        { label: "Source", hit: f("source") },
+        { label: "Status", hit: f("status") },
+        { label: "Pipeline", hit: f("pipeline") },
+      ];
+    }
+
+    function v2FlowSteps({ sourceLabel, validity, sending, test, analysis, endpoint }) {
+      const S = (key, name, state, caption) => ({ key, name, state, caption });
+      const names = { payload: "Source payload", webhook: "Zuper webhook", adapter: "Source adapter", lead: "Lead object", pipeline: "Default pipeline / New" };
+      const idle = (key, caption = "—") => S(key, names[key], "idle", caption);
+      const payload = test
+        ? S("payload", names.payload, "done", `${V2_SOURCES[test.source].label} · ${v2Bytes(test.requestBody.length)}`)
+        : validity.ok ? S("payload", names.payload, "ready", `${sourceLabel} · valid JSON`) : S("payload", names.payload, "failed", "Invalid JSON");
+      if (sending) return [payload, S("webhook", names.webhook, "active", "POST in flight…"), idle("adapter"), idle("lead"), idle("pipeline")];
+      if (!test) {
+        return [payload, S("webhook", names.webhook, endpoint.configured ? "idle" : "warn", endpoint.configured ? "Ready to send" : "Not configured"), idle("adapter", `${sourceLabel} adapter`), idle("lead"), idle("pipeline")];
+      }
+      const r = test.result;
+      const v = analysis.verdict;
+      if (r.kind !== "http") {
+        const cap = v.kind === "proxy" ? "Proxy unreachable" : r.kind === "timeout" ? "Timed out" : r.kind === "network" ? "Unreachable" : "Not sent";
+        return [payload, S("webhook", names.webhook, "failed", cap), idle("adapter", "Not reached"), idle("lead"), idle("pipeline")];
+      }
+      const blocked = r.status === 401 || r.status === 403 || r.status === 404 || (r.status >= 300 && r.status < 400);
+      if (blocked) return [payload, S("webhook", names.webhook, "failed", `HTTP ${r.status}`), idle("adapter", "Not reached"), idle("lead"), idle("pipeline")];
+      const webhook = S("webhook", names.webhook, "done", `HTTP ${r.status} · ${r.latencyMs} ms`);
+      if (r.status >= 400) {
+        return [payload, webhook, S("adapter", names.adapter, "failed", r.status >= 500 ? "Internal error" : "Payload rejected"), idle("lead", "Not created"), idle("pipeline")];
+      }
+      const ctx = analysis.leadCtx;
+      const id = analysis.leadId;
+      const looking = !!(test.leadDetails && test.leadDetails.state === "loading");
+      const adapter = analysis.queued && !ctx
+        ? S("adapter", names.adapter, looking ? "active" : "warn", "Queued — runs in background")
+        : S("adapter", names.adapter, "done", analysis.duplicate ? "Deduplicated" : analysis.queued ? "Mapped (async)" : "Payload mapped");
+      const lead = id || ctx
+        ? S("lead", names.lead, "done", `${analysis.duplicate ? "Existing" : "Lead"} ${id ? v2Short(id.value) : "returned"}`)
+        : looking ? S("lead", names.lead, "active", "Looking it up…")
+          : S("lead", names.lead, "warn", analysis.queued ? "Not returned by webhook" : "Not in response");
+      const st = ctx ? v2FindLeadField(ctx.obj, "status") : null;
+      const pl = ctx ? v2FindLeadField(ctx.obj, "pipeline") : null;
+      const pipe = st || pl
+        ? S("pipeline", names.pipeline, "done", [pl && pl.value, st && st.value].filter(Boolean).join(" · "))
+        : looking ? idle("pipeline", "…") : S("pipeline", names.pipeline, "warn", "Not confirmed yet");
+      return [payload, webhook, adapter, lead, pipe];
+    }
+
+    function v2PayloadName(mappingKey, payload) {
+      const rows = v2BuildMappingRows(mappingKey, payload, null);
+      const pick = (lead) => { const r = rows.find(x => x.lead === lead); return r && !r.none && !v2Empty(r.srcVal) ? String(r.srcVal) : ""; };
+      return [pick("first_name"), pick("last_name")].filter(Boolean).join(" ") || null;
+    }
+
+    // Deduplicated if an earlier test already resolved to this Lead, or the Lead predates the send
+    // by more than two minutes (generous, since browser and server clocks can disagree).
+    function v2IsExistingLead(tests, test, leadId, body) {
+      if (tests.some(t => t.id !== test.id && t.ts < test.ts && t.summary && t.summary.leadId === leadId)) return true;
+      const json = v2ParseJson(body);
+      const hit = json ? v2FindLeadObject(json) : null;
+      const created = hit ? ["created_at", "createdAt", "created_time"].map(k => hit.obj[k]).find(Boolean) : null;
+      const at = created ? Date.parse(created) : NaN;
+      return Number.isFinite(at) && at < test.ts - 120000;
+    }
+
+    function v2LoadTests() {
+      const list = v2Store.get(V2_STORAGE.tests, []);
+      if (!Array.isArray(list)) return [];
+      // A lookup that was in flight when the page closed will never finish.
+      return list.filter(t => t && t.id && t.result).map(t => (t.leadDetails && t.leadDetails.state === "loading"
+        ? { ...t, leadDetails: { ...t.leadDetails, state: "done", ok: false, errorMessage: "Interrupted" } }
+        : t));
+    }
+
+    // ------------------------------------------------------------
+    // V2 components
+    // ------------------------------------------------------------
+    const V2_FLOW_GLYPH = { idle: "○", ready: "●", active: "◌", done: "✓", warn: "!", failed: "✕" };
+
+    function V2FlowStrip({ steps }) {
+      return (
+        <div className="v2-flow" aria-label="Ingestion flow">
+          {steps.map((s, i) => (
+            <React.Fragment key={s.key}>
+              {i > 0 && <div className="v2-flow-arrow">→</div>}
+              <div className={`v2-flow-step ${s.state}`}>
+                <div className="v2-flow-name"><span>{V2_FLOW_GLYPH[s.state]}</span>{s.name}</div>
+                <div className="v2-flow-cap" title={s.caption}>{s.caption}</div>
+              </div>
+            </React.Fragment>
+          ))}
+        </div>
+      );
+    }
+
+    function V2EndpointRow({ label, info, current, editing, onEdit, onCancel, onSave, onRemove }) {
+      const [value, setValue] = useState("");
+      useEffect(() => { if (editing) setValue(""); }, [editing]);
+      return (
+        <div className={`v2-ep ${current ? "current" : ""}`}>
+          <div className="v2-ep-top">
+            <span className={`v2-dot ${info.configured ? "on" : ""}`} />
+            <span className="v2-ep-name">{label}</span>
+            <span style={{ flex: 1 }} />
+            {!editing && <button className="btn btn-ghost btn-mini" onClick={onEdit}>{info.browserSet ? "Change" : "Set"}</button>}
+          </div>
+          <div className="v2-ep-url">
+            {info.configured
+              ? <><span className="v2-origin">{info.origin === "server" ? "server env" : "this browser"}</span><span>{info.masked}</span></>
+              : <span className="v2-dim">{info.serverOnly ? "server env — available via Server proxy" : "not configured"}</span>}
+          </div>
+          {editing && (
+            <form onSubmit={e => { e.preventDefault(); if (value.trim()) onSave(value.trim()); }}>
+              <input autoFocus type="password" className="field field-mono" placeholder="Paste webhook URL (https://…)" value={value} onChange={e => setValue(e.target.value)} autoComplete="off" spellCheck={false} />
+              <div className="v2-ep-actions">
+                <button type="submit" className="btn btn-secondary btn-mini" disabled={!value.trim()}>Save</button>
+                <button type="button" className="btn btn-ghost btn-mini" onClick={onCancel}>Cancel</button>
+                {info.browserSet && <button type="button" className="btn btn-ghost btn-mini" onClick={onRemove}>Remove</button>}
+              </div>
+              <div className="v2-hint" style={{ marginTop: 0 }}>Saved only in this browser and shown masked.{info.serverSet ? " Remove it to fall back to the server env URL." : ""}</div>
+            </form>
+          )}
+        </div>
+      );
+    }
+
+    function V2LeadApiRow({ info, serverConfig, editing, onEdit, onCancel, onSave, onRemove }) {
+      const serverPath = serverConfig.status === "ok" && serverConfig.leadApi ? serverConfig.leadApi.path : null;
+      const [form, setForm] = useState({ baseUrl: "", apiKey: "", path: "", keyHeader: "" });
+      useEffect(() => { if (editing) setForm({ baseUrl: "", apiKey: "", path: "", keyHeader: "" }); }, [editing]);
+      const set = (k) => (e) => setForm(f => ({ ...f, [k]: e.target.value }));
+      return (
+        <div className="v2-ep">
+          <div className="v2-ep-top">
+            <span className={`v2-dot ${info.ready ? "on" : ""}`} />
+            <span className="v2-ep-name">Lead API</span>
+            <span className="v2-muted" style={{ fontSize: 11 }}>optional</span>
+            <span style={{ flex: 1 }} />
+            {!editing && <button className="btn btn-ghost btn-mini" onClick={onEdit}>{info.browserSet ? "Change" : "Set"}</button>}
+          </div>
+          <div className="v2-ep-url">
+            {info.ready
+              ? <><span className="v2-origin">{info.origin === "server" ? "server env" : "this browser"}</span><span>{info.masked}</span></>
+              : <span className="v2-dim">{info.reason || "not configured — fetches the full Lead after each send"}</span>}
+          </div>
+          {editing && (
+            <form onSubmit={e => { e.preventDefault(); if (form.baseUrl.trim() && form.apiKey.trim()) onSave(form); }}>
+              <input autoFocus className="field field-mono" placeholder="Base URL, e.g. https://development.zuperpro.com" value={form.baseUrl} onChange={set("baseUrl")} autoComplete="off" spellCheck={false} />
+              <input type="password" className="field field-mono" placeholder="API key" value={form.apiKey} onChange={set("apiKey")} autoComplete="off" />
+              <input className="field field-mono" placeholder={`Path (default ${serverPath || V2_LEAD_API_DEFAULT_PATH})`} value={form.path} onChange={set("path")} spellCheck={false} />
+              <input className="field field-mono" placeholder={`Key header (default ${V2_LEAD_API_DEFAULT_HEADER})`} value={form.keyHeader} onChange={set("keyHeader")} spellCheck={false} />
+              <div className="v2-ep-actions">
+                <button type="submit" className="btn btn-secondary btn-mini" disabled={!form.baseUrl.trim() || !form.apiKey.trim()}>Save</button>
+                <button type="button" className="btn btn-ghost btn-mini" onClick={onCancel}>Cancel</button>
+                {info.browserSet && <button type="button" className="btn btn-ghost btn-mini" onClick={onRemove}>Remove</button>}
+              </div>
+              <div className="v2-hint" style={{ marginTop: 0 }}>Confirm the path and auth header against the Lead API reference. Saved only in this browser.</div>
+            </form>
+          )}
+        </div>
+      );
+    }
+
+    function V2RequestPanel({ source, onSource, metaFormat, onMetaFormat, endpoint, transport, configLoading, onConfigure, draft, onText, validity, onFormat, onReset, onCopy, onSend, sending }) {
+      const edited = !!draft && draft.text !== draft.generated;
+      const canSend = !!draft && validity.ok && endpoint.configured && !sending;
+      const label = V2_SOURCES[source].label;
+      return (
+        <section className="v2-card">
+          <div className="v2-card-head">
+            <span className="lead-num">01</span>
+            <span className="v2-card-title">Request</span>
+            <span className="v2-card-sub">the payload exactly as {label} would send it</span>
+          </div>
+          <div className="v2-card-body">
+            <div className="v2-form-row">
+              <div className="v2-form-label">Source</div>
+              <div className="v2-form-ctrl">
+                <select className="field" style={{ width: 200 }} value={source} onChange={e => onSource(e.target.value)} aria-label="Source">
+                  {V2_SOURCE_KEYS.map(k => <option key={k} value={k}>{V2_SOURCES[k].label}</option>)}
+                </select>
+                {source === "meta" && (
+                  <>
+                    <span className="v2-muted" style={{ fontSize: 12 }}>Format</span>
+                    <Segmented value={metaFormat} onChange={onMetaFormat} options={V2_META_FORMATS} />
+                  </>
+                )}
+              </div>
+            </div>
+            <div className="v2-form-row">
+              <div className="v2-form-label">Webhook</div>
+              <div className="v2-form-ctrl">
+                {endpoint.configured ? (
+                  <>
+                    <code className="v2-endpoint-url" title="Secret portion masked">{endpoint.masked}</code>
+                    <span className="v2-origin">{endpoint.origin === "server" ? "server env" : "this browser"}</span>
+                    {endpoint.signed && <span className="v2-origin">signed</span>}
+                    <button className="btn btn-ghost btn-mini" onClick={onConfigure}>Change</button>
+                  </>
+                ) : (
+                  <>
+                    <span className="v2-warn-text">
+                      {configLoading ? "Checking the server configuration…"
+                        : endpoint.serverOnly ? "Configured on the server — switch Transport to Server proxy to use it."
+                          : `No ${label} webhook configured.`}
+                    </span>
+                    {!configLoading && <button className="btn btn-ghost btn-mini" onClick={onConfigure}>Configure</button>}
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+          <div className="v2-editor-bar">
+            <span className={`v2-json-state ${validity.ok ? "ok" : "err"}`}>{validity.ok ? `Valid JSON · ${v2Bytes(validity.size)}` : "Invalid JSON"}</span>
+            {edited && <span className="edited-pill">edited</span>}
+            <span style={{ flex: 1 }} />
+            <button className="v2-dark-btn" onClick={onFormat} disabled={!validity.ok}>Format</button>
+            <button className="v2-dark-btn" onClick={onReset} disabled={!edited}>Reset</button>
+            <button className="v2-dark-btn" onClick={onCopy} disabled={!draft}><IconCopy /> Copy</button>
+          </div>
+          <textarea
+            className={`v2-editor code-scroll ${validity.ok ? "" : "json-error"}`}
+            value={draft ? draft.text : ""}
+            onChange={e => onText(e.target.value)}
+            spellCheck={false}
+            wrap="off"
+            aria-label="Source payload JSON"
+          />
+          {!validity.ok && draft && <div className="json-error-msg">Invalid JSON — fix it before sending: {validity.message}</div>}
+          <div className="v2-send-bar">
+            <button className="btn btn-primary v2-send" onClick={onSend} disabled={!canSend}>
+              {sending
+                ? <><span className="loading-dot" /><span className="loading-dot" /><span className="loading-dot" /> Sending…</>
+                : <><IconSend /> Send Lead</>}
+            </button>
+            <span className="v2-send-hint">
+              {transport === "proxy" ? "browser → /api/v2/ingest → Zuper webhook" : "browser → Zuper webhook (direct, needs CORS)"} · re-sending the same payload tests dedup
+            </span>
+          </div>
+        </section>
+      );
+    }
+
+    function V2LeadApiBar({ test, leadApi, onLookup, webhookLeadId }) {
+      const d = test.leadDetails;
+      const [manualId, setManualId] = useState("");
+      useEffect(() => { setManualId(webhookLeadId || (d && d.leadId) || ""); }, [test.id, webhookLeadId, d && d.leadId]);
+      if (!leadApi.ready) {
+        return (
+          <div className="v2-leadapi">
+            {leadApi.reason || "Lead API not configured. Add it under Endpoints → Lead API to read the created Lead back — including the source-specific data it kept."}
+          </div>
+        );
+      }
+      const busy = d && d.state === "loading";
+      const status = d && d.state === "done"
+        ? (d.ok ? `${d.existing ? "existing Lead" : "Lead"} found · HTTP ${d.status}` : d.notFound ? `no match among the ${d.scanned} newest leads` : d.status ? `HTTP ${d.status}` : d.errorMessage)
+        : null;
+      return (
+        <div className="v2-leadapi">
+          <span style={{ fontWeight: 500 }}>Lead API</span>
+          {busy && <span><span className="loading-dot" /><span className="loading-dot" /><span className="loading-dot" /> {d.mode === "find" ? "searching the newest leads" : "loading the Lead"} ({d.attempt}/{d.max})…</span>}
+          {status && <span className={d.ok ? "v2-ok-text" : "v2-err-text"}>{status}{d.latencyMs != null ? ` · ${d.latencyMs} ms` : ""}</span>}
+          <span style={{ flex: 1 }} />
+          {!webhookLeadId && <button className="btn btn-ghost btn-mini" disabled={busy} onClick={() => onLookup(test, {})}>Find Lead</button>}
+          <input className="field field-mono" placeholder="Lead ID (lead_uid)" value={manualId} onChange={e => setManualId(e.target.value)} aria-label="Lead ID to fetch" />
+          <button className="btn btn-ghost btn-mini" disabled={busy || !manualId.trim()} onClick={() => onLookup(test, { leadId: manualId.trim() })}>Fetch</button>
+        </div>
+      );
+    }
+
+    function V2LeadSummary({ test, analysis, leadApi, onLookup }) {
+      const id = analysis.leadId;
+      const ctx = analysis.leadCtx;
+      const rows = ctx ? v2LeadSummaryRows(analysis) : [];
+      const title = analysis.duplicate ? "Existing Lead (deduplicated)"
+        : id || ctx ? "Lead Created"
+          : analysis.queued ? "Lead queued — not returned by the webhook" : "No Lead in the response";
+      const d = test.leadDetails;
+      const from = ctx
+        ? (ctx.origin === "details" ? `from the Lead API${d && d.matchedOn ? ` · matched on ${d.matchedOn.join(", ")}` : ""}` : "from the webhook response") + (ctx.path ? ` · at ${ctx.path}` : "")
+        : null;
+      return (
+        <div className="v2-lead">
+          <div className="v2-lead-head">
+            <span className="v2-lead-title">{title}</span>
+            {from && <span className="v2-lead-from">{from}</span>}
+          </div>
+          <div className="v2-kv">
+            <div className="v2-k">Lead ID</div>
+            <div className="v2-v">
+              {id ? <><span className="v2-leadid">{id.value}</span><span className="v2-src">{id.path}</span></> : <span className="v2-missing">not in response</span>}
+            </div>
+            {rows.map(r => (
+              <React.Fragment key={r.label}>
+                <div className="v2-k">{r.label}</div>
+                <div className="v2-v">
+                  {r.hit ? <><span>{v2Display(r.hit.value)}</span><span className="v2-src">{r.hit.path}</span></> : <span className="v2-missing">not in response</span>}
+                </div>
+              </React.Fragment>
+            ))}
+          </div>
+          {!ctx && (
+            <div className="v2-leadapi">
+              {id ? "The webhook returned only the Lead ID."
+                : analysis.queued ? "The webhook queues the payload and never returns the Lead. The tool reads it back from the Lead API instead — until then the mapping below shows the expected fields only."
+                  : "The webhook response doesn't include a Lead object, so the mapping below shows the expected fields only."}
+            </div>
+          )}
+          <V2LeadApiBar test={test} leadApi={leadApi} onLookup={onLookup} webhookLeadId={analysis.leadIdFromWebhook && id ? id.value : ""} />
+          {d && d.state === "done" && (d.body || d.errorMessage) && (
+            <details className="v2-details">
+              <summary>Lead API response{d.target ? ` · ${d.target.masked}` : ""}</summary>
+              {(() => {
+                const view = v2BodyView(d.body);
+                return view.isJson
+                  ? <div className="json-viewer code-scroll" dangerouslySetInnerHTML={{ __html: v2HighlightJson(view.text, id && id.value) }} />
+                  : <div className="response-body code-scroll">{view.text || d.errorMessage}</div>;
+              })()}
+            </details>
+          )}
+        </div>
+      );
+    }
+
+    const V2_EXPLAIN_GLYPH = { done: "✓", active: "…", warn: "!", failed: "✕" };
+
+    function V2Explain({ steps }) {
+      return (
+        <div className="v2-explain">
+          <div className="label" style={{ marginBottom: 6 }}>What happened</div>
+          {steps.map((s, i) => (
+            <div key={i} className={`v2-explain-row ${s.state}`}>
+              <span className="v2-explain-icon">{V2_EXPLAIN_GLYPH[s.state]}</span>
+              <span>{s.text}</span>
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    function V2ResponsePanel({ test, analysis, isLatest, sending, panelRef, onBackToLatest, onLoadPayload, leadApi, onLookup }) {
+      const head = (extra) => (
+        <div className="v2-card-head">
+          <span className="lead-num">02</span>
+          <span className="v2-card-title">Response</span>
+          {extra}
+        </div>
+      );
+      if (sending) {
+        return (
+          <section className="v2-card" ref={panelRef}>
+            {head()}
+            <div className="v2-waiting"><span className="loading-dot" /><span className="loading-dot" /><span className="loading-dot" /> Waiting for the Zuper webhook…</div>
+          </section>
+        );
+      }
+      if (!test) {
+        return (
+          <section className="v2-card" ref={panelRef}>
+            {head(<span className="v2-card-sub">HTTP response and the Lead it creates</span>)}
+            <div className="v2-placeholder">No response yet. Send the payload to see the webhook's answer, the Lead it created and how the fields mapped.</div>
+          </section>
+        );
+      }
+      const r = test.result;
+      const v = analysis.verdict;
+      const body = r.kind === "http" ? v2BodyView(r.body) : null;
+      const headers = Object.entries(r.headers || {});
+      const request = v2BodyView(test.requestBody);
+      return (
+        <section className="v2-card" ref={panelRef}>
+          {head(
+            <>
+              {!isLatest && <span className="v2-inspecting">Inspecting {V2_SOURCES[test.source].label} test · {v2Time(test.ts)}</span>}
+              <span style={{ flex: 1 }} />
+              <button className="btn btn-ghost btn-mini" onClick={onLoadPayload}>Load payload into editor</button>
+              {!isLatest && <button className="btn btn-ghost btn-mini" onClick={onBackToLatest}>Back to latest</button>}
+            </>
+          )}
+          <div className={`v2-banner ${v.tone}`}>
+            <span className="v2-banner-label">{v.label}</span>
+            <div style={{ minWidth: 0 }}>
+              <div className="v2-banner-headline">{v.headline}</div>
+              {v.detail && <div className="v2-banner-detail">{v.detail}</div>}
+            </div>
+          </div>
+          <div className="v2-statusline">
+            <span>HTTP Status: <b>{r.kind === "http" ? `${r.status} ${r.statusText || ""}`.trim() : "—"}</b></span>
+            {r.latencyMs != null && <span>{r.latencyMs} ms</span>}
+            <span>{test.transport === "proxy" ? "via server proxy" : "direct from browser"}</span>
+            <span>{v2Time(test.ts)}</span>
+            {test.edited && <span>edited payload</span>}
+            {test.endpoint.masked && <span className="v2-statusline-url" title="Secret portion masked">{test.endpoint.masked}</span>}
+          </div>
+          <V2Explain steps={v2Explain(test, analysis, leadApi)} />
+          {r.kind === "http" && r.status >= 200 && r.status < 300 && (
+            <V2LeadSummary test={test} analysis={analysis} leadApi={leadApi} onLookup={onLookup} />
+          )}
+          {r.kind !== "http" && (
+            <>
+              <div className="phase-label">Error</div>
+              <div className="response-body is-error code-scroll">{r.errorMessage || "No details."}{r.errorCode ? ` (${r.errorCode})` : ""}</div>
+            </>
+          )}
+          {body && (
+            <>
+              <div className="phase-label">Response body{body.isJson ? "" : " (not JSON)"}{r.truncated ? " · truncated" : ""}</div>
+              {body.isJson
+                ? <div className="json-viewer code-scroll" dangerouslySetInnerHTML={{ __html: v2HighlightJson(body.text, analysis.leadId && analysis.leadId.value) }} />
+                : <div className="response-body code-scroll">{body.text || <span className="response-empty">(empty response body)</span>}</div>}
+            </>
+          )}
+          {headers.length > 0 && (
+            <details className="v2-details">
+              <summary>Response headers ({headers.length})</summary>
+              <table className="v2-headers"><tbody>
+                {headers.map(([k, val]) => <tr key={k}><td>{k}</td><td>{val}</td></tr>)}
+              </tbody></table>
+            </details>
+          )}
+          <details className="v2-details">
+            <summary>Request payload sent ({v2Bytes(test.requestBody.length)})</summary>
+            {request.isJson
+              ? <div className="json-viewer code-scroll" dangerouslySetInnerHTML={{ __html: highlightJsonString(request.text) }} />
+              : <div className="response-body code-scroll">{request.text}</div>}
+          </details>
+        </section>
+      );
+    }
+
+    function V2MappingPanel({ mappingKey, sourceLabel, payload, analysis, testTime }) {
+      const leadCtx = analysis ? analysis.leadCtx : null;
+      const evidence = analysis ? analysis.evidence : null;
+      const rows = useMemo(() => v2BuildMappingRows(mappingKey, payload, leadCtx), [mappingKey, payload, leadCtx]);
+      const extras = useMemo(() => v2BuildExtras(mappingKey, payload, evidence), [mappingKey, payload, evidence]);
+      const derived = useMemo(() => v2DerivedMatches(payload, leadCtx, rows), [payload, leadCtx, rows]);
+      const backendMapping = analysis ? analysis.backendMapping : null;
+      const note = !analysis
+        ? "Preview of the adapter mapping for this payload. Send it to compare against the Lead the backend actually creates."
+        : !analysis.verdict.ok
+          ? "The request failed, so no Lead was created — showing the expected adapter mapping for the payload that was sent."
+          : leadCtx
+          ? `Lead values come from the ${leadCtx.origin === "details" ? "Lead API response" : "webhook response"}${leadCtx.path ? ` (Lead object at ${leadCtx.path})` : ""}. The source → field pairs are this tool's expected adapter mapping.`
+          : "The response has no Lead object to compare against, so this shows the expected adapter mapping only.";
+      const kept = extras.reduce((n, g) => n + g.items.filter(i => i.foundAt).length, 0);
+      const total = extras.reduce((n, g) => n + g.items.length, 0);
+      return (
+        <section className="v2-card">
+          <div className="v2-card-head">
+            <span className="lead-num">03</span>
+            <span className="v2-card-title">Lead Mapping</span>
+            <span className="v2-card-sub">{sourceLabel} payload → Lead object</span>
+            {testTime && <span className="v2-inspecting">for the test sent at {testTime}</span>}
+          </div>
+          <div className="v2-map-note">{note}</div>
+          {!payload ? (
+            <div className="v2-placeholder">Fix the payload JSON to see the mapping.</div>
+          ) : (
+            <>
+              <div className="v2-table-wrap">
+                <table className="v2-table">
+                  <thead>
+                    <tr><th>Source payload</th><th>Source value</th><th /><th>Lead object</th><th>Lead value</th></tr>
+                  </thead>
+                  <tbody>
+                    {rows.map((r, i) => (
+                      <tr key={`${r.lead}-${i}`}>
+                        <td>
+                          <code className="v2-path">{r.from || (r.none ? "—" : "(constant)")}</code>
+                          {r.note && <div className="v2-note">{r.note}</div>}
+                        </td>
+                        <td className="v2-cell-val">
+                          {r.none ? <span className="v2-dim">{r.none}</span> : v2Empty(r.srcVal) ? <span className="v2-dim">empty</span> : v2Display(r.srcVal)}
+                        </td>
+                        <td className="v2-arrow-cell">→</td>
+                        <td>
+                          <code className="v2-lead-key">{r.lead}</code>
+                          {r.hit && r.hit.path !== r.lead && <div className="v2-note">at {r.hit.path}</div>}
+                        </td>
+                        <td className="v2-cell-val">
+                          {r.hit && <div style={{ marginBottom: 3 }}>{v2Display(r.hit.value)}</div>}
+                          <span className={`v2-mstate ${r.state}`}>{V2_STATE_LABEL[r.state]}</span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="v2-legend">
+                {["match", "differs", "not_returned", "absent", "expected"].map(s => <span key={s} className={`v2-mstate ${s}`}>{V2_STATE_LABEL[s]}</span>)}
+              </div>
+              {derived.length > 0 && (
+                <div className="v2-derived">
+                  <div className="label" style={{ marginBottom: 4 }}>Also matched by value (found in the response)</div>
+                  {derived.map(m => (
+                    <div key={m.leadPath} className="v2-derived-row">
+                      <code className="v2-path">{m.srcPath}</code><span className="v2-muted">→</span>
+                      <code className="v2-lead-key">{m.leadPath}</code><span className="v2-muted">{v2Display(m.value)}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {backendMapping && (
+                <>
+                  <div className="phase-label" style={{ marginTop: 12 }}>Mapping returned by the backend · {backendMapping.path}</div>
+                  <div className="json-viewer code-scroll" dangerouslySetInnerHTML={{ __html: highlightJsonString(JSON.stringify(backendMapping.value, null, 2)) }} />
+                </>
+              )}
+              <div className="v2-subhead">
+                Additional Source Data
+                <span className="v2-card-sub" style={{ fontFamily: "IBM Plex Sans", fontWeight: 400 }}>
+                  {evidence ? `${kept} of ${total} values found in the response` : "source fields with no standard Lead column"}
+                </span>
+              </div>
+              <div className="v2-map-note">
+                {evidence
+                  ? <>Fields with no standard Lead column. <span className="v2-kept">✓</span> = the value appears in the response (hover for where), so it wasn't dropped.</>
+                  : "Fields with no standard Lead column. After sending, values found in the response are ticked, to show the source data was kept."}
+              </div>
+              <div className="v2-extras">
+                {extras.map(g => (
+                  <div key={g.title} className="v2-extra">
+                    <div className="v2-extra-title"><span>{g.title}</span><span className="v2-muted">{g.items.length}</span></div>
+                    {g.items.map((it, i) => (
+                      <div key={`${it.path}-${i}`} className="v2-extra-row" title={it.path}>
+                        <span className="v2-extra-k">{it.label}</span>
+                        <span className="v2-extra-v">{v2Empty(it.value) ? <span className="v2-dim">empty</span> : v2Display(it.value)}</span>
+                        <span className="v2-kept" title={it.foundAt ? `in response at ${it.foundAt}` : ""}>{it.foundAt ? "✓" : ""}</span>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+        </section>
+      );
+    }
+
+    function V2RecentTests({ tests, activeId, onSelect, onClear }) {
+      return (
+        <aside className="v2-card v2-rail">
+          <div className="v2-card-head">
+            <span className="v2-card-title">Recent Tests</span>
+            <span className="v2-muted v2-mono">{tests.length}</span>
+            <span style={{ flex: 1 }} />
+            {tests.length > 0 && <button className="btn btn-ghost btn-mini" onClick={onClear}>Clear</button>}
+          </div>
+          {tests.length === 0 ? (
+            <div className="v2-placeholder" style={{ padding: "20px 14px" }}>Sent tests appear here. Kept in this browser only.</div>
+          ) : (
+            <div className="v2-rail-list">
+              {tests.map(t => {
+                const s = t.summary || {};
+                const label = !s.ok ? "FAILED" : s.duplicate ? "DUPLICATE" : s.queued && !s.leadId ? "QUEUED" : "SUCCESS";
+                const tone = !s.ok ? "fail" : s.duplicate ? "dup" : s.queued && !s.leadId ? "queued" : "ok";
+                return (
+                  <div key={t.id} className={`v2-hist ${t.id === activeId ? "active" : ""}`} onClick={() => onSelect(t.id)}>
+                    <div className="v2-hist-top">
+                      <span className={`v2-result-pill ${tone}`}>{label}</span>
+                      <span className="v2-mono">{s.status ? `HTTP ${s.status}` : "no response"}</span>
+                      <span style={{ flex: 1 }} />
+                      <span className="v2-mono v2-muted">{v2Time(t.ts)}</span>
+                    </div>
+                    <div className="v2-hist-bottom">
+                      <span style={{ fontWeight: 500, color: "var(--ink)", whiteSpace: "nowrap" }}>{V2_SOURCES[t.source] ? V2_SOURCES[t.source].label : t.source}</span>
+                      {s.name && <><span className="v2-muted">·</span><span className="v2-ellipsis">{s.name}</span></>}
+                    </div>
+                    <div className="v2-hist-bottom" style={{ marginTop: 2 }}>
+                      <span className="v2-mono v2-ellipsis v2-muted" title={s.leadId || ""}>{s.leadId ? `Lead ${s.leadId}` : s.queued ? "queued · Lead not looked up" : "no Lead ID"}</span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </aside>
+      );
+    }
+
+    function V2Console({ versionSwitch }) {
+      const prefs = useMemo(() => v2Store.get(V2_STORAGE.prefs, {}) || {}, []);
+      const [source, setSource] = useState(V2_SOURCE_KEYS.includes(prefs.source) ? prefs.source : "angi");
+      const [metaFormat, setMetaFormat] = useState(prefs.metaFormat === "graph" ? "graph" : "zapier");
+      const [scenario, setScenario] = useState(prefs.scenario === "any" || SCENARIOS[prefs.scenario] ? prefs.scenario : "any");
+      const [metro, setMetro] = useState(METROS[prefs.metro] ? prefs.metro : "dallas");
+      const [transportPref, setTransportPref] = useState(prefs.transport === "direct" ? "direct" : "proxy");
+      const [drafts, setDrafts] = useState({});
+      const [serverConfig, setServerConfig] = useState({ status: "loading" });
+      const [browserEndpoints, setBrowserEndpoints] = useState(() => v2Store.get(V2_STORAGE.endpoints, {}) || {});
+      const [tests, setTests] = useState(v2LoadTests);
+      const [activeTestId, setActiveTestId] = useState(null);
+      const [sending, setSending] = useState(false);
+      const [editing, setEditing] = useState(null);
+      const [toast, setToast] = useState(null);
+      const sendingRef = useRef(false);
+      const responseRef = useRef(null);
+      const toastTimer = useRef(null);
+
+      const payloadKey = source === "meta" ? `meta_${metaFormat}` : source;
+      const draft = drafts[payloadKey];
+      const sourceLabel = V2_SOURCES[source].label;
+
+      useEffect(() => { v2Store.set(V2_STORAGE.prefs, { source, metaFormat, scenario, metro, transport: transportPref }); }, [source, metaFormat, scenario, metro, transportPref]);
+      useEffect(() => { v2Store.set(V2_STORAGE.endpoints, browserEndpoints); }, [browserEndpoints]);
+      useEffect(() => { v2Store.set(V2_STORAGE.tests, tests); }, [tests]);
+
+      // The config route doubles as proxy detection: it's missing on file:// and plain static hosting.
+      useEffect(() => {
+        let cancelled = false;
+        fetch("/api/v2/config", { cache: "no-store" })
+          .then(r => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
+          .then(cfg => { if (!cancelled) setServerConfig(cfg && cfg.ok ? { status: "ok", ...cfg } : { status: "unavailable" }); })
+          .catch(() => { if (!cancelled) setServerConfig({ status: "unavailable" }); });
+        return () => { cancelled = true; };
+      }, []);
+
+      const showToast = useCallback((msg) => {
+        clearTimeout(toastTimer.current);
+        setToast(msg);
+        toastTimer.current = setTimeout(() => setToast(null), 2200);
+      }, []);
+
+      const transport = serverConfig.status === "unavailable" ? "direct" : transportPref;
+      const endpoint = v2EndpointInfo(source, serverConfig, browserEndpoints, transport);
+      const leadApi = v2LeadApiInfo(serverConfig, browserEndpoints, transport);
+      const leadApiRef = useRef(leadApi);
+      leadApiRef.current = leadApi;
+
+      const generate = useCallback(() => {
+        const scn = scenario === "any" ? pickFrom(V2_ANY_SCENARIOS) : scenario;
+        const text = JSON.stringify(v2GeneratePayload(source, scn, metro, metaFormat), null, 2);
+        setDrafts(d => ({ ...d, [payloadKey]: { text, generated: text, scenario: scn } }));
+        setActiveTestId(null);
+      }, [source, scenario, metro, metaFormat, payloadKey]);
+
+      useEffect(() => {
+        if (!drafts[payloadKey]) generate();
+      }, [payloadKey]); // eslint-disable-line react-hooks/exhaustive-deps
+
+      const validity = useMemo(() => {
+        if (!draft) return { ok: false, message: "No payload yet." };
+        try {
+          return { ok: true, value: JSON.parse(draft.text), size: new TextEncoder().encode(draft.text).length };
+        } catch (e) {
+          return { ok: false, message: e.message };
+        }
+      }, [draft]);
+
+      const activeTest = activeTestId ? tests.find(t => t.id === activeTestId) || null : null;
+      const analysis = useMemo(() => (activeTest ? v2Analyze(activeTest) : null), [activeTest]);
+      const isLatest = !!activeTest && tests.length > 0 && tests[0].id === activeTest.id;
+
+      const mapping = useMemo(() => {
+        if (activeTest) return { key: activeTest.mappingKey, payload: v2ParseJson(activeTest.requestBody), label: V2_SOURCES[activeTest.source].label };
+        return { key: payloadKey, payload: validity.ok ? validity.value : null, label: sourceLabel };
+      }, [activeTest, payloadKey, validity, sourceLabel]);
+
+      const steps = v2FlowSteps({ sourceLabel, validity, sending, test: activeTest, analysis, endpoint });
+
+      const patchTest = useCallback((id, patch) => {
+        setTests(list => list.map(t => (t.id === id ? { ...t, ...(typeof patch === "function" ? patch(t) : patch) } : t)));
+      }, []);
+      const testsRef = useRef(tests);
+      testsRef.current = tests;
+
+      // Reads the created Lead back from the Lead API. With a lead id: GET it, retrying 404s while
+      // the worker catches up. Without one (the dev webhook only answers "Enqueued"): poll the newest
+      // leads for the one matching this payload, then GET its details.
+      const lookupLead = useCallback(async (test, { leadId: knownId } = {}) => {
+        const api = leadApiRef.current;
+        if (!api.ready || !test) return;
+        const finish = (fields) => patchTest(test.id, t => ({
+          leadDetails: v2TrimBody({ state: "done", ...fields }),
+          summary: fields.ok && fields.leadId ? { ...t.summary, leadId: fields.leadId, duplicate: t.summary.duplicate || !!fields.existing } : t.summary,
+        }));
+        const httpFields = (res) => ({
+          status: res.kind === "http" ? res.status : 0,
+          body: res.kind === "http" ? res.body : "",
+          errorMessage: res.kind === "http" ? null : res.errorMessage,
+          latencyMs: res.latencyMs,
+          target: res.target || null,
+        });
+
+        let leadId = knownId || null;
+        let matchedOn = null;
+        if (!leadId) {
+          const payload = v2ParseJson(test.requestBody);
+          let scanned = 0;
+          for (let i = 0; i < V2_LEAD_FIND_DELAYS.length && !leadId; i++) {
+            patchTest(test.id, { leadDetails: { state: "loading", mode: "find", attempt: i + 1, max: V2_LEAD_FIND_DELAYS.length } });
+            await v2Sleep(V2_LEAD_FIND_DELAYS[i]);
+            const list = await v2PostProxy("/api/v2/lead", { action: "recent", ...api.request });
+            if (list.kind !== "http" || list.status < 200 || list.status >= 300) {
+              finish({ ok: false, mode: "find", ...httpFields(list) });
+              return;
+            }
+            const match = v2MatchLead(v2ParseJson(list.body), test.mappingKey, payload);
+            scanned = match.scanned;
+            if (match.item) {
+              matchedOn = match.matchedOn;
+              const id = v2FindLeadId(match.item, { obj: match.item, path: "" });
+              if (!id) {
+                finish({ ok: true, mode: "find", matchedOn, ...httpFields(list), body: JSON.stringify(match.item) });
+                return;
+              }
+              leadId = id.value;
+            }
+          }
+          if (!leadId) {
+            finish({ ok: false, mode: "find", notFound: true, scanned });
+            return;
+          }
+        }
+
+        for (let i = 0; i < V2_LEAD_FETCH_DELAYS.length; i++) {
+          patchTest(test.id, { leadDetails: { state: "loading", mode: "get", attempt: i + 1, max: V2_LEAD_FETCH_DELAYS.length, leadId } });
+          if (V2_LEAD_FETCH_DELAYS[i]) await v2Sleep(V2_LEAD_FETCH_DELAYS[i]);
+          const res = await v2PostProxy("/api/v2/lead", { action: "get", leadId, ...api.request });
+          const ok = res.kind === "http" && res.status >= 200 && res.status < 300;
+          if (ok || !(res.kind === "http" && res.status === 404) || i === V2_LEAD_FETCH_DELAYS.length - 1) {
+            const existing = ok && v2IsExistingLead(testsRef.current, test, leadId, res.body);
+            finish({ ok, mode: "get", leadId, matchedOn, existing, ...httpFields(res) });
+            return;
+          }
+        }
+      }, [patchTest]);
+
+      const send = async () => {
+        if (sendingRef.current) return;
+        if (!validity.ok) { showToast("Fix the JSON before sending"); return; }
+        if (!endpoint.configured) { setEditing(source); showToast(`Configure the ${sourceLabel} webhook first`); return; }
+        sendingRef.current = true;
+        setSending(true);
+        setActiveTestId(null);
+        const body = JSON.stringify(validity.value);
+        const ts = Date.now();
+        const result = transport === "proxy"
+          ? await v2PostProxy("/api/v2/ingest", { source, body, targetUrl: endpoint.origin === "browser" ? endpoint.url : undefined })
+          : await v2PostDirect(endpoint.url, body);
+        const test = {
+          id: `t${ts}${Math.random().toString(36).slice(2, 6)}`,
+          ts,
+          source,
+          mappingKey: payloadKey,
+          scenario: draft.scenario,
+          edited: draft.text !== draft.generated,
+          transport,
+          endpoint: { masked: (result.target && result.target.masked) || endpoint.masked || null, origin: endpoint.origin },
+          requestBody: body,
+          result: v2TrimBody(result),
+        };
+        const a = v2Analyze(test);
+        test.summary = {
+          ok: a.verdict.ok,
+          status: result.kind === "http" ? result.status : 0,
+          leadId: a.leadId ? a.leadId.value : null,
+          duplicate: a.duplicate,
+          queued: !!a.queued,
+          name: v2PayloadName(payloadKey, validity.value),
+        };
+        setTests(list => [test, ...list].slice(0, V2_TEST_LIMIT));
+        setActiveTestId(test.id);
+        sendingRef.current = false;
+        setSending(false);
+        requestAnimationFrame(() => responseRef.current && responseRef.current.scrollIntoView({ behavior: "smooth", block: "start" }));
+        if (a.verdict.ok && leadApiRef.current.ready && (a.leadId || !a.leadCtx)) lookupLead(test, a.leadId ? { leadId: a.leadId.value } : {});
+      };
+
+      const changeSource = (s) => { setSource(s); setActiveTestId(null); };
+      const changeMetaFormat = (f) => { setMetaFormat(f); setActiveTestId(null); };
+      const setText = (text) => setDrafts(d => ({ ...d, [payloadKey]: { ...d[payloadKey], text } }));
+      const formatDraft = () => { if (validity.ok) setText(JSON.stringify(validity.value, null, 2)); };
+      const resetDraft = () => { if (draft) setText(draft.generated); };
+      const copyDraft = () => {
+        if (!draft) return;
+        navigator.clipboard.writeText(draft.text).then(() => showToast("Payload copied"), () => showToast("Clipboard not available"));
+      };
+
+      const loadPayload = () => {
+        if (!activeTest) return;
+        const parsed = v2ParseJson(activeTest.requestBody);
+        const text = parsed !== null ? JSON.stringify(parsed, null, 2) : activeTest.requestBody;
+        if (activeTest.source === "meta") setMetaFormat(activeTest.mappingKey === "meta_graph" ? "graph" : "zapier");
+        setSource(activeTest.source);
+        setDrafts(d => ({ ...d, [activeTest.mappingKey]: { text, generated: text, scenario: activeTest.scenario } }));
+        showToast("Payload loaded into the editor");
+      };
+
+      const saveEndpoint = (key, value) => {
+        if (key === "leadApi") {
+          try { new URL(value.baseUrl.trim()); } catch { showToast("The base URL isn't a valid URL"); return; }
+          setBrowserEndpoints(b => ({
+            ...b,
+            leadApi: { baseUrl: value.baseUrl.trim(), apiKey: value.apiKey.trim(), path: value.path.trim() || undefined, keyHeader: value.keyHeader.trim() || undefined },
+          }));
+          setEditing(null);
+          showToast("Lead API saved in this browser");
+          return;
+        }
+        let u;
+        try { u = new URL(value); } catch { showToast("That isn't a valid URL"); return; }
+        if (!/^https?:$/.test(u.protocol)) { showToast("Use an http(s) URL"); return; }
+        setBrowserEndpoints(b => ({ ...b, [key]: value }));
+        setEditing(null);
+        showToast(`${V2_SOURCES[key].label} webhook saved in this browser`);
+      };
+      const removeEndpoint = (key) => {
+        setBrowserEndpoints(b => { const next = { ...b }; delete next[key]; return next; });
+        setEditing(null);
+      };
+      const changeTransport = (t) => {
+        if (t === "proxy" && serverConfig.status === "unavailable") { showToast("Server proxy isn't available here — run npm run dev or deploy to Vercel"); return; }
+        setTransportPref(t);
+      };
+      const clearTests = () => { setTests([]); setActiveTestId(null); };
+
+      const proxyNote = serverConfig.status === "loading" ? "Checking for the server proxy…"
+        : serverConfig.status === "unavailable" ? "Server proxy not found (static hosting or file://). Requests go straight from the browser and need CORS on the endpoint."
+          : transport === "proxy" ? "Browser → /api/v2/ingest → Zuper. No CORS needed; server env URLs never reach the browser."
+            : "Browser → Zuper directly. Needs CORS on the endpoint; only browser-entered URLs can be used.";
+
+      return (
+        <div style={{ display: "flex", minHeight: "100vh", position: "relative", zIndex: 2 }}>
+          <aside className="left-panel" style={{ width: 340, flexShrink: 0, background: "var(--surface)", borderRight: "1px solid var(--border)", padding: "24px 24px 32px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+              <span className="brand-mark"></span>
+              <span style={{ fontFamily: "IBM Plex Serif", fontSize: 16, fontWeight: 600, color: "var(--navy)" }}>Zuper Grow</span>
+            </div>
+            <div style={{ fontSize: 12, color: "var(--gray-500)", marginBottom: 28, fontFamily: "IBM Plex Mono", marginLeft: 38 }}>mock_lead_generator.v2</div>
+
+            {versionSwitch}
+
+            {/* Payload generator */}
+            <div style={{ marginBottom: 16 }}>
+              <div className="label">Scenario</div>
+              <select className="field" value={scenario} onChange={e => setScenario(e.target.value)}>
+                <option value="any">Any (random, excluding spam)</option>
+                {SCENARIO_KEYS.map(k => <option key={k} value={k}>{SCENARIOS[k].label}</option>)}
+              </select>
+            </div>
+            <div style={{ marginBottom: 16 }}>
+              <div className="label">Metro</div>
+              <select className="field" value={metro} onChange={e => setMetro(e.target.value)}>
+                {METRO_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+              </select>
+            </div>
+            <button className="btn btn-primary" style={{ width: "100%", justifyContent: "center", padding: "11px 16px", fontSize: 14 }} onClick={generate} disabled={sending}>
+              <IconBolt /> Generate new {sourceLabel} payload
+            </button>
+
+            <div className="divider"></div>
+
+            {/* Endpoints */}
+            <div style={{ marginBottom: 18 }}>
+              <div className="label">Transport</div>
+              <div className="seg-block">
+                <Segmented value={transport} onChange={changeTransport} options={[{ value: "proxy", label: "Server proxy" }, { value: "direct", label: "Direct" }]} />
+              </div>
+              <div className="v2-hint">{proxyNote}</div>
+            </div>
+
+            <div className="label">Zuper Dev webhooks</div>
+            {V2_SOURCE_KEYS.map(k => (
+              <V2EndpointRow
+                key={k}
+                label={V2_SOURCES[k].label}
+                info={v2EndpointInfo(k, serverConfig, browserEndpoints, transport)}
+                current={k === source}
+                editing={editing === k}
+                onEdit={() => setEditing(k)}
+                onCancel={() => setEditing(null)}
+                onSave={(value) => saveEndpoint(k, value)}
+                onRemove={() => removeEndpoint(k)}
+              />
+            ))}
+            <V2LeadApiRow
+              info={leadApi}
+              serverConfig={serverConfig}
+              editing={editing === "leadApi"}
+              onEdit={() => setEditing("leadApi")}
+              onCancel={() => setEditing(null)}
+              onSave={(value) => saveEndpoint("leadApi", value)}
+              onRemove={() => removeEndpoint("leadApi")}
+            />
+            <div className="v2-hint" style={{ marginTop: 10 }}>
+              Webhook URLs carry secret tokens: they're shown masked and never logged. Prefer server env vars (<code className="v2-mono">ZUPER_WEBHOOK_URL_*</code>); URLs entered here stay in this browser only.
+            </div>
+          </aside>
+
+          <main className="v2-main">
+            <div style={{ marginBottom: 16 }}>
+              <h1 style={{ fontFamily: "IBM Plex Serif", fontSize: 26, fontWeight: 600, margin: 0, letterSpacing: "-0.01em", color: "var(--ink)" }}>
+                Lead Ingestion Console
+              </h1>
+              <div style={{ fontSize: 13, color: "var(--gray-600)", marginTop: 4 }}>
+                Send a source payload to the Zuper Dev ingestion webhook and see how the source adapter maps it into a Lead.
+              </div>
+            </div>
+
+            <V2FlowStrip steps={steps} />
+
+            <div className="v2-grid">
+              <div style={{ minWidth: 0 }}>
+                <V2RequestPanel
+                  source={source}
+                  onSource={changeSource}
+                  metaFormat={metaFormat}
+                  onMetaFormat={changeMetaFormat}
+                  endpoint={endpoint}
+                  transport={transport}
+                  configLoading={serverConfig.status === "loading"}
+                  onConfigure={() => setEditing(source)}
+                  draft={draft}
+                  onText={setText}
+                  validity={validity}
+                  onFormat={formatDraft}
+                  onReset={resetDraft}
+                  onCopy={copyDraft}
+                  onSend={send}
+                  sending={sending}
+                />
+                <V2ResponsePanel
+                  test={activeTest}
+                  analysis={analysis}
+                  isLatest={isLatest}
+                  sending={sending}
+                  panelRef={responseRef}
+                  onBackToLatest={() => setActiveTestId(tests.length ? tests[0].id : null)}
+                  onLoadPayload={loadPayload}
+                  leadApi={leadApi}
+                  onLookup={lookupLead}
+                />
+                <V2MappingPanel mappingKey={mapping.key} sourceLabel={mapping.label} payload={mapping.payload} analysis={analysis} testTime={activeTest && !isLatest ? v2Time(activeTest.ts) : null} />
+              </div>
+              <V2RecentTests tests={tests} activeId={activeTestId} onSelect={setActiveTestId} onClear={clearTests} />
+            </div>
+
+            <div style={{ marginTop: 24, paddingTop: 20, borderTop: "1px solid var(--border-soft)", fontSize: 11, color: "var(--gray-500)", fontFamily: "IBM Plex Mono", lineHeight: 1.6, maxWidth: 1320 }}>
+              <div>schema_note: v2 posts the editor payload as-is (compact JSON) to the source's own webhook; no ?source= param, the endpoint identifies the source.</div>
+              <div>schema_note: angi / thumbtack payloads are the vendor's raw body (same generators as v1). lsa is the google ads local_services_lead resource.</div>
+              <div>schema_note: meta (zapier) approximates the Facebook Lead Ads → New Lead trigger as sent by Webhooks by Zapier; meta (graph webhook) is v1's leadgen event + lead_data.</div>
+              <div>schema_note: lead mapping pairs are tool config (V2_MAPPINGS); lead values, ✓ marks and lead ids come only from the actual response.</div>
+            </div>
+          </main>
+
+          {toast && <div className="toast">{toast}</div>}
+        </div>
+      );
+    }
+
+    // ============================================================
+    // ROOT — version switch (v1 generator / v2 ingestion console)
+    // ============================================================
+    function VersionSwitch({ version, onChange }) {
+      return (
+        <div className="version-switch">
+          <Segmented value={version} onChange={onChange} options={[
+            { value: "v1", label: "v1 · Generator" },
+            { value: "v2", label: "v2 · Ingestion" },
+          ]} />
+        </div>
+      );
+    }
+
+    // ?v=2 deep-links to the console; otherwise the last choice in this browser, else v1.
+    function initialVersion() {
+      try {
+        const v = new URLSearchParams(window.location.search).get("v");
+        if (v === "1" || v === "2") return `v${v}`;
+      } catch { }
+      return v2Store.get(V2_STORAGE.version, "v1") === "v2" ? "v2" : "v1";
+    }
+
+    function Root() {
+      const [version, setVersion] = useState(initialVersion);
+      useEffect(() => {
+        v2Store.set(V2_STORAGE.version, version);
+        try {
+          const url = new URL(window.location.href);
+          if (version === "v2") url.searchParams.set("v", "2");
+          else url.searchParams.delete("v");
+          window.history.replaceState(null, "", url.toString());
+        } catch { }
+      }, [version]);
+      const versionSwitch = <VersionSwitch version={version} onChange={setVersion} />;
+      return version === "v2" ? <V2Console versionSwitch={versionSwitch} /> : <App versionSwitch={versionSwitch} />;
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<Root />);
   </script>
 </body>
 

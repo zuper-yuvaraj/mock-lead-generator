@@ -1,0 +1,5 @@
+# Local-only tooling; not part of the deployed site.
+scripts/
+tests/
+.env
+.env.*

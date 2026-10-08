@@ -1,0 +1,11 @@
+{
+  "name": "zuper-grow-mock-lead-generator",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Mock lead payload generator (v1) and Lead Source Ingestion demo console (v2) for Zuper Grow.",
+  "scripts": {
+    "dev": "node scripts/dev-server.js",
+    "mock": "node scripts/mock-ingestion.js",
+    "test": "node --test tests/api.test.js"
+  }
+}

@@ -1,0 +1,7 @@
+# Webhook URLs and API keys are secrets — keep them out of git.
+.env
+.env.*
+!.env.example
+
+node_modules/
+.vercel/
